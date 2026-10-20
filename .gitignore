@@ -1,0 +1,6 @@
+.claude/
+it-wala/
+node_modules/
+dist/
+.env
+.env.*

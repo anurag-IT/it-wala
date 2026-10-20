@@ -1,0 +1,290 @@
+/* IT Wala Dai — additions on top of the Escul theme */
+:root {
+  --itwd-green: #1CB098;
+  --itwd-yellow: #FFBF00;
+  --itwd-dark: #1E1E1E;
+}
+
+/* ------------------------------------------------------------ University marquee */
+.itwd-marquee-section {
+  padding: 36px 0 30px;
+  background: #fff;
+  position: relative;
+  z-index: 2;
+}
+.itwd-marquee__label {
+  margin: 0 auto 18px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #6c757d;
+}
+.itwd-marquee {
+  --marquee-duration: 30s;
+  overflow: hidden;
+  user-select: none;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 12%, #000 88%, transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0, #000 12%, #000 88%, transparent 100%);
+}
+/* Items are rendered twice in one track; sliding by -50% lands exactly on the copy -> seamless loop */
+.itwd-marquee__track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  animation: itwd-marquee var(--marquee-duration) linear infinite;
+}
+.itwd-marquee:hover .itwd-marquee__track { animation-play-state: paused; }
+@keyframes itwd-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.itwd-marquee__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 40px;
+  padding-right: 40px;
+  white-space: nowrap;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--itwd-dark);
+}
+.itwd-marquee__item::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--itwd-green);
+}
+@media (prefers-reduced-motion: reduce) {
+  .itwd-marquee__track { animation: none; }
+}
+
+/* ------------------------------------------------------------ Hero */
+.hero-style3 .btn-wrap { flex-wrap: wrap; gap: 16px; }
+.itwd-hero-proof {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 28px;
+  font-size: 15px;
+}
+.itwd-stars { color: var(--itwd-yellow); letter-spacing: 2px; font-size: 18px; }
+
+/* ------------------------------------------------------------ Small helpers */
+.itwd-sub-lead { max-width: 720px; margin: 14px auto 0; }
+.itwd-note { margin: 8px 0 0; font-size: 14px; color: #6c757d; font-style: italic; }
+.itwd-cta-text { font-size: 18px; max-width: 560px; }
+.itwd-disclaimer {
+  font-size: 14px;
+  color: #6c757d;
+  border-left: 3px solid var(--itwd-yellow);
+  padding-left: 14px;
+  margin-bottom: 30px;
+}
+.itwd-cat-count {
+  display: block;
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--itwd-green);
+}
+
+/* ------------------------------------------------------------ Project cards */
+.course-card .box-img { position: relative; }
+.itwd-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  padding: 4px 12px;
+  border-radius: 30px;
+  background: var(--itwd-green);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+}
+.itwd-rating { margin-left: 8px; font-size: 14px; color: #6c757d; }
+.itwd-course-meta { margin: 0 0 14px; font-size: 14px; line-height: 1.5; color: #6c757d; }
+.itwd-course-meta span { color: var(--itwd-dark); font-weight: 600; }
+
+/* ------------------------------------------------------------ Contact form status */
+.itwd-form-status { margin: 14px 0 0; font-size: 15px; color: var(--itwd-green); }
+.itwd-form-status.is-error { color: #e5484d; }
+
+/* ------------------------------------------------------------ Community: coming soon */
+.itwd-coming-soon { background: #F0FBF8; }
+.itwd-countdown {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.itwd-cd__unit {
+  width: 150px;
+  padding: 26px 10px 20px;
+  border-radius: 20px;
+  background: #fff;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(28, 176, 152, .12);
+  border-bottom: 4px solid var(--itwd-green);
+}
+.itwd-cd__unit:nth-child(even) { border-bottom-color: var(--itwd-yellow); }
+.itwd-cd__num {
+  display: block;
+  font-size: 54px;
+  line-height: 1;
+  font-weight: 700;
+  color: var(--itwd-dark);
+  font-variant-numeric: tabular-nums;
+}
+.itwd-cd__label {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #6c757d;
+}
+.itwd-cd__done { font-size: 22px; font-weight: 700; color: var(--itwd-green); }
+.itwd-cs-card {
+  height: 100%;
+  padding: 30px 26px;
+  border-radius: 20px;
+  background: #fff;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.itwd-cs-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0, 0, 0, .08); }
+.itwd-cs-card__icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin-bottom: 18px;
+  background: var(--itwd-green);
+  color: #fff;
+  font-size: 24px;
+}
+.itwd-cs-card__title { font-size: 20px; margin-bottom: 8px; }
+.itwd-cs-card__text { margin: 0; font-size: 15px; }
+@media (max-width: 575px) {
+  .itwd-cd__unit { width: calc(50% - 10px); }
+  .itwd-cd__num { font-size: 40px; }
+}
+
+/* ------------------------------------------------------------ Find Project: filter */
+.itwd-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin: 0 0 30px;
+}
+.itwd-chip {
+  padding: 9px 20px;
+  border: 1px solid #dfe5e3;
+  border-radius: 30px;
+  background: #fff;
+  color: var(--itwd-dark);
+  font-size: 15px;
+  font-weight: 600;
+  transition: all .25s ease;
+}
+.itwd-chip:hover { border-color: var(--itwd-green); color: var(--itwd-green); }
+.itwd-chip.is-active { background: var(--itwd-green); border-color: var(--itwd-green); color: #fff; }
+.category-card2[data-itwd-filter] { cursor: pointer; }
+.category-card2.is-active { outline: 2px solid var(--itwd-green); outline-offset: -2px; }
+#featured-projects .th-course-row { width: 100%; }
+#featured-projects .th-course-single[hidden] { display: none !important; }
+#featured-projects .th-course-single { animation: itwd-fade-up .4s ease both; }
+@keyframes itwd-fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+#featured-projects .course-card .box-img img {
+  width: 100%;
+  aspect-ratio: 10 / 7;
+  object-fit: cover;
+}
+#featured-projects .course-card .box-title { margin-top: 18px; }
+
+/* ------------------------------------------------------------ Mentors (photos only) */
+.itwd-mentors .team-card3 .box-img img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+/* ------------------------------------------------------------ Start Project modal */
+.itwd-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.itwd-modal[hidden] { display: none; }
+.itwd-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(16, 24, 22, .6);
+  backdrop-filter: blur(3px);
+}
+.itwd-modal__box {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  padding: 40px 36px 34px;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .25);
+  animation: itwd-fade-up .3s ease both;
+}
+.itwd-modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: #F0FBF8;
+  color: var(--itwd-dark);
+  font-size: 18px;
+}
+.itwd-modal__close:hover { background: var(--itwd-green); color: #fff; }
+.itwd-modal__eyebrow {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--itwd-green);
+}
+.itwd-modal__title { margin: 0 0 8px; font-size: 28px; line-height: 1.25; padding-right: 40px; }
+.itwd-modal__text { margin-bottom: 24px; font-size: 15px; }
+.itwd-modal .form-group { position: relative; margin-bottom: 18px; }
+.itwd-modal .form-group > i {
+  position: absolute;
+  top: 19px;
+  right: 30px;
+  color: #8a9490;
+}
+.itwd-modal .form-control { padding-right: 46px; }
+html.itwd-modal-open, html.itwd-modal-open body { overflow: hidden; }
+@media (max-width: 575px) {
+  .itwd-modal__box { padding: 34px 20px 24px; }
+  .itwd-modal__title { font-size: 22px; }
+}
