@@ -288,3 +288,5 @@ html.itwd-modal-open, html.itwd-modal-open body { overflow: hidden; }
   .itwd-modal__box { padding: 34px 20px 24px; }
   .itwd-modal__title { font-size: 22px; }
 }
+.itwd-more-wrap { width: 100%; }
+.itwd-more-wrap[hidden] { display: none !important; }

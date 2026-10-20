@@ -37,19 +37,46 @@
     timer = setInterval(tick, 1000);
   });
 
-  // ---- Find Project: category filter (category cards + chips)
+  // ---- Find Project: category filter (category cards + chips) and "View More"
   var projectsSection = document.getElementById('featured-projects');
   if (projectsSection) {
-    var cards = projectsSection.querySelectorAll('.th-course-single[data-cat]');
+    var cards = Array.prototype.slice.call(projectsSection.querySelectorAll('.th-course-single[data-cat]'));
+    var moreWrap = projectsSection.querySelector('.itwd-more-wrap');
+    var moreBtn = projectsSection.querySelector('.itwd-view-more');
+    var moreLabel = moreBtn ? moreBtn.innerHTML : '';
+    var current = 'all';
+    var expanded = false;
+
+    // cards per row right now (3 on desktop, 2 on tablet, 1 on mobile)
+    var perRow = function () {
+      var top = cards[0].offsetTop, n = 0;
+      cards.forEach(function (c) { if (!c.hidden && c.offsetTop === top) n++; });
+      return Math.max(1, n);
+    };
+    var render = function () {
+      var matching = cards.filter(function (c) { return current === 'all' || c.getAttribute('data-cat') === current; });
+      cards.forEach(function (c) { c.hidden = matching.indexOf(c) === -1; });
+      if (current === 'all' && !expanded) {
+        var limit = perRow() * 2;   // two rows
+        matching.forEach(function (c, i) { c.hidden = i >= limit; });
+        if (moreWrap) moreWrap.hidden = matching.length <= limit;
+        if (moreBtn) moreBtn.innerHTML = moreLabel;
+      } else if (moreWrap) {
+        moreWrap.hidden = current !== 'all';
+        if (moreBtn) moreBtn.textContent = 'View Less';
+      }
+      refreshScroll();
+    };
     var applyFilter = function (cat) {
-      cards.forEach(function (c) { c.hidden = cat !== 'all' && c.getAttribute('data-cat') !== cat; });
+      current = cat;
+      expanded = false;
       projectsSection.querySelectorAll('.itwd-chip').forEach(function (chip) {
         chip.classList.toggle('is-active', chip.getAttribute('data-itwd-filter') === cat);
       });
       document.querySelectorAll('.category-card2[data-itwd-filter]').forEach(function (card) {
         card.classList.toggle('is-active', card.getAttribute('data-itwd-filter') === cat);
       });
-      refreshScroll();
+      render();
     };
     document.addEventListener('click', function (e) {
       var trigger = e.target.closest('[data-itwd-filter]');
@@ -58,6 +85,19 @@
       applyFilter(trigger.getAttribute('data-itwd-filter'));
       if (!trigger.classList.contains('itwd-chip')) scrollToEl(projectsSection);
     });
+    if (moreBtn) {
+      moreBtn.addEventListener('click', function () {
+        expanded = !expanded;
+        render();
+        if (!expanded) scrollToEl(projectsSection);
+      });
+    }
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(render, 150);
+    });
+    render();
   }
 
   // ---- Find Project: "Start Project" modal -> WhatsApp
@@ -123,11 +163,15 @@
     });
   }
 
-  // ---- Contact form -> email (FormSubmit, no backend needed). Falls back to the mail app if the request fails.
+  // ---- Contact form -> sent straight to the inbox via FormSubmit (no backend, no mail app)
   document.querySelectorAll('form.itwd-contact-form').forEach(function (form) {
     var status = form.querySelector('.itwd-form-status');
     var button = form.querySelector('button[type="submit"]');
     var to = form.getAttribute('data-mailto');
+    var setStatus = function (text, isError) {
+      status.textContent = text;
+      status.classList.toggle('is-error', !!isError);
+    };
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -135,12 +179,10 @@
       var email = form.elements['your-email'].value.trim();
       var msg = form.elements['your-message'].value.trim();
       if (!name || !email || !msg || !form.elements['your-email'].checkValidity()) {
-        status.textContent = 'Name, sahi email aur message — teeno bharo please.';
-        status.classList.add('is-error');
+        setStatus('Name, sahi email aur message — teeno bharo please.', true);
         return;
       }
-      status.classList.remove('is-error');
-      status.textContent = 'Bhej rahe hain...';
+      setStatus('Bhej rahe hain...');
       button.disabled = true;
 
       fetch('https://formsubmit.co/ajax/' + to, {
@@ -150,22 +192,29 @@
           name: name,
           email: email,
           message: msg,
+          _replyto: email,
           _subject: 'IT Wala Dai website — message from ' + name,
           _template: 'table',
           _captcha: 'false'
         })
       })
-        .then(function (r) { return r.json(); })
+        .then(function (r) {
+          return r.json().catch(function () { return { success: 'false', message: 'HTTP ' + r.status }; });
+        })
         .then(function (data) {
-          if (String(data.success) !== 'true') throw new Error(data.message || 'failed');
-          status.textContent = 'Shukriya ' + name + '! Message mil gaya — reply 24 ghante mein.';
+          if (String(data.success) !== 'true') throw new Error(data.message || 'Unknown error');
+          setStatus('Shukriya ' + name + '! Message mil gaya — reply 24 ghante mein.');
           form.reset();
         })
-        .catch(function () {
-          var subject = 'IT Wala Dai — message from ' + name;
-          var body = msg + '\n\n— ' + name + ' (' + email + ')';
-          window.location.href = 'mailto:' + to + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-          status.textContent = 'Direct send nahi hua — tumhara mail app khul raha hai, wahan se send kar do.';
+        .catch(function (err) {
+          var reason = (err && err.message) || '';
+          if (window.console) console.warn('Contact form (FormSubmit):', reason);
+          if (/activat/i.test(reason)) {
+            // FormSubmit sends a one-time "Activate Form" email to the inbox; until it is clicked nothing is delivered
+            setStatus('Form abhi activate nahi hua hai. ' + to + ' ke inbox (aur Spam) mein FormSubmit ka "Activate Form" email kholo aur button dabao — uske baad messages direct aayenge.', true);
+          } else {
+            setStatus('Message nahi gaya (' + (reason || 'network error') + '). Thodi der baad try karo ya ' + to + ' pe email karo.', true);
+          }
         })
         .finally(function () { button.disabled = false; });
     });

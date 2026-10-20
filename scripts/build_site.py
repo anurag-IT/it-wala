@@ -700,7 +700,10 @@ def featured_projects():
     chips = ''.join('<button type="button" class="itwd-chip%s" data-itwd-filter="%s">%s</button>'
                     % (' is-active' if slug == 'all' else '', slug, name)
                     for slug, name in [('all', 'All Projects')] + [(c[0], c[1]) for c in CATEGORIES])
-    s = s[:st] + '<div class="itwd-chips">%s</div>\n' % chips + pre + '\n'.join(out) + suf + s[en:]
+    # "All" view shows the first 2 rows; the rest opens with View More (a single category always shows in full)
+    more = ('<div class="itwd-more-wrap text-center mt-40"><button type="button" class="th-btn itwd-view-more" '
+            'data-limit="6">View More Projects%s</button></div>' % ARROW_SVG)
+    s = s[:st] + '<div class="itwd-chips">%s</div>\n' % chips + pre + '\n'.join(out) + suf + more + s[en:]
     return s
 
 
@@ -730,6 +733,7 @@ def start_project_modal():
 
 
 MENTOR_DIR = ROOT / 'mentor'
+MENTOR_ORDER = ['sachin', 'anurag']
 
 
 def mentors():
@@ -738,7 +742,10 @@ def mentors():
     s = rep(s, 'data-id="c77d348"', 'data-id="c77d348" id="mentors"')
     s = rep(s, '/>Our Teachers</span>', '/>Our Mentors</span>')
     s = rep(s, 'Meet Our Professional\nTeachers', 'Industry engineers jo tumhara code review karenge')
-    photos = sorted(p for p in MENTOR_DIR.glob('*') if p.suffix.lower() in ('.jpg', '.jpeg', '.png', '.webp', '.avif'))[:2]
+    photos = [p for p in MENTOR_DIR.glob('*') if p.suffix.lower() in ('.jpg', '.jpeg', '.png', '.webp', '.avif')]
+    # display order: names listed in MENTOR_ORDER first, anything else after (alphabetical)
+    rank = lambda p: next((i for i, n in enumerate(MENTOR_ORDER) if n in p.stem.lower()), len(MENTOR_ORDER))
+    photos = sorted(photos, key=lambda p: (rank(p), p.name.lower()))[:2]
     # name comes from the file name, e.g. "sachin kushwaha mentor 1.png" -> "Sachin Kushwaha"
     people = [('/mentor/' + quote(p.name), re.sub(r'\s*mentor.*$', '', p.stem, flags=re.I).strip().title()) for p in photos]
     if len(people) < 2:
