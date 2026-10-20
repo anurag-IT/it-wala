@@ -751,12 +751,24 @@ def mentors():
     if len(people) < 2:
         print('  ! mentor/: found %d image(s), need 2 -> template photos used as placeholders' % len(people))
         people += [('/wp-content/uploads/2026/02/team_2_%d.jpg' % i, 'Mentor') for i in (1, 2)][len(people):]
-    st = s.index('<div class="slider-area">')
+    # keep the original team slider + team-card3 markup (hover social icons, fade animation); only 2 slides
+    st = s.index('<div class="swiper-wrapper">')
     en = block(s, st)
-    cards = ''.join('<div class="col-lg-4 col-md-5 col-sm-6"><div class="team-card3 th_fade_anim"><div class="box-img">'
-                    '<img decoding="async" src="%s" alt="%s"></div><div class="box-content"><h3 class="box-title">%s</h3>'
-                    '<p class="box-text">IT Wala Dai Mentor</p></div></div></div>' % (src, name, name) for src, name in people)
-    s = s[:st] + '<div class="row gy-4 justify-content-center itwd-mentors">%s</div>' % cards + s[en:]
+    pre, slides, between, suf = split_items(s[st:en], '<div class="swiper-slide')
+    out = []
+    for (src, name), sl in zip(people, slides):
+        sl = re.sub(r'<img decoding="async" src="[^"]*" alt="[^"]*"\s*/>', '<img decoding="async" src="%s" alt="%s" />' % (src, name), sl)
+        sl = re.sub(r'(<div class="th-social">).*?(</div>)', r'\g<1>%s\2' % social_links(), sl, flags=re.S)
+        sl = re.sub(r'<h3 class="box-title"><a href="[^"]*">[^<]*</a></h3><p class="box-text">[^<]*</p>',
+                    '<h3 class="box-title"><a href="/contact">%s</a></h3><p class="box-text">IT Wala Dai Mentor</p>' % name, sl)
+        sl = re.sub(r'<span class="ms-2">\( [0-9.]+ \)</span>', '', sl)   # no made-up rating numbers
+        out.append(sl)
+    s = s[:st] + pre + ''.join(out) + suf + s[en:]
+    # 2 cards: no loop/autoplay, at most 2 per view; the wrapper keeps cards at their original width
+    s = re.sub(r"data-slider-options='[^']*'(?=[^>]*>)",
+               "data-slider-options='{\"loop\":false,\"autoplay\":false,\"breakpoints\":{\"0\":{\"slidesPerView\":1},\"576\":{\"slidesPerView\":\"2\"}}}'",
+               s, count=1)
+    s = rep(s, '<div class="slider-area">', '<div class="slider-area itwd-mentor-slider">')
     return s
 
 

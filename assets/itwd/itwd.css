@@ -215,11 +215,16 @@
 }
 #featured-projects .course-card .box-title { margin-top: 18px; }
 
-/* ------------------------------------------------------------ Mentors (photos only) */
-.itwd-mentors .team-card3 .box-img img {
+/* ------------------------------------------------------------ Mentors (original team slider, 2 cards) */
+.itwd-mentor-slider {
   width: 100%;
-  aspect-ratio: 4 / 5;
+  max-width: 700px;      /* 2 cards at roughly the original 4-per-row card width */
+  margin: 0 auto;
+}
+.itwd-mentor-slider .team-card3 .box-img img {
+  aspect-ratio: 1 / 1;   /* original team photos are square */
   object-fit: cover;
+  object-position: top center;
 }
 
 /* ------------------------------------------------------------ Start Project modal */
