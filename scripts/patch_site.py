@@ -691,6 +691,9 @@ def main():
             s = V.patch_free_learning(s)
             s = V.patch_home_faq(s)
             s = V.patch_home_testimonials(s)
+            # hero: the two buttons sit on one line (the trust line below wraps to its own row)
+            s = s.replace('<div class="btn-wrap wow animate__fadeInUp" data-wow-delay="0.9s">',
+                          '<div class="btn-wrap itwd-btn-pair itwd-hero-btns wow animate__fadeInUp" data-wow-delay="0.9s">', 1)
         if rel == 'programs/index.html':
             s = patch_projects(s)
             s = patch_mentor_cards(s)
@@ -714,6 +717,7 @@ def shared(s, active):
     s = patch_footer_credit(s)
     s = V.patch_footer_cta(s)
     s = V.patch_app_buttons(s)
+    s = V.patch_pranam_tab(s)
     s = nepali_copy.apply(s)
     return s
 

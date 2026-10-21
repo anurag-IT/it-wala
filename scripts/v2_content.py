@@ -96,21 +96,30 @@ PROMO_IMG = '/assets/itwd/consult-thinking.png'
 def consult_promo():
     return '''<!-- itwd:consult-promo:start -->
 <section class="itwd-promo" aria-labelledby="itwd-promo-title">
+  <span class="itwd-promo__blob itwd-promo__blob--a" aria-hidden="true"></span>
+  <span class="itwd-promo__blob itwd-promo__blob--b" aria-hidden="true"></span>
   <div class="container">
-    <div class="itwd-promo__card th_fade_anim">
+    <div class="itwd-promo__grid">
       <div class="itwd-promo__content">
-        <span class="itwd-promo__label"><i class="fal fa-compass"></i>Free IT Guidance for Nepal Students</span>
-        <h2 class="itwd-promo__title" id="itwd-promo-title">+2 pachhi kun IT college ra course rojne?</h2>
-        <p class="itwd-promo__text">TU, PU wa foreign-affiliated college? BSc CSIT, BIT, BCA wa aru IT course? Options dherai huda confusion hunu swabhavik ho. IT Wala Dai le hajurlai courses bujhna, colleges explore garna, ra aafno interest anusar options compare garna free guidance dinchha.</p>
-        <ul class="itwd-promo__chips"><li>TU</li><li>PU</li><li>KU</li><li>Foreign-affiliated</li><li>BSc CSIT</li><li>BIT</li><li>BCA</li></ul>
-        <div class="itwd-promo__btns">
+        <span class="itwd-promo__label th_fade_anim"><i class="fal fa-compass"></i>Free IT Guidance for Nepal Students</span>
+        <h2 class="itwd-promo__title th_fade_anim" id="itwd-promo-title">+2 pachhi kun <span class="itwd-hl">IT college</span> ra course rojne?</h2>
+        <p class="itwd-promo__text th_fade_anim">TU, PU wa foreign-affiliated college? BSc CSIT, BIT, BCA wa aru IT course? Options dherai huda confusion hunu swabhavik ho. IT Wala Dai le hajurlai courses bujhna, colleges explore garna, ra aafno interest anusar options compare garna free guidance dinchha.</p>
+        <ul class="itwd-promo__chips th_fade_anim"><li>TU</li><li>PU</li><li>KU</li><li>Foreign-affiliated</li><li>BSc CSIT</li><li>BIT</li><li>BCA</li></ul>
+        <div class="itwd-btn-pair th_fade_anim">
           <a href="%(consult)s" class="th-btn">Free IT Consultation Book Garnuhos%(arrow)s</a>
           <a href="%(colleges)s" class="th-btn style-border2">IT Colleges Explore Garnuhos</a>
         </div>
+        <ul class="itwd-promo__facts th_fade_anim">
+          <li><strong>100%%</strong><span>Free guidance</span></li>
+          <li><strong>5+</strong><span>IT courses explain</span></li>
+          <li><strong>+2 &amp; Bachelor</strong><span>students ka lagi</span></li>
+        </ul>
       </div>
-      <div class="itwd-promo__visual">
+      <div class="itwd-promo__visual th_fade_anim">
         <span class="itwd-promo__ring" aria-hidden="true"></span>
-        <img src="%(img)s" alt="+2 sakepachhi kun IT college ramro hola bhanera sochdai gareki student" loading="lazy" decoding="async" width="543" height="900">
+        <img src="%(img)s" alt="+2 sakepachhi kun IT college ramro hola bhanera sochdai gareki student" decoding="async" width="543" height="900">
+        <span class="itwd-promo__badge itwd-promo__badge--a"><i class="fas fa-check-circle"></i>Free consultation</span>
+        <span class="itwd-promo__badge itwd-promo__badge--b"><i class="fas fa-graduation-cap"></i>TU · PU · KU</span>
       </div>
     </div>
   </div>
@@ -176,7 +185,7 @@ def patch_mission_cta(s):
         '<span class="sub-title text-theme th_fade_anim"><img decoding="async" src="/wp-content/uploads/2026/02/subtitle-icon1-4.svg" alt="">%s</span>'
         '<h2 class="sec-title text-white th-text-perspective">%s</h2>'
         '<div class="btn-wrap th_fade_anim mt-30"><p class="text-white mb-0 itwd-cta-text">%s</p></div>'
-        '<div class="btn-wrap mt-40 th_fade_anim justify-content-xl-start justify-content-center itwd-mission-btns">'
+        '<div class="btn-wrap mt-40 th_fade_anim justify-content-xl-start justify-content-center itwd-mission-btns itwd-btn-pair">'
         '<a href="%s" class="th-btn style2">Free IT Consultation Book Garnuhos%s</a>'
         '<a href="%s" class="th-btn style-border3">IT Colleges Explore Garnuhos</a></div></div>'
         % (MISSION['label'], MISSION['heading'], MISSION['text'], CONSULT_URL, ARROW, COLLEGES_URL))
@@ -202,7 +211,7 @@ def patch_free_learning(s):
         '<p class="box-text th_fade_anim">+2 wa bachelor ma padhdai hunuhunchha? IT Wala Dai bata programming ra computer-related '
         'learning resources explore garnuhos. Project ideas khojnuhos, IT courses ra colleges bujhnuhos, ra aafno next step '
         'ko lagi free guidance linuhos.</p>'
-        '<div class="btn-wrap mt-50 justify-content-center th_fade_anim">'
+        '<div class="btn-wrap mt-50 justify-content-center th_fade_anim itwd-btn-pair">'
         '<a href="%s" class="th-btn style2">Free ma Sikna Suru Garnuhos <i class="far fa-arrow-right ms-2"></i></a>'
         '<a href="%s" class="th-btn style-border3">Free IT Guidance Linuhos <i class="far fa-arrow-right ms-2"></i></a>'
         '</div></div>' % (LEARN_URL, CONSULT_URL))
@@ -391,7 +400,7 @@ def community_content():
       <p class="th_fade_anim itwd-sub-lead">+2 ra bachelor ka IT students ko community — prashna sodhnuhos, project share garnuhos, ra seniors bata siknuhos.</p>
     </div>
     <div class="row gy-4">%s</div>
-    <div class="itwd-community__cta th_fade_anim">
+    <div class="itwd-community__cta itwd-btn-pair th_fade_anim">
       <a href="#" data-app-link="android" class="th-btn"><i class="fab fa-google-play me-2"></i>IT Wala Dai App download garnuhos</a>
       <a href="%s" target="_blank" rel="noopener" class="th-btn style-border2"><i class="fab fa-whatsapp me-2"></i>WhatsApp ma jodinuhos</a>
     </div>
@@ -492,7 +501,7 @@ def consult_content():
         <span class="itwd-fc-label th_fade_anim"><i class="fal fa-compass"></i>IT Wala Dai Free Guidance</span>
         <h1 class="itwd-fc-title th_fade_anim">Aafno lagi sahi IT course ra college chhanna hajurlai help chahinchha?</h1>
         <p class="itwd-fc-lead th_fade_anim">+2 pachhi IT padhne sochma hunuhunchha tara kun course wa college rojne bhanera confused hunuhunchha? IT Wala Dai ko free guidance le options bujhna ra informed decision lina madat garchha.</p>
-        <div class="itwd-fc-btns th_fade_anim">
+        <div class="itwd-fc-btns itwd-btn-pair th_fade_anim">
           <a href="#courses" class="th-btn">Aafno Options Explore Garnuhos%(arrow)s</a>
           <a href="%(wa)s" target="_blank" rel="noopener" class="th-btn style-border2"><i class="fab fa-whatsapp me-2"></i>WhatsApp ma Sodhnuhos</a>
         </div>
@@ -604,7 +613,7 @@ def consult_content():
     <div class="itwd-fc-final__card th_fade_anim">
       <h2>Aafno IT journey ko next step aaja bata suru garnuhos.</h2>
       <p>Course, college, coding wa project ko barema confusion chha? IT Wala Dai sanga kura garnuhos.</p>
-      <div class="itwd-fc-btns justify-content-center">
+      <div class="itwd-fc-btns itwd-btn-pair justify-content-center">
         <a href="#consult-form" class="th-btn style2">Consultation Form Bharnuhos%(arrow)s</a>
         <a href="#colleges" class="th-btn style-border3">IT Colleges Explore Garnuhos</a>
       </div>
@@ -615,3 +624,27 @@ def consult_content():
            helps=help_html, steps=step_html, courses=course_html, colleges=college_html, faq=faq,
            wa_college=wa_link('Namaste Dai! Malai euta IT college ko barema jaankari chahiyo.'), wa_number=WA_NUMBER,
            course_opts=course_opts)
+
+
+# --------------------------------------------------------------------------- "Powered by Pranam Software" side tab (every page)
+
+PRANAM_TAB = (
+    '<!-- itwd:pranam-tab:start -->'
+    '<a class="itwd-pranam-tab" href="https://www.pranamsoftware.com.np/" target="_blank" rel="noopener" '
+    'aria-label="Powered by Pranam Software — website kholnuhos">'
+    '<span class="itwd-pranam-tab__icon" aria-hidden="true"><i class="fas fa-code"></i></span>'
+    '<span class="itwd-pranam-tab__vertical" aria-hidden="true">Powered by <b>Pranam Software</b></span>'
+    '<span class="itwd-pranam-tab__panel"><small>Powered by</small><strong>Pranam Software</strong>'
+    '<em>Website, App &amp; Software Development</em></span>'
+    '</a>'
+    '<!-- itwd:pranam-tab:end -->')
+
+
+def patch_pranam_tab(s):
+    """Fixed side tab, placed right before </body> (outside the smooth-scroll wrapper so position:fixed works)."""
+    if '<!-- itwd:pranam-tab:start -->' in s:
+        st = s.index('<!-- itwd:pranam-tab:start -->')
+        en = s.index('<!-- itwd:pranam-tab:end -->') + len('<!-- itwd:pranam-tab:end -->')
+        return s[:st] + PRANAM_TAB + s[en:]
+    i = s.rindex('</body>')
+    return s[:i] + PRANAM_TAB + '\n' + s[i:]

@@ -62,6 +62,12 @@
     a.setAttribute('rel', 'noopener');
   });
 
+  // ---- "All Things in One Place" cards: enable the paint-out animation only after a real hover
+  document.addEventListener('mouseover', function (e) {
+    var card = e.target.closest && e.target.closest('.elementor-element-faea3de .category-card3');
+    if (card) card.classList.add('itwd-was-hovered');
+  });
+
   // ---- Find Project: category tabs (+ category cards above) and mobile swipe carousel
   var projectsSection = document.getElementById('featured-projects');
   var projWrap = projectsSection && projectsSection.querySelector('.itwd-projects');
