@@ -1,4 +1,4 @@
-/* IT Wala Dai — small page scripts (countdown, project filter, start-project modal, contact form) */
+/* IT Wala Dai — small page scripts (app links, project tabs, start-project / free-course modal, course pages, testimonials filter, consultation form, contact form) */
 (function () {
   'use strict';
 
@@ -45,29 +45,21 @@
     });
   });
 
-  // ---- Community countdown
-  document.querySelectorAll('[data-countdown]').forEach(function (el) {
-    var target = new Date(el.getAttribute('data-countdown')).getTime();
-    var nums = {};
-    el.querySelectorAll('[data-cd]').forEach(function (n) { nums[n.getAttribute('data-cd')] = n; });
-    var done = el.parentNode.querySelector('.itwd-cd__done');
-    var pad = function (v) { return String(v).padStart(2, '0'); };
-    var timer;
-
-    function tick() {
-      var diff = Math.max(0, target - Date.now());
-      var s = Math.floor(diff / 1000);
-      nums.days.textContent = pad(Math.floor(s / 86400));
-      nums.hours.textContent = pad(Math.floor((s % 86400) / 3600));
-      nums.minutes.textContent = pad(Math.floor((s % 3600) / 60));
-      nums.seconds.textContent = pad(s % 60);
-      if (diff === 0) {
-        clearInterval(timer);
-        if (done) done.hidden = false;
-      }
-    }
-    tick();
-    timer = setInterval(tick, 1000);
+  // ---- IT Wala Dai App download buttons ([data-app-link="android" | "windows"])
+  // Paste the real store / download links here once they are ready. While a link is empty the button opens
+  // WhatsApp so the student can ask Dai for the app link (never a dead "#" button).
+  var APP_LINKS = {
+    android: '',
+    windows: ''
+  };
+  var WA_NUMBER = '9779823415625';
+  var waUrl = function (msg) { return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg); };
+  document.querySelectorAll('[data-app-link]').forEach(function (a) {
+    var url = APP_LINKS[a.getAttribute('data-app-link')];
+    a.removeAttribute('onclick');
+    a.setAttribute('href', url || waUrl('Namaste Dai! Malai IT Wala Dai App ko download link chahiyo.'));
+    a.setAttribute('target', '_blank');
+    a.setAttribute('rel', 'noopener');
   });
 
   // ---- Find Project: category tabs (+ category cards above) and mobile swipe carousel
@@ -181,7 +173,7 @@
       var email = f.email.value.trim();
       var desc = f.description.value.trim();
       if (!name || !phone || !email || !f.email.checkValidity()) {
-        startStatus.textContent = 'Name, phone aur sahi email bharo please.';
+        startStatus.textContent = 'Kripaya naam, phone ra sahi email bharnuhos.';
         startStatus.classList.add('is-error');
         return;
       }
@@ -197,7 +189,7 @@
         '\nKripaya guide garnu hola. Dhanyabad!';
       window.open('https://wa.me/' + startForm.getAttribute('data-whatsapp') + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
       startStatus.classList.remove('is-error');
-      startStatus.textContent = 'WhatsApp khul gaya — wahan Send dabao. Dai jaldi reply karenge!';
+      startStatus.textContent = 'WhatsApp khulyo — tyaha Send thichnuhos. Dai chhittai reply garnuhunchha!';
       startForm.reset();
     });
   }
@@ -248,7 +240,7 @@
     var id = b.getAttribute('data-wish');
     var list = getWish();
     var i = list.indexOf(id);
-    if (i === -1) { list.push(id); toast('Wishlist mein add ho gaya ❤'); } else { list.splice(i, 1); toast('Wishlist se hata diya'); }
+    if (i === -1) { list.push(id); toast('Wishlist ma thapiyo ❤'); } else { list.splice(i, 1); toast('Wishlist bata hatayiyo'); }
     try { localStorage.setItem(WISH_KEY, JSON.stringify(list)); } catch (err) { /* private mode */ }
     paintWish();
   });
@@ -263,7 +255,7 @@
     if (navigator.share) {
       navigator.share(data).catch(function () {});
     } else if (navigator.clipboard) {
-      navigator.clipboard.writeText(location.href).then(function () { toast('Link copy ho gaya!'); });
+      navigator.clipboard.writeText(location.href).then(function () { toast('Link copy bhayo!'); });
     }
   });
 
@@ -309,6 +301,88 @@
     });
   }
 
+  // ---- Testimonials page: category filter
+  var tGrid = document.querySelector('.itwd-tgrid');
+  if (tGrid) {
+    var tCards = Array.prototype.slice.call(tGrid.querySelectorAll('.itwd-tc'));
+    document.querySelectorAll('.itwd-tfilter').forEach(function (btn) {
+      btn.setAttribute('aria-pressed', btn.classList.contains('is-active') ? 'true' : 'false');
+      btn.addEventListener('click', function () {
+        var cat = btn.getAttribute('data-tfilter');
+        document.querySelectorAll('.itwd-tfilter').forEach(function (b) {
+          var on = b === btn;
+          b.classList.toggle('is-active', on);
+          b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+        tCards.forEach(function (c) { c.hidden = cat !== 'all' && c.getAttribute('data-cat') !== cat; });
+        tGrid.classList.remove('is-animating');
+        void tGrid.offsetWidth;
+        tGrid.classList.add('is-animating');
+        refreshScroll();
+      });
+    });
+  }
+
+  // ---- Free IT consultation page: college search
+  var collegeSearch = document.getElementById('itwd-college-search');
+  if (collegeSearch) {
+    var collegeCols = Array.prototype.slice.call(document.querySelectorAll('.itwd-fc-college-col'));
+    var emptyNote = document.querySelector('.itwd-fc-empty');
+    collegeSearch.addEventListener('input', function () {
+      var q = collegeSearch.value.trim().toLowerCase();
+      var shown = 0;
+      collegeCols.forEach(function (c) {
+        var hit = !q || c.getAttribute('data-name').indexOf(q) !== -1;
+        c.hidden = !hit;
+        if (hit) shown++;
+      });
+      if (emptyNote) emptyNote.hidden = shown !== 0;
+      refreshScroll();
+    });
+  }
+
+  // ---- Free IT consultation page: request form -> WhatsApp (no backend; nothing is stored)
+  document.querySelectorAll('form.itwd-fc-form').forEach(function (form) {
+    var status = form.querySelector('.itwd-form-status');
+    var setStatus = function (text, isError) {
+      status.textContent = text;
+      status.classList.toggle('is-error', !!isError);
+    };
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var f = form.elements;
+      var val = function (n) { return (f[n].value || '').trim(); };
+      var missing = [];
+      if (!val('name')) missing.push('naam');
+      if (!/^[+\d][\d\s-]{6,}$/.test(val('phone'))) missing.push('sahi phone number');
+      if (!val('level')) missing.push('ahile ko padhai');
+      if (!val('course')) missing.push('interest bhayeko course');
+      if (!val('question')) missing.push('prashna');
+      form.querySelectorAll('.form-control, .form-select').forEach(function (el) {
+        var bad = el.required && !el.value.trim();
+        if (el.name === 'phone') bad = !/^[+\d][\d\s-]{6,}$/.test(el.value.trim());
+        el.classList.toggle('is-invalid', bad);
+        el.setAttribute('aria-invalid', bad ? 'true' : 'false');
+      });
+      if (missing.length) {
+        setStatus('Kripaya ' + missing.join(', ') + ' bharnuhos.', true);
+        return;
+      }
+      var contact = (form.querySelector('input[name="contact"]:checked') || {}).value || 'WhatsApp';
+      var msg =
+        'Namaste Dai! 🙏 Malai free IT consultation chahiyo.\n\n' +
+        'Naam: ' + val('name') + '\n' +
+        'Phone: ' + val('phone') + '\n' +
+        'Ahile ko padhai: ' + val('level') + '\n' +
+        'Interest: ' + val('course') + '\n' +
+        (val('colleges') ? 'Man pareko college/university: ' + val('colleges') + '\n' : '') +
+        'Contact: ' + contact + '\n\n' +
+        'Prashna: ' + val('question');
+      window.open(waUrl(msg), '_blank', 'noopener');
+      setStatus('WhatsApp khulyo — request pathauna tyaha Send thichnuhos. Hami chhitto reply garchhau.');
+    });
+  });
+
   // ---- Contact form -> sent straight to the inbox via FormSubmit (no backend, no mail app)
   document.querySelectorAll('form.itwd-contact-form').forEach(function (form) {
     var status = form.querySelector('.itwd-form-status');
@@ -325,10 +399,10 @@
       var email = form.elements['your-email'].value.trim();
       var msg = form.elements['your-message'].value.trim();
       if (!name || !email || !msg || !form.elements['your-email'].checkValidity()) {
-        setStatus('Name, sahi email aur message — teeno bharo please.', true);
+        setStatus('Kripaya naam, sahi email ra message — tinai bharnuhos.', true);
         return;
       }
-      setStatus('Bhej rahe hain...');
+      setStatus('Pathaudai chhau...');
       button.disabled = true;
 
       fetch('https://formsubmit.co/ajax/' + to, {
@@ -349,7 +423,7 @@
         })
         .then(function (data) {
           if (String(data.success) !== 'true') throw new Error(data.message || 'Unknown error');
-          setStatus('Shukriya ' + name + '! Message mil gaya — reply 24 ghante mein.');
+          setStatus('Dhanyabad ' + name + '! Message pugyo — 24 ghanta bhitra reply garchhau.');
           form.reset();
         })
         .catch(function (err) {
@@ -357,9 +431,9 @@
           if (window.console) console.warn('Contact form (FormSubmit):', reason);
           if (/activat/i.test(reason)) {
             // FormSubmit sends a one-time "Activate Form" email to the inbox; until it is clicked nothing is delivered
-            setStatus('Form abhi activate nahi hua hai. ' + to + ' ke inbox (aur Spam) mein FormSubmit ka "Activate Form" email kholo aur button dabao — uske baad messages direct aayenge.', true);
+            setStatus('Form ahile activate bhayeko chhaina. ' + to + ' ko inbox (ra Spam) ma FormSubmit ko "Activate Form" email kholera button thichnuhos — tyaspachhi messages sidhai aaunchhan.', true);
           } else {
-            setStatus('Message nahi gaya (' + (reason || 'network error') + '). Thodi der baad try karo ya ' + to + ' pe email karo.', true);
+            setStatus('Message pugena (' + (reason || 'network error') + '). Kehi bermapachhi feri try garnuhos wa ' + to + ' ma email garnuhos.', true);
           }
         })
         .finally(function () { button.disabled = false; });

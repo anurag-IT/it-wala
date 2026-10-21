@@ -5,7 +5,10 @@ The generated pages have since been edited by hand (hero, logo, menu icons, CSS.
 build_site.py must NOT be re-run any more. This script makes targeted, repeatable edits
 to the live files instead:
 
-  * same header menu (with icons) + footer quick links on every page
+  * same simple text header menu + footer quick links on every page
+  * shared WhatsApp consultation CTA in every footer, app download buttons, Roman Nepali copy
+  * home: free IT consultation promo, mission CTA, free-learning block, FAQ, testimonials preview
+  * creates /free-it-consultation, /community, /testimonials, /plus-two (+ course pages)
   * Find Project: category tabs + project cards (between itwd:projects markers)
   * creates /plus-two (free C & C++ for +2) and /testimonials if they don't exist yet
     (use --force-new-pages to regenerate them)
@@ -20,22 +23,26 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 import build_site as B  # project/category data + html helpers (block, hidden, ...)
+import nepali_copy
+import v2_content as V
 
 ROOT = B.ROOT
 
-NAV = [
-    ('/', 'Home', 'fas fa-home'),
-    ('/programs', 'Find Project', 'far fa-folder'),
-    ('/plus-two', 'For +2', 'far fa-graduation-cap'),
-    ('/community', 'Community', 'far fa-users'),
-    ('/testimonials', 'Testimonials', 'far fa-star'),
-    ('/about', 'About', 'far fa-info-circle'),
-    ('/contact', 'Contact', 'far fa-envelope'),
+NAV = [  # simple text menu (no icons)
+    ('/', 'Home'),
+    ('/programs', 'Find Project'),
+    ('/plus-two', 'For +2'),
+    ('/free-it-consultation', 'Free Guidance'),
+    ('/community', 'Community'),
+    ('/testimonials', 'Testimonials'),
+    ('/about', 'About'),
+    ('/contact', 'Contact'),
 ]
 PAGES = {
     'index.html': '/',
     'programs/index.html': '/programs',
     'plus-two/index.html': '/plus-two',
+    'free-it-consultation/index.html': '/free-it-consultation',
     'community/index.html': '/community',
     'testimonials/index.html': '/testimonials',
     'about/index.html': '/about',
@@ -58,11 +65,13 @@ def write(rel, s):
 
 def nav_items(active):
     out = []
-    for i, (href, label, icon) in enumerate(NAV):
+    for i, (href, label) in enumerate(NAV):
         cls = 'menu-item menu-item-type-custom menu-item-object-custom itwd-menu-%d' % i
+        aria = ''
         if href == active:
             cls += ' current-menu-item current_page_item'
-        out.append('<li class="%s"><a href="%s"><i class="%s"></i><span>%s</span></a></li>' % (cls, href, icon, label))
+            aria = ' aria-current="page"'
+        out.append('<li class="%s"><a href="%s"%s>%s</a></li>' % (cls, href, aria, label))
     return '\n'.join(out) + '\n'
 
 
@@ -76,7 +85,7 @@ def set_menus(s, active):
     ul_open = '<ul id="menu-quick-links" class="menu">'
     st = s.index(ul_open) + len(ul_open)
     en = s.index('<template data-itwd-hidden="template-footer-menu">', st)
-    s = s[:st] + '\n' + ''.join('<li class="menu-item"><a href="%s">%s</a></li>\n' % (h, l) for h, l, _ in NAV) + s[en:]
+    s = s[:st] + '\n' + ''.join('<li class="menu-item"><a href="%s">%s</a></li>\n' % (h, l) for h, l in NAV) + s[en:]
     return s
 
 
@@ -177,11 +186,11 @@ def home_app_banner():
 
 def plus_two_content():
     courses = [
-        dict(code='C', cls='c', name='C Programming', tag='Programming ki shuruaat',
+        dict(code='C', cls='c', name='C Programming', tag='Programming ko suruwat',
              img=B.unsplash('1515879218367-8466d910aaa4'),
              topics=['Variables &amp; Data Types', 'Operators', 'If-else &amp; Loops', 'Arrays &amp; Strings',
                      'Functions', 'Pointers', 'Structures', 'File Handling']),
-        dict(code='C++', cls='cpp', name='C++ Programming', tag='C ke baad agla level &mdash; OOP',
+        dict(code='C++', cls='cpp', name='C++ Programming', tag='C pachhi arko level &mdash; OOP',
              img=B.unsplash('1555066931-4365d14bab8c'),
              topics=['C++ Basics', 'Classes &amp; Objects', 'Constructors', 'Inheritance',
                      'Polymorphism', 'Function Overloading', 'Operator Overloading', 'File I/O']),
@@ -192,13 +201,13 @@ def plus_two_content():
         '<span class="itwd-c2__free"><i class="fas fa-gift"></i>FREE</span>'
         '<span class="itwd-c2__lang">%(code)s</span></div>'
         '<div class="itwd-c2__body">'
-        '<span class="itwd-c2__kicker"><i class="fal fa-mobile"></i>IT Wala Dai App pe</span>'
+        '<span class="itwd-c2__kicker"><i class="fal fa-mobile"></i>IT Wala Dai App ma</span>'
         '<h3 class="itwd-c2__name">%(name)s</h3><p class="itwd-c2__tag">%(tag)s</p>'
         '<ul class="itwd-c2__meta"><li><i class="fal fa-signal-bars"></i>Beginner</li>'
         '<li><i class="fal fa-video"></i>Live classes</li><li><i class="fal fa-tag"></i>Rs. 0</li></ul>'
         '<ul class="itwd-c2__topics">%(topics)s</ul>'
         '<a href="#start-project" class="th-btn itwd-start" data-kind="course" data-project="%(name)s">'
-        'Free mein join karo%(arrow)s</a>'
+        'Free ma join garnuhos%(arrow)s</a>'
         '</div></article></div>'
         % dict(c, delay='0.%d' % (2 + 2 * i), topics=''.join('<li>%s</li>' % t for t in c['topics']), arrow=B.ARROW_SVG)
         for i, c in enumerate(courses))
@@ -207,21 +216,21 @@ def plus_two_content():
     cards = ''.join('<div class="col-xl-4 col-md-6">%s</div>' % course_card(c, 0.2 + 0.2 * i) for i, c in enumerate(COURSES))
 
     app_features = [
-        ('fal fa-signal-stream', 'Live classes', 'Teacher ke saath live padho, wahin sawaal poocho.'),
-        ('fal fa-circle-play', 'Recorded videos', 'Class miss hui? Video baad mein dekh lo.'),
-        ('fal fa-file-lines', 'Notes &amp; PDF', 'Har chapter ke simple notes, download karo.'),
-        ('fal fa-laptop-code', 'Practice questions', 'Har topic ke baad code karke practice.'),
-        ('fal fa-clipboard-check', 'Mock tests', 'Exam se pehle khud ko test karo.'),
-        ('fal fa-comments-question', 'Doubt solving', 'Atak gaye? App pe doubt pucho, jawab pao.'),
+        ('fal fa-signal-stream', 'Live classes', 'Teacher sanga live padhnuhos, tyahi prashna sodhnuhos.'),
+        ('fal fa-circle-play', 'Recorded videos', 'Class chhutyo? Video pachhi herna saknuhunchha.'),
+        ('fal fa-file-lines', 'Notes &amp; PDF', 'Har chapter ko simple notes download garnuhos.'),
+        ('fal fa-laptop-code', 'Practice questions', 'Har topic pachhi code garera practice garnuhos.'),
+        ('fal fa-clipboard-check', 'Mock tests', 'Exam aghi aafailai test garnuhos.'),
+        ('fal fa-comments-question', 'Doubt solving', 'Atkinubhayo? App ma doubt sodhnuhos, jawaf paunuhos.'),
     ]
     feat_html = ''.join(
         '<div class="col-lg-4 col-sm-6"><div class="itwd-appf th_fade_anim" data-delay="0.%d">'
         '<span class="itwd-appf__icon"><i class="%s"></i></span><div><h4>%s</h4><p>%s</p></div></div></div>'
         % (1 + i, ic, t, d) for i, (ic, t, d) in enumerate(app_features))
 
-    steps = [('fal fa-download', 'App download karo', 'IT Wala Dai App &mdash; Android &amp; Windows (jaldi aa raha hai).'),
-             ('fal fa-hand-pointer', 'C ya C++ chuno', 'Apna course select karo &mdash; bilkul free.'),
-             ('fal fa-chalkboard-user', 'Live class join karo', 'Schedule app pe milega, bas join karo aur seekho.')]
+    steps = [('fal fa-download', 'App download garnuhos', 'IT Wala Dai App &mdash; Android ra Windows ma available chha.'),
+             ('fal fa-hand-pointer', 'C wa C++ chhannuhos', 'Aafno course select garnuhos &mdash; pura free.'),
+             ('fal fa-chalkboard-user', 'Live class join garnuhos', 'Schedule app ma painchha, join garnuhos ra siknuhos.')]
     step_html = ''.join(
         '<div class="col-md-4"><div class="itwd-step th_fade_anim" data-delay="0.%d"><span class="itwd-step__num">%d</span>'
         '<i class="%s itwd-step__icon"></i><h4>%s</h4><p>%s</p></div></div>' % (2 + 2 * i, i + 1, ic, t, d)
@@ -232,13 +241,13 @@ def plus_two_content():
   <div class="container">
     <div class="title-area text-center mb-30">
       <span class="sub-title th_fade_anim"><img decoding="async" src="/wp-content/uploads/2026/02/subtitle-icon1-4.svg" alt="">For +2 Students &middot; 100%% Free</span>
-      <h2 class="sec-title th_fade_anim"><span class="th-text-perspective">C aur C++ seekho &mdash; bilkul free</span></h2>
-      <p class="th_fade_anim itwd-sub-lead">Saari padhai <strong>IT Wala Dai App</strong> pe hogi &mdash; live classes, videos, notes aur practice. Bas app download karo aur shuru ho jao.</p>
+      <h2 class="sec-title th_fade_anim"><span class="th-text-perspective">C ra C++ siknuhos &mdash; pura free</span></h2>
+      <p class="th_fade_anim itwd-sub-lead">Sabai padhai <strong>IT Wala Dai App</strong> ma hunchha &mdash; live classes, videos, notes ra practice. App download garnuhos ra suru garnuhos.</p>
     </div>
     <ul class="itwd-pills th_fade_anim">
       <li><i class="fal fa-badge-percent"></i>Rs. 0 fees</li>
-      <li><i class="fal fa-mobile"></i>Sab kuch App pe</li>
-      <li><i class="fal fa-book-open"></i>+2 syllabus ke saath</li>
+      <li><i class="fal fa-mobile"></i>Sabai kura App ma</li>
+      <li><i class="fal fa-book-open"></i>+2 syllabus anusar</li>
     </ul>
     <div class="row gy-4 justify-content-center">%s</div>
   </div>
@@ -247,8 +256,8 @@ def plus_two_content():
   <div class="container">
     <div class="title-area text-center mb-40">
       <span class="sub-title th_fade_anim"><img decoding="async" src="/wp-content/uploads/2026/02/subtitle-icon1-4.svg" alt="">IT Wala Dai App</span>
-      <h2 class="sec-title th_fade_anim"><span class="th-text-perspective">Padhai sab ek App pe</span></h2>
-      <p class="th_fade_anim itwd-sub-lead">Class, notes, practice, test &mdash; sab kuch tumhare phone ya laptop pe.</p>
+      <h2 class="sec-title th_fade_anim"><span class="th-text-perspective">Sabai padhai euta App ma</span></h2>
+      <p class="th_fade_anim itwd-sub-lead">Class, notes, practice, test &mdash; sabai kura hajurko phone wa laptop ma.</p>
     </div>
     <div class="row gy-4">%s</div>
   </div>
@@ -257,74 +266,13 @@ def plus_two_content():
 <section class="itwd-plus2-steps space">
   <div class="container">
     <div class="title-area text-center mb-40">
-      <span class="sub-title th_fade_anim"><img decoding="async" src="/wp-content/uploads/2026/02/subtitle-icon1-4.svg" alt="">Kaise shuru karein</span>
+      <span class="sub-title th_fade_anim"><img decoding="async" src="/wp-content/uploads/2026/02/subtitle-icon1-4.svg" alt="">Kasari suru garne</span>
       <h2 class="sec-title th_fade_anim"><span class="th-text-perspective">3 simple steps</span></h2>
     </div>
     <div class="row gy-4">%s</div>
-    <p class="itwd-note text-center mt-30 th_fade_anim">App jaldi launch ho raha hai &mdash; abhi join karo, launch hote hi sabse pehle access milega.</p>
   </div>
 </section>
 ''' % (cards, feat_html, home_app_banner(), step_html)
-
-
-TESTIMONIALS = [
-    ('Bibek K.', 'BSc CSIT &middot; TU', 'AI Attendance Project',
-     'Mera AI attendance project ab college mein actually use hota hai. External ne &lsquo;production-ready&rsquo; bola!'),
-    ('Kritika B.', 'BCA &middot; Pokhara Univ.', 'Viva Prep',
-     'Documentation aur viva prep sabse helpful tha. Pehli baar viva mein confident thi.'),
-    ('Rohan M.', 'BIT &middot; Purbanchal', 'Mentor Review',
-     'Mentor review ne meri bad habits pakdi. Isi project se internship mili.'),
-]
-
-
-def testimonials_content():
-    def initials(n):
-        return ''.join(w[0] for w in n.replace('.', '').split()[:2]).upper()
-
-    stars = '<span class="itwd-t-stars" aria-label="5 out of 5">' + '<i class="fas fa-star"></i>' * 5 + '</span>'
-
-    def person(name, meta):
-        return ('<div class="itwd-t-person"><span class="itwd-t-avatar">%s</span>'
-                '<div class="itwd-t-person__text"><h4>%s</h4><p>%s</p></div></div>' % (initials(name), name, meta))
-
-    # featured: full-width banner (quote left, student right)
-    feat_name, feat_meta, feat_tag, feat_quote = TESTIMONIALS[0]
-    featured = ('<article class="itwd-t-featured th_fade_anim">'
-                '<div class="itwd-t-featured__quote"><i class="fas fa-quote-left itwd-t-featured__mark"></i>'
-                '<div class="itwd-t-featured__meta">%s<span class="itwd-t-chip">%s</span></div>'
-                '<blockquote>%s</blockquote></div>'
-                '<div class="itwd-t-featured__who">%s</div></article>'
-                % (stars, feat_tag, feat_quote, person(feat_name, feat_meta)))
-    # equal cards in one row: tag sits next to the stars (never squeezed beside the name)
-    cards = ''.join(
-        '<div class="col-lg-4 col-md-6"><article class="itwd-t-card th_fade_anim" data-delay="%.1f">'
-        '<div class="itwd-t-card__top">%s<span class="itwd-t-chip">%s</span></div>'
-        '<i class="fas fa-quote-right itwd-t-card__mark"></i>'
-        '<p class="itwd-t-card__quote">%s</p>%s</article></div>'
-        % (0.1 + i * 0.15, stars, t, q, person(n, m)) for i, (n, m, t, q) in enumerate(TESTIMONIALS[1:]))
-    share = ('<div class="col-lg-4 col-md-12"><a href="/contact" class="itwd-t-share th_fade_anim" data-delay="0.4">'
-             '<span class="itwd-t-share__icon"><i class="fal fa-pen-nib"></i></span>'
-             '<strong>Apni story share karo</strong><small>IT Wala Dai ke saath project banaya? Humein batao — '
-             'tumhari story yahan aa sakti hai.</small><span class="itwd-t-share__go">Story bhejo <i class="far fa-arrow-right"></i></span></a></div>')
-    stats = [('1,200+', 'Happy students', 'fal fa-face-smile'), ('5.0', 'Average rating', 'fal fa-star'),
-             ('92%', 'Got A / A+ grade', 'fal fa-award'), ('340+', 'Projects shipped', 'fal fa-rocket')]
-    stat_html = ''.join('<div class="col-6 col-lg-3"><div class="itwd-t-stat th_fade_anim"><span class="itwd-t-stat__icon"><i class="%s"></i></span>'
-                        '<strong>%s</strong><span>%s</span></div></div>' % (ic, v, l) for v, l, ic in stats)
-    return '''
-<section class="itwd-testi space">
-  <div class="container">
-    <div class="title-area text-center mb-40">
-      <span class="sub-title th_fade_anim"><img decoding="async" src="/wp-content/uploads/2026/02/subtitle-icon1-4.svg" alt="">Testimonials</span>
-      <h2 class="sec-title th_fade_anim"><span class="th-text-perspective">Unke projects, unki zubaani.</span></h2>
-      <p class="th_fade_anim itwd-sub-lead">CSIT, BIT, BCA students jinhone IT Wala Dai ke saath apna project banaya.</p>
-    </div>
-    <div class="row gy-4 mb-50">%s</div>
-    %s
-    <div class="row gy-4 mt-1">%s%s</div>
-    <div class="text-center mt-50 th_fade_anim"><a href="/programs" class="th-btn">Apna project shuru karo%s</a></div>
-  </div>
-</section>
-''' % (stat_html, featured, cards, share, B.ARROW_SVG)
 
 
 def start_modal_html():
@@ -365,7 +313,7 @@ def mentor_social(name):
             out.append('<a href="%s" target="_blank" rel="noopener" aria-label="%s"><i aria-hidden="true" class="%s"></i></a>'
                        % (url, label, SOCIAL_ICON[net]))
         else:  # icon only for now — link will be added later
-            out.append('<a class="is-disabled" aria-disabled="true" aria-label="%s (coming soon)"><i aria-hidden="true" class="%s"></i></a>'
+            out.append('<a class="is-disabled" aria-disabled="true" aria-label="%s (link pachhi thapinechha)"><i aria-hidden="true" class="%s"></i></a>'
                        % (label, SOCIAL_ICON[net]))
     return ''.join(out)
 
@@ -421,9 +369,9 @@ def patch_about_badge(s):
 INSTRUCTOR = dict(
     name='Sachin Kushwaha',
     role='IT Wala Dai Mentor &middot; C &amp; C++',
-    bio=('Sachin Kushwaha Pranam Software ke CEO &amp; Founder aur IT Wala Dai ke mentor hain. Wo +2 students ko C aur C++ simple Hinglish mein, '
-         'real examples aur roz ki practice ke saath sikhate hain &mdash; taaki concept clear ho aur exam ke saath '
-         'coding confidence bhi aaye.'),
+    bio=('Sachin Kushwaha Pranam Software ka CEO &amp; Founder ra IT Wala Dai ka mentor hunuhunchha. Uhaa +2 students lai C ra C++ '
+         'simple bhasha ma, real examples ra dainik practice sanga sikaunuhunchha &mdash; jasle garda concept clear hos ra exam '
+         'sangai coding confidence pani badhos.'),
 )
 
 
@@ -437,82 +385,82 @@ def instructor_photo():
 COURSES = [
     dict(
         slug='c-programming', code='C', cls='c', name='C Programming',
-        title='C Programming &mdash; zero se pointers tak',
-        short='Programming ki shuruaat C se karo. Variables se lekar pointers aur file handling tak &mdash; '
-              'simple language, live classes aur roz ki practice ke saath.',
+        title='C Programming &mdash; zero dekhi pointers samma',
+        short='Programming ko suruwat C bata garnuhos. Variables dekhi pointers ra file handling samma &mdash; '
+              'simple bhasha, live classes ra dainik practice sanga.',
         img='1515879218367-8466d910aaa4', level='Beginner', weeks='~8 weeks',
-        goals=['C program likhna, compile aur run karna', 'Variables, data types aur operators samajhna',
-               'if-else, switch aur loops se logic banana', 'Arrays aur strings ke saath kaam karna',
-               'Functions aur recursion use karna', 'Pointers ka concept clear karna',
-               'Structures se apna data type banana', 'Files mein data save aur read karna'],
+        goals=['C program lekhna, compile ra run garna', 'Variables, data types ra operators bujhna',
+               'if-else, switch ra loops bata logic banauna', 'Arrays ra strings sanga kaam garna',
+               'Functions ra recursion use garna', 'Pointers ko concept clear garna',
+               'Structures bata aafnai data type banauna', 'Files ma data save ra read garna'],
         skills=['C Language', 'Logic Building', 'Problem Solving', 'Loops &amp; Patterns', 'Arrays',
                 'Functions', 'Pointers', 'Structures', 'File Handling', 'Debugging'],
-        desc=['Ye course un +2 students ke liye hai jo programming bilkul zero se shuru karna chahte hain. '
-              'Har topic pehle simple example se samjhaya jaata hai, phir live class mein saath mein code karte hain.',
-              'Saari classes <strong>IT Wala Dai App</strong> pe hongi &mdash; live class miss ho jaye to recording dekh lo, '
-              'notes download karo aur har chapter ke baad practice questions solve karo.'],
-        reqs=['Koi coding experience zaroori nahi', 'Laptop/computer best hai &mdash; phone pe online compiler bhi chalega',
-              'Internet connection (live classes ke liye)', 'Seekhne ka mann &mdash; baaki Dai sambhal lega!'],
-        audience=['Grade 11&ndash;12 ke Computer Science students', 'Jo programming pehli baar seekh rahe hain',
-                  'Board exam ke C questions ki tayyari karne wale', 'Jo aage BSc CSIT / BIT / BCA karna chahte hain'],
+        desc=['Yo course programming pura zero bata suru garna chahane +2 students ka lagi ho. '
+              'Har topic pahile simple example bata bujhaincha, ani live class ma sangai code garinchha.',
+              'Sabai classes <strong>IT Wala Dai App</strong> ma hunchhan &mdash; live class chhutyo bhane recording hernuhos, '
+              'notes download garnuhos ra har chapter pachhi practice questions solve garnuhos.'],
+        reqs=['Coding experience chahidaina', 'Laptop/computer ramro &mdash; phone ma online compiler pani chalchha',
+              'Internet connection (live classes ka lagi)', 'Sikne icchha &mdash; baaki Dai le sambhalchha!'],
+        audience=['Grade 11&ndash;12 ka Computer Science students', 'Pahilo choti programming sikdai gareka students',
+                  'Board exam ko C questions ko tayari garne students', 'Pachhi BSc CSIT / BIT / BCA padhna chahane students'],
         modules=[
-            ('Getting Started', ['Programming kya hai aur C kyun?', 'Setup: VS Code / Code::Blocks + GCC',
-                                 'Pehla program: Hello World']),
-            ('C ke Basics', ['Variables &amp; data types', 'Input / Output: printf &amp; scanf',
+            ('Getting Started', ['Programming ke ho ra C kina?', 'Setup: VS Code / Code::Blocks + GCC',
+                                 'Pahilo program: Hello World']),
+            ('C ka Basics', ['Variables &amp; data types', 'Input / Output: printf &amp; scanf',
                              'Operators &amp; expressions', 'Type conversion']),
             ('Control Flow', ['if, else-if &amp; switch', 'Loops: for, while, do-while', 'break &amp; continue',
                               'Practice: pattern printing']),
             ('Arrays &amp; Strings', ['1D arrays', '2D arrays (matrix)', 'Strings &amp; string functions',
                                       'Practice: searching &amp; sorting']),
-            ('Functions', ['Function banana aur call karna', 'Call by value vs call by reference', 'Recursion']),
-            ('Pointers, Structures &amp; Files', ['Pointers ke basics', 'Pointers + arrays', 'Structures &amp; unions',
+            ('Functions', ['Function banauna ra call garna', 'Call by value vs call by reference', 'Recursion']),
+            ('Pointers, Structures &amp; Files', ['Pointers ka basics', 'Pointers + arrays', 'Structures &amp; unions',
                                                    'File handling: fopen, fprintf, fscanf']),
         ],
     ),
     dict(
         slug='cpp-programming', code='C++', cls='cpp', name='C++ Programming',
-        title='C++ Programming &mdash; OOP simple tareeke se',
-        short='C ke baad agla level. Classes, objects, inheritance aur polymorphism &mdash; '
-              'Object-Oriented Programming ko real examples aur mini project ke saath seekho.',
+        title='C++ Programming &mdash; OOP simple tarika le',
+        short='C pachhi arko level. Classes, objects, inheritance ra polymorphism &mdash; '
+              'Object-Oriented Programming real examples ra mini project sanga siknuhos.',
         img='1555066931-4365d14bab8c', level='Intermediate', weeks='~8 weeks',
-        goals=['C aur C++ ka difference samajhna', 'Classes aur objects design karna',
-               'Constructors &amp; destructors use karna', 'Inheritance se code reuse karna',
-               'Function &amp; operator overloading', 'Virtual functions aur polymorphism',
-               'fstream se file I/O karna', 'Ek complete mini project banana'],
+        goals=['C ra C++ ko farak bujhna', 'Classes ra objects design garna',
+               'Constructors &amp; destructors use garna', 'Inheritance bata code reuse garna',
+               'Function &amp; operator overloading', 'Virtual functions ra polymorphism',
+               'fstream bata file I/O garna', 'Euta complete mini project banauna'],
         skills=['C++', 'OOP', 'Classes &amp; Objects', 'Inheritance', 'Polymorphism', 'Overloading',
                 'Templates', 'File I/O', 'Exception Handling', 'Mini Project'],
-        desc=['Is course mein hum Object-Oriented Programming ko simple tareeke se samjhenge &mdash; har concept ek '
-              'real-life example (student, bank account, library) ke saath.',
-              'Saari classes <strong>IT Wala Dai App</strong> pe hongi &mdash; live classes, recordings, notes aur practice '
-              'questions sab ek jagah. Course ke end mein tum apna mini project banaoge.'],
-        reqs=['C ke basics aate ho to best (nahi aate to pehle hamara free C course karo)',
-              'Laptop/computer best hai &mdash; phone pe online compiler bhi chalega',
-              'Internet connection (live classes ke liye)', 'Practice karne ka josh!'],
-        audience=['Grade 12 ke Computer Science students (OOP chapter)', 'Jinhone C seekh liya hai aur aage badhna hai',
-                  'Jo OOP concepts clear karna chahte hain', 'Jo aage BSc CSIT / BIT / BCA karna chahte hain'],
+        desc=['Yo course ma hami Object-Oriented Programming simple tarika le bujhchhau &mdash; har concept euta '
+              'real-life example (student, bank account, library) sanga.',
+              'Sabai classes <strong>IT Wala Dai App</strong> ma hunchhan &mdash; live classes, recordings, notes ra practice '
+              'questions sabai ek thau ma. Course ko anta ma hajurle aafnai mini project banaunuhunchha.'],
+        reqs=['C ka basics aaunchha bhane ramro (aaudaina bhane pahile hamro free C course garnuhos)',
+              'Laptop/computer ramro &mdash; phone ma online compiler pani chalchha',
+              'Internet connection (live classes ka lagi)', 'Practice garne josh!'],
+        audience=['Grade 12 ka Computer Science students (OOP chapter)', 'C siki sakeka ra agadi badhna chahane students',
+                  'OOP concepts clear garna chahane students', 'Pachhi BSc CSIT / BIT / BCA padhna chahane students'],
         modules=[
-            ('C se C++ tak', ['C vs C++', 'cin, cout &amp; namespaces', 'References &amp; function overloading']),
+            ('C bata C++ samma', ['C vs C++', 'cin, cout &amp; namespaces', 'References &amp; function overloading']),
             ('OOP Basics', ['Classes &amp; objects', 'Access specifiers', 'Constructors &amp; destructors',
                             'this pointer &amp; static members']),
             ('Inheritance', ['Types of inheritance', 'Constructors in inheritance', 'Practice: student result system']),
             ('Polymorphism', ['Function overloading', 'Operator overloading', 'Virtual functions',
                               'Abstract classes']),
-            ('Files &amp; Templates', ['File I/O with fstream', 'Templates ka intro', 'Exception handling basics']),
+            ('Files &amp; Templates', ['File I/O with fstream', 'Templates ko intro', 'Exception handling basics']),
             ('Mini Project', ['Project plan: library / bank system', 'Build &amp; present']),
         ],
     ),
 ]
 
 COURSE_FAQ = [
-    ('Kya course sach mein free hai?', 'Haan, bilkul. Fees Rs. 0 hai &mdash; koi hidden charge nahi.'),
-    ('Classes kahan hongi?', 'Saari classes IT Wala Dai App pe hongi &mdash; live classes, recordings, notes aur practice '
-                             'questions sab app mein milenge. App jaldi launch ho raha hai.'),
-    ('Kya pehle se coding aani chahiye?', 'C course bilkul zero se shuru hota hai. C++ ke liye C ke basics helpful hain '
-                                          '&mdash; nahi aate to pehle free C course karo.'),
-    ('Laptop zaroori hai?', 'Laptop/computer best hai. Classes phone pe bhi dekh sakte ho aur practice online compiler pe '
-                            'kar sakte ho.'),
-    ('Join kaise karein?', '"Free mein join karo" dabao, form bharo &mdash; WhatsApp pe class details aur app access ki '
-                           'jaankari hum bhejenge.'),
+    ('Ke course sachchai free ho?', 'Ho, pura free. Fees Rs. 0 &mdash; kunai hidden charge chhaina.'),
+    ('Classes kaha hunchhan?', 'Sabai classes IT Wala Dai App ma hunchhan &mdash; live classes, recordings, notes ra practice '
+                             'questions sabai app mai painchha.'),
+    ('Pahile nai coding aaunu parchha?', 'C course pura zero bata suru hunchha. C++ ka lagi C ka basics helpful hunchhan '
+                                          '&mdash; aaudaina bhane pahile free C course garnuhos.'),
+    ('Laptop chahinchha?', 'Laptop/computer ramro hunchha. Classes phone ma pani herna saknuhunchha ra practice online '
+                            'compiler ma garna saknuhunchha.'),
+    ('Kasari join garne?', '"Free ma join garnuhos" thichnuhos, form bharnuhos &mdash; WhatsApp ma class details ra app '
+                           'access ko jaankari hami pathaunchhau.'),
 ]
 
 
@@ -539,7 +487,7 @@ def course_card(c, delay=0.2):
         '<span><i class="fal fa-clock"></i>%(weeks)s</span><span><i class="fal fa-signal-stream"></i>Live</span></div>'
         '<div class="itwd-ec__foot"><span class="itwd-ec__app"><i class="fal fa-mobile"></i>IT Wala Dai App</span>'
         '<span class="itwd-ec__price">Free</span></div>'
-        '<a href="%(url)s" class="th-btn w-100 itwd-ec__btn">Course dekho%(arrow)s</a>'
+        '<a href="%(url)s" class="th-btn w-100 itwd-ec__btn">Course hernuhos%(arrow)s</a>'
         '</div></article>'
         % dict(c, url=url, img=B.unsplash(c['img']), delay=delay, photo=instructor_photo(),
                iname=INSTRUCTOR['name'], lessons=n_lessons(c), arrow=B.ARROW_SVG))
@@ -572,7 +520,7 @@ def course_detail_content(c):
         % (' is-open' if i == 0 else '', 'true' if i == 0 else 'false', i + 1, q, a) for i, (q, a) in enumerate(COURSE_FAQ))
     includes = [('fal fa-signal-stream', 'Live classes on IT Wala Dai App'), ('fal fa-circle-play', 'Class recordings'),
                 ('fal fa-file-lines', 'Notes &amp; PDF'), ('fal fa-laptop-code', 'Practice questions &amp; mock tests'),
-                ('fal fa-comments-question', 'Doubt solving'), ('fal fa-mobile', 'Mobile &amp; desktop pe access')]
+                ('fal fa-comments-question', 'Doubt solving'), ('fal fa-mobile', 'Mobile ra desktop ma access')]
     inc = ''.join('<li><span><i class="%s"></i></span>%s</li>' % x for x in includes)
     lessons = n_lessons(c)
     related = ''.join('<div class="col-lg-4 col-md-6">%s</div>' % course_card(o, 0.2) for o in others)
@@ -599,7 +547,7 @@ def course_detail_content(c):
             <button type="button" class="itwd-cd-action" data-wish="%(slug)s"><i class="far fa-heart"></i>Wishlist</button>
           </div>
         </div>
-        <a href="#start-project" class="th-btn w-100 itwd-start itwd-cd-mobile-join d-lg-none" data-kind="course" data-project="%(name)s">Free mein join karo%(arrow)s</a>
+        <a href="#start-project" class="th-btn w-100 itwd-start itwd-cd-mobile-join d-lg-none" data-kind="course" data-project="%(name)s">Free ma join garnuhos%(arrow)s</a>
       </div>
     </div>
   </div>
@@ -616,11 +564,11 @@ def course_detail_content(c):
         </nav>
 
         <div id="cd-overview" class="itwd-cd-sec">
-          <div class="itwd-cd-box th_fade_anim"><h3>Kya seekhoge</h3><ul class="itwd-cd-goals">%(goals)s</ul></div>
-          <h3 class="itwd-cd-h">Skills jo milengi</h3><ul class="itwd-cd-skills th_fade_anim">%(skills)s</ul>
-          <h3 class="itwd-cd-h">Course ke baare mein</h3><div class="itwd-cd-desc th_fade_anim"><p>%(desc0)s</p><p>%(desc1)s</p></div>
+          <div class="itwd-cd-box th_fade_anim"><h3>Ke siknuhunchha</h3><ul class="itwd-cd-goals">%(goals)s</ul></div>
+          <h3 class="itwd-cd-h">Paunuhune skills</h3><ul class="itwd-cd-skills th_fade_anim">%(skills)s</ul>
+          <h3 class="itwd-cd-h">Course ko barema</h3><div class="itwd-cd-desc th_fade_anim"><p>%(desc0)s</p><p>%(desc1)s</p></div>
           <h3 class="itwd-cd-h">Requirements</h3><ul class="itwd-cd-reqs th_fade_anim">%(reqs)s</ul>
-          <h3 class="itwd-cd-h">Ye course kiske liye hai</h3><div class="row g-3 th_fade_anim">%(audience)s</div>
+          <h3 class="itwd-cd-h">Yo course kasko lagi ho</h3><div class="row g-3 th_fade_anim">%(audience)s</div>
         </div>
 
         <div id="cd-curriculum" class="itwd-cd-sec">
@@ -629,7 +577,7 @@ def course_detail_content(c):
         </div>
 
         <div id="cd-instructor" class="itwd-cd-sec">
-          <h3 class="itwd-cd-h">Apne instructor se milo</h3>
+          <h3 class="itwd-cd-h">Aafno instructor sanga chinjan</h3>
           <div class="itwd-cd-inst th_fade_anim">
             <div class="itwd-cd-inst__img"><img src="%(photo)s" alt="%(iname)s"></div>
             <div class="itwd-cd-inst__body">
@@ -642,7 +590,7 @@ def course_detail_content(c):
         </div>
 
         <div id="cd-faq" class="itwd-cd-sec">
-          <h3 class="itwd-cd-h">Aksar pooche jaane wale sawaal</h3>
+          <h3 class="itwd-cd-h">Dherai sodhine prashnaharu</h3>
           <div class="itwd-acc-group">%(faqs)s</div>
         </div>
       </div>
@@ -651,12 +599,12 @@ def course_detail_content(c):
         <aside class="itwd-cd-side">
           <div class="itwd-cd-side__img"><img src="%(img)s" alt="%(name)s"><span class="itwd-cd-side__lang">%(code)s</span></div>
           <div class="itwd-cd-side__price"><strong>Free</strong><span>100%% Free</span></div>
-          <a href="#start-project" class="th-btn w-100 itwd-start" data-kind="course" data-project="%(name)s">Free mein join karo%(arrow)s</a>
-          <a href="/plus-two#app" class="itwd-cd-side__ghost"><i class="fal fa-mobile"></i>App jaldi aa raha hai</a>
-          <p class="itwd-cd-side__note"><i class="fal fa-shield-check"></i>Koi fees nahi, koi card detail nahi</p>
-          <h4>Is course mein milega</h4>
+          <a href="#start-project" class="th-btn w-100 itwd-start" data-kind="course" data-project="%(name)s">Free ma join garnuhos%(arrow)s</a>
+          <a href="#" data-app-link="android" class="itwd-cd-side__ghost"><i class="fal fa-mobile"></i>IT Wala Dai App download garnuhos</a>
+          <p class="itwd-cd-side__note"><i class="fal fa-shield-check"></i>Kunai fees chhaina, card detail chahidaina</p>
+          <h4>Yo course ma painchha</h4>
           <ul class="itwd-cd-side__inc">%(inc)s</ul>
-          <div class="itwd-cd-side__share"><span>Share karo:</span>
+          <div class="itwd-cd-side__share"><span>Share garnuhos:</span>
             <a href="https://wa.me/?text=%(shareurl)s" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
             <a href="https://www.facebook.com/sharer/sharer.php?u=%(shareurl)s" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
             <button type="button" data-share aria-label="Copy link"><i class="far fa-link"></i></button>
@@ -671,7 +619,7 @@ def course_detail_content(c):
   <div class="container">
     <div class="title-area text-center mb-40">
       <span class="sub-title th_fade_anim"><img decoding="async" src="/wp-content/uploads/2026/02/subtitle-icon1-4.svg" alt="">Keep learning</span>
-      <h2 class="sec-title th_fade_anim"><span class="th-text-perspective">Aur free courses</span></h2>
+      <h2 class="sec-title th_fade_anim"><span class="th-text-perspective">Aru free courses</span></h2>
     </div>
     <div class="row gy-4 justify-content-center">%(related)s</div>
   </div>
@@ -693,8 +641,14 @@ def create_new_pages(force=False):
                                 'Free C and C++ programming courses for +2 (Grade 11-12) students in Nepal.',
                                 'Free C &amp; C++ for +2', 'For +2', plus_two_content(), modal),
         'testimonials/index.html': ('Testimonials &#8211; IT Wala Dai',
-                                    'What CSIT, BIT and BCA students say about building their projects with IT Wala Dai.',
-                                    'Testimonials', 'Testimonials', testimonials_content(), ''),
+                                    'IT Wala Dai sanga coding, project ra college guidance liyeka students ko anubhav.',
+                                    'Testimonials', 'Testimonials', V.testimonials_content(), ''),
+        'community/index.html': ('Community &#8211; IT Wala Dai',
+                                 'IT Wala Dai student community — prashna sodhnuhos, project share garnuhos, seniors bata siknuhos.',
+                                 'Community', 'Community', V.community_content(), ''),
+        'free-it-consultation/index.html': ('Free IT Consultation &#8211; IT Course ra College Guidance &#8211; IT Wala Dai',
+                                            '+2 pachhi kun IT course ra college? IT Wala Dai bata free IT course ra college guidance linuhos.',
+                                            None, None, V.consult_content(), ''),
     }
     for c in COURSES:
         pages['plus-two/%s/index.html' % c['slug']] = (
@@ -707,7 +661,7 @@ def create_new_pages(force=False):
         if path.exists() and '<!-- itwd:page -->' in path.read_text(encoding='utf-8') and not regenerate:
             print('kept', rel, '(exists; use --force-new-pages to regenerate)')
             continue
-        if path.exists() and '<!-- itwd:page -->' not in path.read_text(encoding='utf-8'):
+        if path.exists() and 'IT Wala Dai' not in path.read_text(encoding='utf-8')[:3000]:
             # an old Escul template page lives here -> keep a copy instead of deleting it
             backup = ROOT / '_original' / rel
             backup.parent.mkdir(parents=True, exist_ok=True)
@@ -728,12 +682,15 @@ def main():
             force = True
         elif arg.startswith('--force-new-pages='):
             force = arg.split('=', 1)[1]
-    create_new_pages(force=force)
-    pages = dict(PAGES, **{'plus-two/%s/index.html' % c['slug']: '/plus-two' for c in COURSES})
-    for rel, active in pages.items():
+    # 1) hand-edited pages first (other pages copy parts of them: contact = shell, home = app banner)
+    for rel in ('index.html', 'programs/index.html', 'about/index.html', 'contact/index.html'):
         s = read(rel)
-        s = set_menus(s, active)
-        s = patch_footer_credit(s)
+        if rel == 'index.html':
+            s = V.patch_home_promo(s)
+            s = V.patch_all_things(s)
+            s = V.patch_free_learning(s)
+            s = V.patch_home_faq(s)
+            s = V.patch_home_testimonials(s)
         if rel == 'programs/index.html':
             s = patch_projects(s)
             s = patch_mentor_cards(s)
@@ -741,7 +698,24 @@ def main():
             s = patch_about_badge(s)
         if rel == 'contact/index.html':
             s = s.replace('Dai se seedhi baat — hello@itwaladai.com', 'Dai se seedhi baat — itwaladai@gmail.com')
+        s = V.patch_mission_cta(s)
+        s = shared(s, PAGES[rel])
         write(rel, s)
+    # 2) generated pages
+    create_new_pages(force=force)
+    # 3) shared parts on every page
+    pages = dict(PAGES, **{'plus-two/%s/index.html' % c['slug']: '/plus-two' for c in COURSES})
+    for rel, active in pages.items():
+        write(rel, shared(read(rel), active))
+
+
+def shared(s, active):
+    s = set_menus(s, active)
+    s = patch_footer_credit(s)
+    s = V.patch_footer_cta(s)
+    s = V.patch_app_buttons(s)
+    s = nepali_copy.apply(s)
+    return s
 
 
 if __name__ == '__main__':
