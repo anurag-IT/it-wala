@@ -202,6 +202,113 @@
     });
   }
 
+  // ---- Course detail pages: accordion, section tabs, share, wishlist, sticky sidebar
+  var toast = function (text) {
+    var t = document.querySelector('.itwd-toast');
+    if (!t) {
+      t = document.createElement('div');
+      t.className = 'itwd-toast';
+      t.setAttribute('role', 'status');
+      document.body.appendChild(t);
+    }
+    t.textContent = text;
+    t.classList.add('is-show');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(function () { t.classList.remove('is-show'); }, 2200);
+  };
+
+  // accordion (curriculum modules + FAQs)
+  document.addEventListener('click', function (e) {
+    var head = e.target.closest('.itwd-acc__head');
+    if (!head) return;
+    var acc = head.parentNode;
+    var open = !acc.classList.contains('is-open');
+    acc.classList.toggle('is-open', open);
+    head.setAttribute('aria-expanded', open ? 'true' : 'false');
+    setTimeout(refreshScroll, 480);
+  });
+
+  // wishlist hearts (remembered in this browser)
+  var WISH_KEY = 'itwd-wishlist';
+  var getWish = function () {
+    try { return JSON.parse(localStorage.getItem(WISH_KEY)) || []; } catch (err) { return []; }
+  };
+  var paintWish = function () {
+    var list = getWish();
+    document.querySelectorAll('[data-wish]').forEach(function (b) {
+      var on = list.indexOf(b.getAttribute('data-wish')) !== -1;
+      b.classList.toggle('is-on', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+  };
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-wish]');
+    if (!b) return;
+    e.preventDefault();
+    var id = b.getAttribute('data-wish');
+    var list = getWish();
+    var i = list.indexOf(id);
+    if (i === -1) { list.push(id); toast('Wishlist mein add ho gaya ❤'); } else { list.splice(i, 1); toast('Wishlist se hata diya'); }
+    try { localStorage.setItem(WISH_KEY, JSON.stringify(list)); } catch (err) { /* private mode */ }
+    paintWish();
+  });
+  paintWish();
+
+  // share: native share sheet on phones, otherwise copy the link
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-share]');
+    if (!b) return;
+    e.preventDefault();
+    var data = { title: document.title, url: location.href };
+    if (navigator.share) {
+      navigator.share(data).catch(function () {});
+    } else if (navigator.clipboard) {
+      navigator.clipboard.writeText(location.href).then(function () { toast('Link copy ho gaya!'); });
+    }
+  });
+
+  var cdTabs = document.querySelector('.itwd-cd-tabs');
+  if (cdTabs) {
+    var tabLinks = Array.prototype.slice.call(cdTabs.querySelectorAll('a'));
+    var secs = tabLinks.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+    tabLinks.forEach(function (a, i) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (secs[i]) scrollToEl(secs[i]);
+      });
+    });
+    // highlight the tab of the section currently on screen
+    var spy = function () {
+      var current = 0;
+      secs.forEach(function (sec, i) {
+        if (sec && sec.getBoundingClientRect().top < window.innerHeight * 0.35) current = i;
+      });
+      tabLinks.forEach(function (a, i) { a.classList.toggle('is-active', i === current); });
+    };
+    window.addEventListener('scroll', spy, { passive: true });
+    spy();
+  }
+
+  // sticky sidebar on desktop (ScrollSmoother transforms the page, so CSS position:sticky can't work)
+  var side = document.querySelector('.itwd-cd-side');
+  var mainCol = document.querySelector('.itwd-cd__main');
+  if (side && mainCol) {
+    window.addEventListener('load', function () {
+      if (!window.ScrollTrigger || !window.matchMedia('(min-width: 992px)').matches) return;
+      // short sidebar: stick under the header; tall sidebar: stick once its bottom reaches the screen bottom
+      var fits = function () { return side.offsetHeight + 130 <= window.innerHeight; };
+      window.ScrollTrigger.create({
+        trigger: side,
+        start: function () { return fits() ? 'top 110px' : 'bottom bottom-=24'; },
+        endTrigger: mainCol,
+        end: function () { return fits() ? 'bottom ' + (110 + side.offsetHeight) + 'px' : 'bottom bottom-=24'; },
+        pin: true,
+        pinSpacing: false,
+        invalidateOnRefresh: true
+      });
+    });
+  }
+
   // ---- Contact form -> sent straight to the inbox via FormSubmit (no backend, no mail app)
   document.querySelectorAll('form.itwd-contact-form').forEach(function (form) {
     var status = form.querySelector('.itwd-form-status');
