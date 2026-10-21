@@ -333,12 +333,95 @@ def start_modal_html():
     return s[st:B.block(s, st)]
 
 
+# --------------------------------------------------------------------------- Pranam Software (parent company)
+
+PRANAM_URL = 'https://www.pranamsoftware.com.np/'
+
+# Mentor profiles. A social link of None keeps the icon but without a link (to be added later).
+MENTOR_PROFILES = {
+    'Sachin Kushwaha': dict(
+        title='CEO &amp; Founder',
+        social=[('facebook', 'https://www.facebook.com/share/1JD7SZRfnZ/'),
+                ('instagram', 'https://www.instagram.com/kushwahasachinaj?exln=cTUxbTRtMmxuM3R6'),
+                ('linkedin', 'https://www.linkedin.com/in/sachin-kushwaha-77b682391'),
+                ('github', 'https://github.com/sachin-pranam')]),
+    'Anurag Thakur': dict(
+        title='Senior Developer',
+        social=[('facebook', 'https://www.facebook.com/share/1JEn2vYduB/'),
+                ('instagram', 'https://www.instagram.com/anuragthakurrr01?mdxt=Z2tzY2V0cnRvOW11'),
+                ('linkedin', None),
+                ('github', 'https://github.com/anurag-IT')]),
+}
+SOCIAL_ICON = {'facebook': 'fab fa-facebook-f', 'instagram': 'fab fa-instagram',
+               'linkedin': 'fab fa-linkedin-in', 'github': 'fab fa-github'}
+SOCIAL_LABEL = {'facebook': 'Facebook', 'instagram': 'Instagram', 'linkedin': 'LinkedIn', 'github': 'GitHub'}
+
+
+def mentor_social(name):
+    out = []
+    for net, url in MENTOR_PROFILES[name]['social']:
+        label = '%s on %s' % (name, SOCIAL_LABEL[net])
+        if url:
+            out.append('<a href="%s" target="_blank" rel="noopener" aria-label="%s"><i aria-hidden="true" class="%s"></i></a>'
+                       % (url, label, SOCIAL_ICON[net]))
+        else:  # icon only for now — link will be added later
+            out.append('<a class="is-disabled" aria-disabled="true" aria-label="%s (coming soon)"><i aria-hidden="true" class="%s"></i></a>'
+                       % (label, SOCIAL_ICON[net]))
+    return ''.join(out)
+
+
+def pranam_role(name, cls='itwd-pranam-role', tag='p'):
+    """'CEO & Founder · Pranam Software' — the company name links to the Pranam Software website."""
+    return ('<%s class="%s"><span>%s</span><a href="%s" target="_blank" rel="noopener" title="Visit Pranam Software">'
+            'Pranam Software<i class="far fa-arrow-up-right"></i></a></%s>'
+            % (tag, cls, MENTOR_PROFILES[name]['title'], PRANAM_URL, tag))
+
+
+def patch_mentor_cards(s):
+    """Find Project > Our Mentors: real social links + 'title · Pranam Software' line under each name."""
+    st = s.index('<div class="slider-area itwd-mentor-slider">')
+    en = B.block(s, st)
+    sec = s[st:en]
+    for name in MENTOR_PROFILES:
+        i = sec.index('alt="%s"' % name)
+        a = sec.rindex('<div class="swiper-slide">', 0, i)
+        b = B.block(sec, a)
+        card = sec[a:b]
+        card = re.sub(r'(<div class="th-social">).*?(</div>)', lambda m: m.group(1) + mentor_social(name) + m.group(2), card, count=1, flags=re.S)
+        card = re.sub(r'<p class="itwd-pranam-role">.*?</p>', '', card, flags=re.S)
+        card = card.replace('<p class="box-text">IT Wala Dai Mentor</p>',
+                            '<p class="box-text">IT Wala Dai Mentor</p>' + pranam_role(name), 1)
+        sec = sec[:a] + card + sec[b:]
+    return s[:st] + sec + s[en:]
+
+
+FOOTER_CREDIT = (' <span class="itwd-credit">An initiative by <a href="%s" target="_blank" rel="noopener">Pranam Software'
+                 '<i class="far fa-arrow-up-right"></i></a></span>' % PRANAM_URL)
+
+
+def patch_footer_credit(s):
+    s = re.sub(r' <span class="itwd-credit">.*?</span>(?=</p>)', '', s, flags=re.S)
+    return s.replace('Kathmandu, Nepal. All rights reserved.</p>', 'Kathmandu, Nepal. All rights reserved.' + FOOTER_CREDIT + '</p>', 1)
+
+
+ABOUT_BADGE = ('<a class="itwd-pranam-badge th_fade_anim" href="%s" target="_blank" rel="noopener">'
+               '<span class="itwd-pranam-badge__icon"><i class="fal fa-building"></i></span>'
+               '<span><small>An initiative by</small><strong>Pranam Software</strong></span>'
+               '<i class="far fa-arrow-up-right"></i></a>' % PRANAM_URL)
+
+
+def patch_about_badge(s):
+    s = re.sub(r'<a class="itwd-pranam-badge.*?</a>', '', s, count=1, flags=re.S)
+    anchor = 'accessible to every curious student.</p>'
+    return s.replace(anchor, anchor + ABOUT_BADGE, 1)
+
+
 # --------------------------------------------------------------------------- +2 courses (cards + detail pages)
 
 INSTRUCTOR = dict(
     name='Sachin Kushwaha',
     role='IT Wala Dai Mentor &middot; C &amp; C++',
-    bio=('Sachin Kushwaha IT Wala Dai ke mentor hain. Wo +2 students ko C aur C++ simple Hinglish mein, '
+    bio=('Sachin Kushwaha Pranam Software ke CEO &amp; Founder aur IT Wala Dai ke mentor hain. Wo +2 students ko C aur C++ simple Hinglish mein, '
          'real examples aur roz ki practice ke saath sikhate hain &mdash; taaki concept clear ho aur exam ke saath '
          'coding confidence bhi aaye.'),
 )
@@ -510,7 +593,7 @@ def course_detail_content(c):
           <li class="is-free"><i class="fal fa-tag"></i>Rs. 0</li>
         </ul>
         <div class="itwd-cd-by th_fade_anim">
-          <div class="itwd-cd-by__who"><img src="%(photo)s" alt="%(iname)s"><span><small>Instructor</small><strong>%(iname)s</strong></span></div>
+          <div class="itwd-cd-by__who"><img src="%(photo)s" alt="%(iname)s"><span><small>Instructor</small><strong>%(iname)s</strong>%(iorgsmall)s</span></div>
           <div class="itwd-cd-by__actions">
             <button type="button" class="itwd-cd-action" data-share><i class="far fa-share-nodes"></i>Share</button>
             <button type="button" class="itwd-cd-action" data-wish="%(slug)s"><i class="far fa-heart"></i>Wishlist</button>
@@ -550,9 +633,10 @@ def course_detail_content(c):
           <div class="itwd-cd-inst th_fade_anim">
             <div class="itwd-cd-inst__img"><img src="%(photo)s" alt="%(iname)s"></div>
             <div class="itwd-cd-inst__body">
-              <h4>%(iname)s</h4><span class="itwd-cd-inst__role">%(irole)s</span>
+              <h4>%(iname)s</h4><span class="itwd-cd-inst__role">%(irole)s</span>%(iorg)s
               <ul class="itwd-cd-inst__stats"><li><strong>2</strong><span>Courses</span></li><li><strong>Live</strong><span>Classes</span></li><li><strong>+2</strong><span>Focus</span></li></ul>
               <p>%(ibio)s</p>
+              <div class="itwd-cd-inst__social">%(isocial)s</div>
             </div>
           </div>
         </div>
@@ -593,6 +677,9 @@ def course_detail_content(c):
   </div>
 </section>
 ''' % dict(c, title=c['title'], photo=photo, iname=INSTRUCTOR['name'], irole=INSTRUCTOR['role'], ibio=INSTRUCTOR['bio'],
+           iorg=pranam_role(INSTRUCTOR['name'], 'itwd-pranam-role itwd-cd-inst__org'),
+           iorgsmall=pranam_role(INSTRUCTOR['name'], 'itwd-pranam-role itwd-pranam-role--sm', 'span'),
+           isocial=mentor_social(INSTRUCTOR['name']),
            lessons=lessons, nmods=len(c['modules']), goals=goals, skills=skills, desc0=c['desc'][0], desc1=c['desc'][1],
            reqs=reqs, audience=audience, mods=''.join(mods), faqs=faqs, inc=inc, img=B.unsplash(c['img']),
            arrow=B.ARROW_SVG, related=related,
@@ -646,8 +733,12 @@ def main():
     for rel, active in pages.items():
         s = read(rel)
         s = set_menus(s, active)
+        s = patch_footer_credit(s)
         if rel == 'programs/index.html':
             s = patch_projects(s)
+            s = patch_mentor_cards(s)
+        if rel == 'about/index.html':
+            s = patch_about_badge(s)
         if rel == 'contact/index.html':
             s = s.replace('Dai se seedhi baat — hello@itwaladai.com', 'Dai se seedhi baat — itwaladai@gmail.com')
         write(rel, s)

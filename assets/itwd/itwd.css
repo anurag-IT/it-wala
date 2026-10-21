@@ -2352,3 +2352,90 @@ html.itwd-modal-open, html.itwd-modal-open body { overflow: hidden; }
   .itwd-cd-hero__spark { animation: none; }
 }
 .itwd-cd-mobile-join { margin-top: 22px; justify-content: center; }
+
+/* ============================================================ Pranam Software (parent company) */
+.itwd-pranam-role {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px 8px;
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #5b6866;
+}
+.itwd-pranam-role > span { font-weight: 600; color: var(--itwd-dark); }
+.itwd-pranam-role > span::after { content: "\00B7"; margin-left: 8px; color: #9aa6a4; font-weight: 400; }
+.itwd-pranam-role a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 10px;
+  border-radius: 30px;
+  background: #F0FBF8;
+  color: var(--itwd-green);
+  font-weight: 700;
+  transition: background .3s ease, color .3s ease;
+}
+.itwd-pranam-role a i { font-size: 11px; transition: transform .3s ease; }
+.itwd-pranam-role a:hover { background: var(--itwd-green); color: #fff; }
+.itwd-pranam-role a:hover i { transform: translate(2px, -2px); }
+.team-card3 .itwd-pranam-role { margin-top: 6px; }
+.itwd-cd-inst__org { justify-content: flex-start; margin-top: 10px; }
+.itwd-pranam-role--sm { display: flex; justify-content: flex-start; margin-top: 4px; font-size: 13px; }
+.itwd-pranam-role--sm a { padding: 1px 8px; }
+
+/* social icons without a link yet (e.g. LinkedIn to be added later) */
+.th-social a.is-disabled, .itwd-cd-inst__social a.is-disabled { cursor: default; opacity: .45; }
+.th-social a.is-disabled:hover { color: var(--body-color); border-color: var(--body-color); background: transparent; }
+
+.itwd-cd-inst__social { display: flex; gap: 8px; margin-top: 18px; }
+.itwd-cd-inst__social a {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #e3ebe9;
+  border-radius: 50%;
+  color: var(--itwd-dark);
+  font-size: 14px;
+  transition: all .3s ease;
+}
+.itwd-cd-inst__social a:not(.is-disabled):hover { background: var(--itwd-green); border-color: var(--itwd-green); color: #fff; transform: translateY(-3px); }
+
+/* footer credit */
+.itwd-credit { display: block; margin-top: 6px; white-space: nowrap; }
+.itwd-credit a { display: inline-flex; align-items: center; gap: 5px; font-weight: 700; }
+.itwd-credit a i { font-size: 11px; transition: transform .3s ease; }
+.itwd-credit a:hover i { transform: translate(2px, -2px); }
+
+/* About page badge */
+.itwd-pranam-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 22px;
+  padding: 12px 20px 12px 12px;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid #e3efec;
+  box-shadow: 0 10px 26px rgba(0, 70, 59, .07);
+  color: var(--itwd-dark);
+  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+}
+.itwd-pranam-badge:hover { transform: translateY(-3px); border-color: var(--itwd-green); box-shadow: 0 18px 36px rgba(0, 70, 59, .12); color: var(--itwd-dark); }
+.itwd-pranam-badge__icon {
+  flex: 0 0 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--itwd-green);
+  color: #fff;
+  font-size: 20px;
+}
+.itwd-pranam-badge small { display: block; font-size: 12.5px; color: #6c757d; }
+.itwd-pranam-badge strong { font-size: 17px; }
+.itwd-pranam-badge > .fa-arrow-up-right { margin-left: 6px; color: var(--itwd-green); transition: transform .3s ease; }
+.itwd-pranam-badge:hover > .fa-arrow-up-right { transform: translate(3px, -3px); }
