@@ -2,6 +2,10 @@
 (function () {
   'use strict';
 
+  // The site uses GSAP ScrollSmoother. Make sure every page opens at the very top so the
+  // visitor always lands on the main page (hero) — never stuck down at the contact CTA.
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
   // Theme uses GSAP ScrollSmoother: refresh it after layout changes, and scroll through it when present
   function refreshScroll() {
     if (window.ScrollTrigger) window.ScrollTrigger.refresh();
@@ -11,6 +15,35 @@
     if (smoother) smoother.scrollTo(el, true, 'top 90px');
     else el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+  // Scroll to the very top — through ScrollSmoother when present, else natively.
+  function goTop(smooth) {
+    var smoother = window.ScrollSmoother && window.ScrollSmoother.get && window.ScrollSmoother.get();
+    if (smoother) smoother.scrollTo(0, !!smooth);
+    else window.scrollTo({ top: 0, left: 0, behavior: smooth ? 'smooth' : 'auto' });
+  }
+
+  // ---- Open the site at the top of the main page
+  // Jump up as soon as the script runs, and again once everything (and ScrollSmoother) is ready.
+  goTop(false);
+  window.addEventListener('load', function () { goTop(false); });
+
+  // ---- Logo -> home / scroll to top of home
+  // Every site logo (desktop header, mobile menu, side panel) should take the visitor to the
+  // top of the home page. When already on home we smooth-scroll up; from any other page we
+  // navigate to "/", which loads at the top thanks to the logic above.
+  var isHome = function () {
+    var p = location.pathname.replace(/\/+$/, '');
+    return p === '' || p === '/' || p === '/index.html';
+  };
+  document.querySelectorAll('.header-logo a, .mobile-logo a, .about-logo a').forEach(function (a) {
+    a.setAttribute('href', '/');
+    a.addEventListener('click', function (e) {
+      if (isHome()) {
+        e.preventDefault();
+        goTop(true);
+      }
+    });
+  });
 
   // ---- Community countdown
   document.querySelectorAll('[data-countdown]').forEach(function (el) {
