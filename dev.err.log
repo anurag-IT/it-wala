@@ -2665,3 +2665,1785 @@ Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
     |                                                                 ^
 391 |  				</div>
 392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code end-tag-without-matching-open-element
+ at D:/cureen/it-the-best/it-wala/index.html:1192:1
+1190 |  </div>
+1191 |  
+1192 |  </template>
+     |  ^^^^^^^^^^^
+1193 |  
+1194 |  <template data-itwd-hidden="about-8e72882">[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code end-tag-without-matching-open-element
+ at D:/cureen/it-the-best/it-wala/index.html:1192:1
+1190 |  </div>
+1191 |  
+1192 |  </template>
+     |  ^^^^^^^^^^^
+1193 |  
+1194 |  <template data-itwd-hidden="about-8e72882">[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code end-tag-without-matching-open-element
+ at D:/cureen/it-the-best/it-wala/index.html:1192:1
+1190 |  </div>
+1191 |  
+1192 |  </template>
+     |  ^^^^^^^^^^^
+1193 |  
+1194 |  <template data-itwd-hidden="about-8e72882">[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/programs/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/programs/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/programs/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/programs/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/programs/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/programs/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code misplaced-start-tag-for-head-element
+ at D:/cureen/it-the-best/it-wala/index.html:6:1
+4  |  <!-- Mirrored from https://wordpress.themehour.net/escul/ by HTTrack Website Copier/3.x [XR&CO], Tue, 20 Oct 2026 09:...
+5  |  <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+6  |  <head>
+   |  ^^^^^^
+7  |      <meta charset="UTF-8">
+8  |      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">[39m
+[33m
+Unable to parse HTML; parse5 error code missing-whitespace-between-attributes
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
+[33m
+Unable to parse HTML; parse5 error code unexpected-character-in-attribute-name
+ at D:/cureen/it-the-best/it-wala/index.html:390:349
+388 |  				<div class="elementor-element elementor-element-8829aab elementor-widget elementor-widget-esculmarquee" data-id="...
+389 |  				<div class="elementor-widget-container">
+390 |  ... class="swiper-slide"><div class="marquee-card"><a  href="#"">LEARNING INNOVATION</a><span class="marquee-card-ico...
+    |                                                                 ^
+391 |  				</div>
+392 |  				</div>[39m
