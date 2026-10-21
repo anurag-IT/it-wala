@@ -70,67 +70,67 @@
     timer = setInterval(tick, 1000);
   });
 
-  // ---- Find Project: category filter (category cards + chips) and "View More"
+  // ---- Find Project: category tabs (+ category cards above) and mobile swipe carousel
   var projectsSection = document.getElementById('featured-projects');
-  if (projectsSection) {
-    var cards = Array.prototype.slice.call(projectsSection.querySelectorAll('.th-course-single[data-cat]'));
-    var moreWrap = projectsSection.querySelector('.itwd-more-wrap');
-    var moreBtn = projectsSection.querySelector('.itwd-view-more');
-    var moreLabel = moreBtn ? moreBtn.innerHTML : '';
-    var current = 'all';
-    var expanded = false;
+  var projWrap = projectsSection && projectsSection.querySelector('.itwd-projects');
+  if (projWrap) {
+    var grid = projWrap.querySelector('.itwd-proj-grid');
+    var cards = Array.prototype.slice.call(grid.querySelectorAll('.itwd-proj'));
+    var tabs = Array.prototype.slice.call(projWrap.querySelectorAll('.itwd-tab'));
+    var countEl = projWrap.querySelector('.itwd-proj-nav__count b');
+    var totalEl = projWrap.querySelector('.itwd-proj-nav__count span');
+    var visible = function () { return cards.filter(function (c) { return !c.hidden; }); };
 
-    // cards per row right now (3 on desktop, 2 on tablet, 1 on mobile)
-    var perRow = function () {
-      var top = cards[0].offsetTop, n = 0;
-      cards.forEach(function (c) { if (!c.hidden && c.offsetTop === top) n++; });
-      return Math.max(1, n);
-    };
-    var render = function () {
-      var matching = cards.filter(function (c) { return current === 'all' || c.getAttribute('data-cat') === current; });
-      cards.forEach(function (c) { c.hidden = matching.indexOf(c) === -1; });
-      if (current === 'all' && !expanded) {
-        var limit = perRow() * 2;   // two rows
-        matching.forEach(function (c, i) { c.hidden = i >= limit; });
-        if (moreWrap) moreWrap.hidden = matching.length <= limit;
-        if (moreBtn) moreBtn.innerHTML = moreLabel;
-      } else if (moreWrap) {
-        moreWrap.hidden = current !== 'all';
-        if (moreBtn) moreBtn.textContent = 'View Less';
-      }
-      refreshScroll();
-    };
-    var applyFilter = function (cat) {
-      current = cat;
-      expanded = false;
-      projectsSection.querySelectorAll('.itwd-chip').forEach(function (chip) {
-        chip.classList.toggle('is-active', chip.getAttribute('data-itwd-filter') === cat);
+    var showCategory = function (cat) {
+      if (!tabs.some(function (t) { return t.getAttribute('data-itwd-filter') === cat; })) cat = tabs[0].getAttribute('data-itwd-filter');
+      tabs.forEach(function (t) {
+        var on = t.getAttribute('data-itwd-filter') === cat;
+        t.classList.toggle('is-active', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        if (on && t.scrollIntoView && window.matchMedia('(max-width: 991px)').matches) {
+          t.parentNode.scrollTo({ left: t.offsetLeft - 16, behavior: 'smooth' });
+        }
       });
       document.querySelectorAll('.category-card2[data-itwd-filter]').forEach(function (card) {
         card.classList.toggle('is-active', card.getAttribute('data-itwd-filter') === cat);
       });
-      render();
+      cards.forEach(function (c) { c.hidden = c.getAttribute('data-cat') !== cat; });
+      // replay the entrance animation
+      grid.classList.remove('is-animating');
+      void grid.offsetWidth;
+      grid.classList.add('is-animating');
+      grid.scrollLeft = 0;
+      if (totalEl) totalEl.textContent = visible().length;
+      if (countEl) countEl.textContent = '1';
+      refreshScroll();
     };
+
     document.addEventListener('click', function (e) {
       var trigger = e.target.closest('[data-itwd-filter]');
       if (!trigger) return;
       e.preventDefault();
-      applyFilter(trigger.getAttribute('data-itwd-filter'));
-      if (!trigger.classList.contains('itwd-chip')) scrollToEl(projectsSection);
+      var cat = trigger.getAttribute('data-itwd-filter');
+      if (cat !== 'all') showCategory(cat);
+      if (!trigger.classList.contains('itwd-tab')) scrollToEl(projectsSection);
     });
-    if (moreBtn) {
-      moreBtn.addEventListener('click', function () {
-        expanded = !expanded;
-        render();
-        if (!expanded) scrollToEl(projectsSection);
+
+    // mobile carousel: arrows + "2 / 5" counter
+    var step = function () {
+      var first = visible()[0];
+      return first ? first.getBoundingClientRect().width + 16 : grid.clientWidth;
+    };
+    projWrap.querySelectorAll('.itwd-proj-nav__btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        grid.scrollBy({ left: step() * Number(btn.getAttribute('data-dir')), behavior: 'smooth' });
       });
-    }
-    var resizeTimer;
-    window.addEventListener('resize', function () {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(render, 150);
     });
-    render();
+    grid.addEventListener('scroll', function () {
+      if (!countEl) return;
+      var n = Math.round(grid.scrollLeft / step()) + 1;
+      countEl.textContent = Math.min(Math.max(n, 1), visible().length);
+    }, { passive: true });
+
+    showCategory(tabs[0].getAttribute('data-itwd-filter'));
   }
 
   // ---- Find Project: "Start Project" modal -> WhatsApp
@@ -140,10 +140,14 @@
     document.body.appendChild(modal);
     var startForm = modal.querySelector('form');
     var title = modal.querySelector('.itwd-modal__title');
+    var eyebrow = modal.querySelector('.itwd-modal__eyebrow');
+    var kind = 'project';
     var startStatus = startForm.querySelector('.itwd-form-status');
 
-    var openModal = function (project) {
+    var openModal = function (project, k) {
+      kind = k || 'project';
       title.textContent = project;
+      if (eyebrow) eyebrow.textContent = kind === 'course' ? 'Free Course' : 'Start Project';
       startForm.elements.project.value = project;
       startStatus.textContent = '';
       startStatus.classList.remove('is-error');
@@ -160,7 +164,7 @@
       var btn = e.target.closest('.itwd-start');
       if (btn) {
         e.preventDefault();
-        openModal(btn.getAttribute('data-project'));
+        openModal(btn.getAttribute('data-project'), btn.getAttribute('data-kind'));
       } else if (e.target.closest('[data-itwd-close]')) {
         closeModal();
       }
@@ -183,7 +187,9 @@
       }
       var msg =
         'Hello IT Wala Dai! 🙏\n' +
-        'Malai "' + f.project.value + '" project banaunu xa.\n\n' +
+        (kind === 'course'
+          ? 'Malai "' + f.project.value + '" free course join garnu xa.\n\n'
+          : 'Malai "' + f.project.value + '" project banaunu xa.\n\n') +
         'Name: ' + name + '\n' +
         'Phone: ' + phone + '\n' +
         'Email: ' + email + '\n' +
