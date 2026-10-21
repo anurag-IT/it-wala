@@ -657,3 +657,345 @@ html.itwd-modal-open, html.itwd-modal-open body { overflow: hidden; }
     height: 58px;
   }
 }
+
+/* New brand logo */
+.header-layout3 .header-logo img {
+  width: auto;
+  height: 62px;
+  max-width: 245px;
+  object-fit: contain;
+}
+.th-menu-wrapper .mobile-logo img {
+  width: auto;
+  height: 62px;
+  max-width: 235px;
+  object-fit: contain;
+}
+.sidemenu-wrapper .about-logo img,
+.footer-wrapper .about-logo img {
+  width: auto;
+  max-width: 240px;
+  height: auto;
+  object-fit: contain;
+}
+@media (max-width: 1199px) {
+  .header-layout3 .header-logo img {
+    width: auto;
+    height: 56px;
+    max-width: 220px;
+  }
+}
+@media (max-width: 767px) {
+  .header-layout3 .header-logo img {
+    width: auto;
+    height: 50px;
+    max-width: 190px;
+  }
+}
+
+/* Larger brand logo */
+.header-layout3 .header-logo img {
+  width: auto;
+  height: 76px;
+  max-width: 290px;
+}
+@media (max-width: 1199px) {
+  .header-layout3 .header-logo img {
+    height: 68px;
+    max-width: 260px;
+  }
+}
+@media (max-width: 767px) {
+  .header-layout3 .header-logo img {
+    height: 58px;
+    max-width: 220px;
+  }
+}
+
+/* Free +2 app promotion banner */
+.itwd-app-banner {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(420px, .95fr) minmax(560px, 1.15fr);
+  min-height: 430px;
+  overflow: hidden;
+  background: linear-gradient(120deg, #f7fffd 0%, #fff 58%, #f4fbfa 100%);
+  border-top: 1px solid #edf5f3;
+}
+.itwd-app-banner::before,
+.itwd-app-banner::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  z-index: 0;
+}
+.itwd-app-banner::before {
+  width: 380px;
+  height: 380px;
+  left: -110px;
+  top: -145px;
+  background: rgba(28, 176, 152, .12);
+}
+.itwd-app-banner::after {
+  width: 420px;
+  height: 220px;
+  right: -160px;
+  bottom: -150px;
+  background: var(--itwd-green);
+  box-shadow: -80px -34px 0 var(--itwd-yellow);
+  transform: rotate(-14deg);
+}
+.itwd-app-banner__visual,
+.itwd-app-banner__content { position: relative; z-index: 2; }
+.itwd-app-banner__visual { min-height: 430px; }
+.itwd-phone {
+  position: absolute;
+  left: 14%;
+  bottom: 18px;
+  width: 205px;
+  height: 390px;
+  padding: 11px;
+  border: 7px solid #14171b;
+  border-radius: 34px;
+  background: #fff;
+  box-shadow: 0 18px 30px rgba(18, 45, 40, .18);
+  z-index: 3;
+}
+.itwd-phone__speaker { width: 58px; height: 6px; margin: -3px auto 10px; border-radius: 9px; background: #17191d; }
+.itwd-phone__screen { text-align: center; color: #18242d; font-size: 10px; }
+.itwd-phone__screen > img { width: 118px; height: 44px; object-fit: contain; }
+.itwd-phone__screen > span { display: block; margin: 1px 0 12px; color: var(--itwd-green); font-weight: 700; }
+.itwd-phone__screen button { width: 100%; padding: 7px; border: 0; border-radius: 5px; background: var(--itwd-green); color: #fff; font-weight: 700; }
+.itwd-phone__stats { display: flex; justify-content: space-around; margin: 13px 0; font-size: 9px; }
+.itwd-phone__lessons { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; }
+.itwd-phone__lessons i { height: 85px; border-radius: 7px; background: linear-gradient(160deg,#e5f8f4,#fff 45%,#1cb098 46%,#edf9f7); }
+.itwd-phone__rating { display: block; margin-top: 12px; text-align: left; font-size: 27px; }
+.itwd-rating-bars { display: grid; gap: 4px; margin-top: 5px; }
+.itwd-rating-bars i { height: 5px; border-radius: 5px; background: linear-gradient(90deg,var(--itwd-green) 78%,#dce9e6 78%); }
+.itwd-app-banner__mentor {
+  position: absolute;
+  left: 43%;
+  bottom: 20px;
+  width: 235px;
+  height: 350px;
+  border-radius: 120px 120px 18px 18px;
+  object-fit: cover;
+  object-position: center top;
+  z-index: 2;
+}
+.itwd-hand-note {
+  position: absolute;
+  left: 3%;
+  top: 125px;
+  padding: 14px 18px;
+  color: #17202a;
+  font-size: 16px;
+  line-height: 1.25;
+  text-align: center;
+  transform: rotate(-7deg);
+  z-index: 4;
+}
+.itwd-hand-note::after { content: ""; position: absolute; inset: 0; border: 3px solid var(--itwd-yellow); border-radius: 50%; transform: rotate(-5deg); }
+.itwd-app-banner__content { padding: 28px 90px 34px 10px; align-self: center; }
+.itwd-app-banner__logo { width: 290px; height: 74px; object-fit: contain; object-position: left center; }
+.itwd-app-banner h2 { margin: 0 0 8px; color: #101827; font-size: clamp(42px,4.2vw,67px); line-height: .92; letter-spacing: -3px; }
+.itwd-app-banner h2 span { color: var(--itwd-green); }
+.itwd-app-banner__content > p { margin: 18px 0; color: #52616e; font-size: 20px; }
+.itwd-app-features { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+.itwd-app-features > div { display: flex; align-items: center; gap: 10px; min-height: 62px; padding: 9px 12px; border-radius: 14px; background: rgba(255,255,255,.94); box-shadow: 0 8px 22px rgba(40,70,64,.08); }
+.itwd-app-features i { display: grid; width: 40px; height: 40px; flex: 0 0 40px; place-items: center; border-radius: 11px; background: var(--itwd-green); color: #fff; font-size: 17px; }
+.itwd-app-features > div:nth-child(even) i { background: var(--itwd-yellow); }
+.itwd-app-features span { color: #18242d; font-size: 13px; font-weight: 700; line-height: 1.15; }
+.itwd-app-downloads { display: flex; gap: 16px; margin-top: 18px; }
+.itwd-app-downloads a { display: flex; align-items: center; gap: 12px; min-width: 215px; padding: 10px 20px; border: 2px solid #111827; border-radius: 15px; background: #07111e; color: #fff; }
+.itwd-app-downloads a:hover { color: #fff; transform: translateY(-2px); }
+.itwd-app-downloads a.is-light { background: #fff; color: #111827; }
+.itwd-app-downloads i { font-size: 30px; }
+.itwd-app-downloads span { font-size: 19px; font-weight: 700; line-height: 1; }
+.itwd-app-downloads small { display: block; margin-bottom: 4px; font-size: 10px; font-weight: 500; }
+.itwd-study-note { position: absolute; top: 58px; right: 18px; z-index: 3; color: #285e58; font-size: 12px; line-height: 1.4; text-align: center; transform: rotate(-6deg); }
+@media (max-width: 1199px) {
+  .itwd-app-banner { grid-template-columns: 1fr 1.15fr; }
+  .itwd-app-banner__mentor { display: none; }
+  .itwd-phone { left: 30%; }
+  .itwd-app-banner__content { padding-right: 35px; }
+  .itwd-app-features { grid-template-columns: repeat(2,1fr); }
+  .itwd-study-note { display: none; }
+}
+@media (max-width: 991px) {
+  .itwd-app-banner { grid-template-columns: 1fr; padding: 45px 20px; }
+  .itwd-app-banner__visual { display: none; }
+  .itwd-app-banner__content { padding: 0; text-align: center; }
+  .itwd-app-banner__logo { object-position: center; }
+  .itwd-app-features { max-width: 620px; margin: auto; }
+  .itwd-app-downloads { justify-content: center; flex-wrap: wrap; }
+}
+@media (max-width: 575px) {
+  .itwd-app-banner { padding: 35px 15px; }
+  .itwd-app-banner h2 { font-size: 42px; letter-spacing: -2px; }
+  .itwd-app-banner__content > p { font-size: 16px; }
+  .itwd-app-features { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .itwd-app-features > div { padding: 8px; }
+  .itwd-app-downloads a { min-width: 240px; }
+}
+
+/* App banner UI refinement */
+.itwd-app-banner {
+  min-height: 470px;
+  background:
+    radial-gradient(circle at 23% 52%, rgba(28,176,152,.14) 0 180px, transparent 181px),
+    linear-gradient(118deg, #f3fcfa 0%, #fff 52%, #f5fbfa 100%);
+}
+.itwd-app-banner__visual { min-height: 470px; }
+.itwd-app-banner__content {
+  padding-top: 38px;
+  padding-bottom: 38px;
+}
+.itwd-app-banner h2 {
+  margin-bottom: 14px;
+  font-size: clamp(48px, 4.7vw, 72px);
+  line-height: .94;
+}
+.itwd-app-banner__content > p {
+  margin: 20px 0 24px;
+}
+.itwd-phone {
+  left: 12%;
+  bottom: 22px;
+  height: 400px;
+  z-index: 4;
+}
+.itwd-app-banner__mentor {
+  left: 45%;
+  bottom: 0;
+  width: 270px;
+  height: 390px;
+  border: 8px solid rgba(255,255,255,.9);
+  border-bottom: 0;
+  border-radius: 145px 145px 0 0;
+  box-shadow: 0 18px 36px rgba(25,73,65,.16);
+  z-index: 5;
+}
+.itwd-app-features > div {
+  min-height: 68px;
+  border: 1px solid rgba(28,176,152,.08);
+  box-shadow: 0 10px 28px rgba(29,72,64,.09);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.itwd-app-features > div:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(29,72,64,.14);
+}
+.itwd-app-downloads a {
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.itwd-app-downloads a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(10,25,35,.18);
+}
+@media (max-width: 1399px) {
+  .itwd-app-banner__mentor {
+    left: 43%;
+    width: 245px;
+  }
+}
+@media (max-width: 1199px) {
+  .itwd-app-banner__content { padding-top: 42px; padding-bottom: 42px; }
+}
+@media (max-width: 991px) {
+  .itwd-app-banner { min-height: auto; }
+  .itwd-app-banner__content { padding: 0; }
+}
+
+/* Visible free featured courses */
+.elementor-element-b14b4e2 {
+  padding: 100px 0;
+  background: linear-gradient(120deg, #f0faf7 0%, #fbfdf8 55%, #eef9f6 100%);
+}
+.elementor-element-b14b4e2 .box-price {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 74px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: #e8f9f5;
+  color: var(--itwd-green);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: .06em;
+}
+.elementor-element-b14b4e2 .course-card {
+  height: 100%;
+  border: 1px solid rgba(28,176,152,.12);
+  box-shadow: 0 12px 35px rgba(25,70,62,.08);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.elementor-element-b14b4e2 .course-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 20px 45px rgba(25,70,62,.14);
+}
+@media (max-width: 767px) {
+  .elementor-element-b14b4e2 { padding: 70px 0; }
+}
+
+/* Popular course promotion cards */
+.itwd-popular-promos {
+  padding: 100px 0;
+  background: #fff;
+}
+.itwd-popular-promos .cta-card2 {
+  min-height: 370px;
+  overflow: hidden;
+  border-radius: 28px;
+  box-shadow: 0 16px 40px rgba(26,66,59,.1);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.itwd-popular-promos .cta-card2:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 50px rgba(26,66,59,.16);
+}
+.itwd-popular-promos .cta-card2 .box-thumb img {
+  max-height: 330px;
+  object-fit: contain;
+}
+@media (max-width: 991px) {
+  .itwd-popular-promos { padding: 75px 0; }
+}
+@media (max-width: 575px) {
+  .itwd-popular-promos { padding: 55px 0; }
+  .itwd-popular-promos .cta-card2 { min-height: 420px; border-radius: 22px; }
+}
+
+/* Student discount CTA */
+.itwd-discount-cta .cta-area-1 {
+  min-height: 610px;
+  background-color: #020908;
+  background-position: center;
+  background-size: cover;
+}
+.itwd-discount-cta .cta-card {
+  position: relative;
+  z-index: 3;
+}
+.itwd-discount-cta .cta-img1-1 img {
+  width: 100%;
+  object-fit: cover;
+}
+@media (max-width: 767px) {
+  .itwd-discount-cta .cta-area-1 { min-height: 560px; }
+  .itwd-discount-cta .cta-card { padding-left: 15px; padding-right: 15px; }
+}
+
+/* Primary testimonial section */
+.elementor-element-4ac00df {
+  padding: 105px 0;
+  background: #fff;
+}
+.elementor-element-4ac00df .testi-thumb1-1 img { border-radius: 24px; }
+@media (max-width: 991px) {
+  .elementor-element-4ac00df { padding: 80px 0; }
+}
+@media (max-width: 575px) {
+  .elementor-element-4ac00df { padding: 60px 0; }
+}
