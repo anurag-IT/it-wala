@@ -619,6 +619,17 @@ html.itwd-modal-open, html.itwd-modal-open body { overflow: hidden; }
   }
 }
 
+/* Footer widget alignment */
+.footer-wrapper .th-widget-about {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.footer-wrapper .th-widget-about .about-logo {
+  margin-bottom: 20px;
+}
+
 /* New brand logo */
 .header-layout3 .header-logo img {
   width: auto;
@@ -632,12 +643,31 @@ html.itwd-modal-open, html.itwd-modal-open body { overflow: hidden; }
   max-width: 235px;
   object-fit: contain;
 }
+/* Footer logo styling */
+.footer-wrapper .about-logo {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.footer-wrapper .about-logo a {
+  display: block;
+  transition: transform .25s ease, opacity .25s ease;
+}
+
+.footer-wrapper .about-logo a:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
 .sidemenu-wrapper .about-logo img,
 .footer-wrapper .about-logo img {
   width: auto;
   max-width: 240px;
-  height: auto;
+  height: 60px;
   object-fit: contain;
+  display: block;
 }
 @media (max-width: 1199px) {
   .header-layout3 .header-logo img {
@@ -2825,5 +2855,38 @@ html.itwd-modal-open, html.itwd-modal-open body { overflow: hidden; }
   .breadcumb-wrapper .breadcumb-content {
     --space: 50px;
     padding: calc(var(--space) + 110px) 0 var(--space) 0;
+  }
+}
+
+
+/* Footer logo responsive styles */
+@media (max-width: 1199px) {
+  .footer-wrapper .about-logo img {
+    max-width: 220px;
+    height: 56px;
+  }
+}
+
+@media (max-width: 767px) {
+  .footer-wrapper .about-logo img {
+    max-width: 190px;
+    height: 48px;
+  }
+  
+  .footer-wrapper .th-widget-about {
+    text-align: center;
+    align-items: center;
+  }
+  
+  .footer-wrapper .about-logo {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media (max-width: 575px) {
+  .footer-wrapper .about-logo img {
+    max-width: 160px;
+    height: 40px;
   }
 }
