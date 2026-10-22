@@ -664,8 +664,8 @@ html.itwd-modal-open, html.itwd-modal-open body { overflow: hidden; }
 .sidemenu-wrapper .about-logo img,
 .footer-wrapper .about-logo img {
   width: auto;
-  max-width: 240px;
-  height: 60px;
+  max-width: 270px;
+  height: 105px;
   object-fit: contain;
   display: block;
 }
@@ -958,25 +958,86 @@ html.itwd-modal-open, html.itwd-modal-open body { overflow: hidden; }
   .itwd-popular-promos .cta-card2 { min-height: 420px; border-radius: 22px; }
 }
 
-/* Student discount CTA */
+/* Student discount CTA - Group image arch */
+.itwd-discount-cta {
+  background-color: #000000;
+  overflow: hidden;
+}
 .itwd-discount-cta .cta-area-1 {
-  min-height: 610px;
-  background-color: #020908;
-  background-position: center;
-  background-size: cover;
+  min-height: auto;
+  background-color: #000000;
+  background-position: center top;
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+}
+.itwd-discount-cta .cta-area-1::before,
+.itwd-discount-cta .cta-area-1::after {
+  display: none !important;
+}
+.itwd-discount-cta .cta-wrap1 {
+  padding: 30px 0 85px;
+  position: relative;
+  z-index: 1;
+}
+.itwd-discount-cta .cta-img1-1 {
+  margin-bottom: -250px;
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+.itwd-discount-cta .cta-img1-1 img,
+.itwd-discount-cta .itwd-group-arch-img {
+  width: 100%;
+  max-width: 1560px;
+  height: auto;
+  display: inline-block;
+  object-fit: contain;
 }
 .itwd-discount-cta .cta-card {
   position: relative;
-  z-index: 3;
-}
-.itwd-discount-cta .cta-img1-1 img {
+  z-index: 5;
   width: 100%;
-  object-fit: cover;
+  max-width: 620px;
+  padding: 0 16px;
+  margin: 0 auto;
+  text-align: center;
+}
+.itwd-discount-cta .sec-title {
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.24;
+  margin-bottom: 14px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.85);
+}
+.itwd-discount-cta .box-text {
+  max-width: 560px;
+  margin: 0 auto;
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+}
+.itwd-discount-cta .btn-wrap {
+  gap: 14px;
+}
+@media (max-width: 1399px) {
+  .itwd-discount-cta .cta-img1-1 { margin-bottom: -205px; }
+}
+@media (max-width: 1199px) {
+  .itwd-discount-cta .cta-img1-1 { margin-bottom: -150px; }
+  .itwd-discount-cta .cta-wrap1 { padding: 30px 0 70px; }
+  .itwd-discount-cta .cta-card { max-width: 560px; }
+}
+@media (max-width: 991px) {
+  .itwd-discount-cta .cta-img1-1 { margin-bottom: -95px; }
 }
 @media (max-width: 767px) {
-  .itwd-discount-cta .cta-area-1 { min-height: 560px; }
-  .itwd-discount-cta .cta-card { padding-left: 15px; padding-right: 15px; }
+  .itwd-discount-cta .cta-area-1 { min-height: auto; }
+  .itwd-discount-cta .cta-img1-1 { margin-bottom: 18px; }
+  .itwd-discount-cta .cta-card { max-width: 100%; padding-left: 18px; padding-right: 18px; }
+  .itwd-discount-cta .sec-title { font-size: 24px; }
 }
+
 
 /* Primary testimonial section */
 .elementor-element-4ac00df {
@@ -1059,14 +1120,19 @@ html.itwd-modal-open, html.itwd-modal-open body { overflow: hidden; }
   background: transparent;
 }
 .header-layout3 .container {
-  padding: 0;
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 .header-layout3 .menu-area {
   position: relative;
   min-height: 82px;
   margin: 0;
-  padding: 7px 14px 7px 24px;
+  padding: 8px 16px;
   overflow: hidden;
+  box-sizing: border-box;
   border: 1px solid #e9f3f1;
   border-radius: 0 0 24px 24px;
   background: rgba(255,255,255,.97);
@@ -1092,23 +1158,67 @@ html.itwd-modal-open, html.itwd-modal-open body { overflow: hidden; }
   bottom: -52px;
   background: var(--itwd-green);
 }
-.header-layout3 .menu-area > .row { position: relative; z-index: 1; }
+.header-layout3 .menu-area > .row {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0;
+}
+.header-layout3 .menu-area > .row > .col-auto {
+  flex: 0 0 auto;
+  width: auto;
+  max-width: none;
+  padding: 0;
+}
+/* middle column (nav) is the flexible one so nothing gets clipped */
+.header-layout3 .menu-area > .row > .col-auto:nth-child(2) {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.header-layout3 .header-logo {
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+.header-layout3 .header-logo a {
+  display: inline-flex;
+  align-items: center;
+}
 .header-layout3 .header-logo img {
   width: auto;
-  height: 68px;
-  max-width: 218px;
+  height: 60px;
+  max-width: 210px;
+  object-fit: contain;
+  transition: transform .25s ease;
 }
-.header-layout3 .main-menu > ul { gap: 4px; }
+.header-layout3 .header-logo a:hover img {
+  transform: scale(1.02);
+}
+.header-layout3 .main-menu {
+  display: block;
+  min-width: 0;
+}
+.header-layout3 .main-menu > ul {
+  gap: 3px;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
 .header-layout3 .main-menu > ul > li > a {
   display: inline-flex;
+  flex: 0 0 auto;
   min-height: 46px;
-  padding: 0 11px;
+  padding: 0 9px;
   align-items: center;
   gap: 7px;
   border-radius: 999px;
   color: #17202c;
   font-size: 13px;
   font-weight: 700;
+  white-space: nowrap;
 }
 .header-layout3 .main-menu > ul > li > a::after { display: none; }
 .header-layout3 .main-menu > ul > li > a i { font-size: 17px; }
@@ -1124,12 +1234,13 @@ html.itwd-modal-open, html.itwd-modal-open body { overflow: hidden; }
 }
 .header-layout3 .header-button {
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
   gap: 9px;
 }
 .itwd-nav-search {
   display: flex;
-  width: 145px;
+  width: 130px;
   height: 46px;
   padding: 0 15px;
   align-items: center;
@@ -1149,9 +1260,9 @@ html.itwd-modal-open, html.itwd-modal-open body { overflow: hidden; }
   font-size: 13px;
 }
 .header-layout3 .header-button .th-btn.itwd-phone-cta {
-  min-width: 180px;
+  min-width: 168px;
   height: 46px;
-  padding: 0 16px;
+  padding: 0 14px;
   gap: 9px;
   border-radius: 999px;
   background: #eaf9f6;
@@ -1162,9 +1273,9 @@ html.itwd-modal-open, html.itwd-modal-open body { overflow: hidden; }
 .header-layout3 .header-button .th-btn.itwd-phone-cta:hover { background: #d9f5ef; color: #087865; }
 .itwd-join-cta {
   display: inline-flex;
-  min-width: 138px;
+  min-width: 128px;
   height: 48px;
-  padding: 0 18px;
+  padding: 0 16px;
   align-items: center;
   justify-content: center;
   gap: 9px;
@@ -1178,13 +1289,12 @@ html.itwd-modal-open, html.itwd-modal-open body { overflow: hidden; }
 .itwd-join-cta:hover { color: #15202b; background: #ffca2c; transform: translateY(-2px); }
 .header-layout3 .sticky-wrapper.sticky .menu-area { border-radius: 22px; }
 @media (max-width: 1499px) {
-  .header-layout3 .menu-area { padding-left: 16px; }
-  .header-layout3 .header-logo img { height: 60px; max-width: 190px; }
-  .header-layout3 .main-menu > ul > li > a { padding: 0 8px; font-size: 12px; }
-  .header-layout3 .main-menu > ul > li.current-menu-item > a { padding: 0 13px; }
+  .header-layout3 .header-logo img { height: 56px; max-width: 180px; }
+  .header-layout3 .main-menu > ul > li > a { padding: 0 7px; font-size: 12px; }
+  .header-layout3 .main-menu > ul > li.current-menu-item > a { padding: 0 11px; }
   .itwd-nav-search { display: none; }
-  .header-layout3 .header-button .th-btn.itwd-phone-cta { min-width: 168px; padding: 0 12px; }
-  .itwd-join-cta { min-width: 122px; padding: 0 13px; }
+  .header-layout3 .header-button .th-btn.itwd-phone-cta { min-width: 150px; padding: 0 12px; }
+  .itwd-join-cta { min-width: 112px; padding: 0 12px; }
 }
 @media (max-width: 1199px) {
   .header-layout3 .menu-area { min-height: 74px; padding: 5px 18px; border-radius: 0 0 20px 20px; }
@@ -2862,15 +2972,15 @@ html.itwd-modal-open, html.itwd-modal-open body { overflow: hidden; }
 /* Footer logo responsive styles */
 @media (max-width: 1199px) {
   .footer-wrapper .about-logo img {
-    max-width: 220px;
-    height: 56px;
+    max-width: 250px;
+    height: 95px;
   }
 }
 
 @media (max-width: 767px) {
   .footer-wrapper .about-logo img {
-    max-width: 190px;
-    height: 48px;
+    max-width: 230px;
+    height: 85px;
   }
   
   .footer-wrapper .th-widget-about {
@@ -2886,7 +2996,8 @@ html.itwd-modal-open, html.itwd-modal-open body { overflow: hidden; }
 
 @media (max-width: 575px) {
   .footer-wrapper .about-logo img {
-    max-width: 160px;
-    height: 40px;
+    max-width: 210px;
+    height: 76px;
   }
 }
+
