@@ -718,6 +718,7 @@ def shared(s, active):
     s = V.patch_footer_cta(s)
     s = V.patch_app_buttons(s)
     s = V.patch_pranam_tab(s)
+    s = V.patch_page_hero(s, active)
     s = nepali_copy.apply(s)
     return s
 

@@ -648,3 +648,25 @@ def patch_pranam_tab(s):
         return s[:st] + PRANAM_TAB + s[en:]
     i = s.rindex('</body>')
     return s[:i] + PRANAM_TAB + '\n' + s[i:]
+
+
+# --------------------------------------------------------------------------- page hero images (breadcrumb banner)
+# one illustration per page; pages not listed keep the theme image
+PAGE_HERO = {
+    '/plus-two': ('/assets/itwd/hero-plus-two.webp', 'Free C ra C++ +2 students ka lagi'),
+    '/about': ('/assets/itwd/hero-about.webp', 'IT Wala Dai: learning, guidance, community ra success'),
+    '/contact': ('/assets/itwd/hero-contact.webp', 'IT Wala Dai lai WhatsApp, email wa phone bata samparka garnuhos'),
+    '/testimonials': ('/assets/itwd/hero-testimonials.webp', 'IT Wala Dai ka students ka anubhav'),
+    '/community': ('/assets/itwd/hero-community.webp', 'IT Wala Dai community: sodhnuhos, share garnuhos, sangai siknuhos'),
+}
+HERO_THUMB_RE = re.compile(r'<div class="breadcumb-thumb[^"]*"><img [^>]*></div>')
+
+
+def patch_page_hero(s, active):
+    """Swap the breadcrumb illustration for the page's own image (idempotent)."""
+    if active not in PAGE_HERO or not HERO_THUMB_RE.search(s):
+        return s
+    src, alt = PAGE_HERO[active]
+    new = ('<div class="breadcumb-thumb itwd-hero-thumb"><img src="%s" alt="%s" width="900" '
+           'fetchpriority="high" decoding="async"></div>' % (src, escape(alt)))
+    return HERO_THUMB_RE.sub(lambda m: new, s, count=1)
