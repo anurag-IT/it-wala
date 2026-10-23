@@ -7,19 +7,26 @@ and writes the published result back into the same `index.html` files that are d
 
 Requirements: Node 18+ (no npm packages needed for the admin) and Python 3 (used when publishing CMS content).
 
-```bash
-npm run admin:set-password
-```
-
-Asks for a username and a password (min. 10 characters) and writes **`.env.admin`** (git-ignored) with a
-scrypt hash. The password itself is never stored. Run it again to change the password or add users.
+The admin is built into the normal dev server, so there is nothing extra to run:
 
 ```bash
-npm run admin
+npm run dev
 ```
 
-Open <http://127.0.0.1:4000/admin> and sign in. The same server also serves the public site on port 4000,
-so "Open live page" links work. (`npm run dev` on port 3000 is still the normal Vite preview.)
+Open <http://localhost:3000/admin> and sign in.
+
+**Login.** One shared team login lives in `server/admin-account.json`. It is committed, but only as a scrypt hash.
+Create or change it with:
+
+```bash
+npm run admin:set-password -- --shared
+```
+
+To use a private login on one computer instead, run `npm run admin:set-password` without `--shared`.
+That writes `.env.admin`, which is git-ignored and takes precedence over the shared login.
+Passwords need at least 10 characters.
+
+`npm run admin` (a standalone server on port 4000) still works for hosting the admin on a server; see section 3.
 
 ## 2. Environment variables
 
@@ -40,13 +47,18 @@ All optional except the account. They can live in `.env.admin` or the real envir
 ## 3. Deployment options
 
 **A. Edit locally, deploy with git (simplest, works with any static host).**
-Run `npm run admin` on your own computer, edit and publish, then commit and push the changed HTML,
+Run `npm run dev`, open `/admin`, edit and publish, then commit and push the changed HTML,
 `assets/`, and `content/data`, `content/theme.json` and `content/*.json` files. The hosting stays static.
 
 **B. Run the admin on a server (Node host / VPS).**
 Run `node server/server.mjs` behind an HTTPS reverse proxy with `COOKIE_SECURE=1`, `TRUST_PROXY=1`, and
 `ADMIN_HOST=127.0.0.1`. The same process serves the public site, so publishing is live immediately.
 Back up `content/` and the page files. Sessions are kept in memory, so a restart signs everyone out.
+**On a public server, set a private strong login (`.env.admin` or `ADMIN_*` env vars)**. The shared
+team login in the repo is meant for local editing; anyone who can read the repo can try to guess it offline.
+
+The static build/host never contains `/admin`'s backend. On a plain static host, `/admin` only shows the
+admin page files and cannot log in or publish.
 
 Private folders are never served: `content/drafts`, `content/revisions`, `content/private`, `content/unpublished`
 (also blocked in Vite dev and git-ignored).

@@ -35,7 +35,7 @@ export function loadConfig(overrides = {}) {
     host: overrides.host || env.ADMIN_HOST || '127.0.0.1',
     python: env.PYTHON || (process.platform === 'win32' ? 'python' : 'python3'),
     // "user:scrypt$..." pairs separated by commas, or ADMIN_USERNAME + ADMIN_PASSWORD_HASH
-    users: parseUsers(env),
+    users: parseUsers(env, path.join(root, 'server', 'admin-account.json')),
     cookieSecure: env.COOKIE_SECURE === '1',
     sessionIdleMinutes: Number(env.SESSION_IDLE_MINUTES || 120),
     sessionMaxHours: Number(env.SESSION_MAX_HOURS || 12),
@@ -45,12 +45,19 @@ export function loadConfig(overrides = {}) {
   }
 }
 
-function parseUsers(env) {
+function parseUsers(env, sharedFile) {
   const users = new Map()
   if (env.ADMIN_USERNAME && env.ADMIN_PASSWORD_HASH) users.set(env.ADMIN_USERNAME, env.ADMIN_PASSWORD_HASH)
   for (const pair of (env.ADMIN_USERS || '').split(',').map((s) => s.trim()).filter(Boolean)) {
     const i = pair.indexOf(':')
     if (i > 0) users.set(pair.slice(0, i), pair.slice(i + 1))
+  }
+  // shared team login (server/admin-account.json, committed, hash only) when no private account is configured
+  if (!users.size && sharedFile && fs.existsSync(sharedFile)) {
+    try {
+      const a = JSON.parse(fs.readFileSync(sharedFile, 'utf8'))
+      if (a.username && String(a.passwordHash).startsWith('scrypt$')) users.set(a.username, a.passwordHash)
+    } catch { /* ignore a broken file: no account */ }
   }
   return users
 }

@@ -50,6 +50,31 @@ const rawLegacyAssets = () => ({
   },
 })
 
+// Visual admin (/admin) runs inside this dev server: no second server or port needed.
+// /admin/*, /api/* and /__admin/* go to server/server.mjs (login, drafts, publish); everything else stays Vite.
+const ADMIN_PREFIXES = ['/admin', '/api', '/__admin']
+const visualAdmin = () => {
+  let handle = null
+  const mount = (middlewares, root) => {
+    middlewares.use(async (req, res, next) => {
+      const pathname = req.url.split('?')[0]
+      if (!ADMIN_PREFIXES.some((p) => pathname === p || pathname.startsWith(p + '/'))) return next()
+      if (!handle) {
+        const { createServer } = await import('./server/server.mjs')
+        const admin = createServer({ root })
+        if (!admin.cfg.users.size) console.warn('\n! /admin has no login yet. Run: npm run admin:set-password -- --shared\n')
+        handle = admin.handle
+      }
+      handle(req, res)
+    })
+  }
+  return {
+    name: 'itwd-visual-admin',
+    configureServer(server) { mount(server.middlewares, path.resolve(server.config.root)) },
+    configurePreviewServer(server) { mount(server.middlewares, path.resolve(server.config.root)) },
+  }
+}
+
 export default defineConfig({
   appType: 'mpa',
   server: {
@@ -57,6 +82,8 @@ export default defineConfig({
     // Vite's defaults + the admin's private working data (audit log, drafts, revisions, unpublished pages)
     fs: { deny: ['.env', '.env.*', '*.{crt,pem}', '**/.git/**', '**/content/private/**', '**/content/drafts/**',
       '**/content/revisions/**', '**/content/unpublished/**'] },
+    // admin autosaves and revisions are not site files: don't trigger page reloads for them
+    watch: { ignored: ['**/content/drafts/**', '**/content/revisions/**', '**/content/private/**', '**/content/published/**'] },
   },
-  plugins: [cleanUrls(), rawLegacyAssets()],
+  plugins: [visualAdmin(), cleanUrls(), rawLegacyAssets()],
 })

@@ -1,0 +1,5 @@
+{
+  "_note": "Shared /admin login for the team (scrypt hash only). Used when .env.admin defines no account. Change: npm run admin:set-password -- --shared",
+  "username": "admin",
+  "passwordHash": "scrypt$16384$8$1$xlrkR6IGYHYr5eSNhp/96g==$pcbpRUmM66NnxePzcFsz9LEoEy4l8FrFeQSwFGGZAFvsp8RKLRCVBLHAzUU9SRJRgn7HxOvevIY14Lj0RYwp/Q=="
+}

@@ -301,7 +301,7 @@ export function createServer(overrides = {}) {
   }
 
   const server = http.createServer((req, res) => { handle(req, res) })
-  return { server, cfg, site, sessions }
+  return { server, handle, cfg, site, sessions }
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

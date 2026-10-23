@@ -1,5 +1,7 @@
-// Create or replace the admin login.  npm run admin:set-password
-// Stores only a scrypt hash in .env.admin (git-ignored). Nothing secret is printed.
+// Create or replace the admin login.
+//   npm run admin:set-password              -> private login in .env.admin (git-ignored)
+//   npm run admin:set-password -- --shared  -> shared team login in server/admin-account.json (committed)
+// Only a scrypt hash is stored. Nothing secret is printed.
 import fs from 'node:fs'
 import path from 'node:path'
 import readline from 'node:readline'
@@ -36,7 +38,22 @@ try {
   process.exit(1)
 }
 
+const shared = process.argv.includes('--shared')
 const file = cfg.envFile
+if (shared) {
+  const out = path.join(cfg.root, 'server', 'admin-account.json')
+  fs.writeFileSync(out, JSON.stringify({
+    _note: 'Shared /admin login for the team (scrypt hash only). Used when .env.admin defines no account. Change: npm run admin:set-password -- --shared',
+    username, passwordHash: hash,
+  }, null, 2) + '\n')
+  // a private account in .env.admin would take precedence, so drop it
+  if (fs.existsSync(file)) {
+    const kept = fs.readFileSync(file, 'utf8').split(/\r?\n/).filter((l) => !/^(ADMIN_USERNAME|ADMIN_PASSWORD_HASH|ADMIN_USERS)=/.test(l))
+    fs.writeFileSync(file, kept.join('\n'), { mode: 0o600 })
+  }
+  console.log('Saved shared admin login for "' + username + '" in server/admin-account.json. Restart npm run dev if it is running.')
+  process.exit(0)
+}
 const lines = fs.existsSync(file) ? fs.readFileSync(file, 'utf8').split(/\r?\n/) : ['# IT Wala Dai admin settings (keep this file private; it is git-ignored)']
 const set = (k, v) => {
   const i = lines.findIndex((l) => l.startsWith(k + '='))
