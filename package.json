@@ -4,7 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite"
+    "dev": "vite",
+    "admin": "node server/server.mjs",
+    "admin:set-password": "node server/cli/set-password.mjs",
+    "test": "node --test \"server/test/*.test.mjs\""
   },
   "devDependencies": {
     "vite": "^8.3.4"

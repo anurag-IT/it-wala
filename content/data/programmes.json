@@ -1,0 +1,182 @@
+[
+  {
+    "name": "BSc (Hons) Computing",
+    "kind": "foreign",
+    "award": "London Metropolitan University, UK",
+    "at": "Islington College",
+    "years": "3 years",
+    "elig": "NEB +2 ma CGPA 2.2 (55%) wa mathi",
+    "url": "https://islington.edu.np/programmes/computing"
+  },
+  {
+    "name": "BSc (Hons) Computing with Artificial Intelligence",
+    "kind": "foreign",
+    "award": "London Metropolitan University, UK",
+    "at": "Islington College",
+    "years": "3 years",
+    "elig": "NEB +2 ma CGPA 2.2 (55%) wa mathi",
+    "url": "https://islington.edu.np/programmes/computing-with-Ai"
+  },
+  {
+    "name": "BSc (Hons) Computer Networking &amp; IT Security",
+    "kind": "foreign",
+    "award": "London Metropolitan University, UK",
+    "at": "Islington College",
+    "years": null,
+    "elig": "NEB +2 ma CGPA 2.2 (55%) wa mathi",
+    "url": "https://islington.edu.np/programmes/networking"
+  },
+  {
+    "name": "BSc (Hons) Computer Science with Artificial Intelligence",
+    "kind": "foreign",
+    "award": "Coventry University, UK",
+    "at": "Softwarica College of IT &amp; E-Commerce",
+    "years": "3 years",
+    "elig": "+2 ma GPA 2.4 wa A Level; English: IELTS 6.0 wa college ko GETS test",
+    "url": "https://softwarica.edu.np/programmes/bsc-computer-science-ai"
+  },
+  {
+    "name": "BSc (Hons) Software Engineering",
+    "kind": "foreign",
+    "award": "Coventry University, UK",
+    "at": "Softwarica College of IT &amp; E-Commerce",
+    "years": "3 years",
+    "elig": "+2 ma GPA 2.4 wa A Level; English: IELTS 6.0 wa college ko GETS test",
+    "url": "https://softwarica.edu.np/programmes/bsc-software-engineering"
+  },
+  {
+    "name": "BSc (Hons) Ethical Hacking &amp; Cybersecurity",
+    "kind": "foreign",
+    "award": "Coventry University, UK",
+    "at": "Softwarica College of IT &amp; E-Commerce",
+    "years": "3 years",
+    "elig": "+2 ma GPA 2.4 wa A Level; English: IELTS 6.0 wa college ko GETS test",
+    "url": "https://softwarica.edu.np/programmes/bsc-cybersecurity"
+  },
+  {
+    "name": "BSc (Hons) Computer Science with Artificial Intelligence",
+    "kind": "foreign",
+    "award": "Birmingham City University, UK",
+    "at": "Sunway College Kathmandu",
+    "years": "4 years (professional placement year sahit)",
+    "elig": "NEB grade 12 ma CGPA 2.6 wa mathi",
+    "url": "https://sunway.edu.np/program/artificial-intelligence/"
+  },
+  {
+    "name": "BSc (Hons) Business Information Technology",
+    "kind": "foreign",
+    "award": "Birmingham City University, UK",
+    "at": "Sunway College Kathmandu",
+    "years": null,
+    "elig": "NEB grade 12 ma CGPA 2.6 wa mathi",
+    "url": "https://sunway.edu.np/program/bschons-business-information-technology/"
+  },
+  {
+    "name": "BSc (Hons) Computer Science",
+    "kind": "foreign",
+    "award": "University of Wolverhampton, UK",
+    "at": "Herald College Kathmandu",
+    "years": "3 years",
+    "elig": "NEB +2 (jun-sukai stream) ma 55% (GPA 2.4) wa mathi",
+    "url": "https://heraldcollege.edu.np/bachelors-in-computer-science"
+  },
+  {
+    "name": "BSc (Hons) Cybersecurity",
+    "kind": "foreign",
+    "award": "University of Wolverhampton, UK",
+    "at": "Herald College Kathmandu",
+    "years": "3 years",
+    "elig": "NEB +2 (jun-sukai stream) ma 55% (GPA 2.4) wa mathi",
+    "url": "https://heraldcollege.edu.np/bachelors-in-cyber-security"
+  },
+  {
+    "name": "BSc (Hons) Computing",
+    "kind": "foreign",
+    "award": "Leeds Beckett University, UK",
+    "at": "The British College",
+    "years": "3 years",
+    "elig": "Foundation entry: +2 ma 60% (GPA 2.4); direct entry ko criteria official page ma",
+    "url": "https://www.thebritishcollege.edu.np/programme/bsc-computing-BIT-in-kathmandu-nepal"
+  },
+  {
+    "name": "BSc (Hons) Computer Science &ndash; Artificial Intelligence",
+    "kind": "foreign",
+    "award": "University of the West of England, UK",
+    "at": "The British College",
+    "years": "3 years",
+    "elig": "+2 ma 60% (GPA 2.4) wa mathi",
+    "url": "https://www.thebritishcollege.edu.np/programme/bsc-hons-computer-science-artificial-intelligence"
+  },
+  {
+    "name": "BSc (Hons) Cyber Security and Digital Forensics",
+    "kind": "foreign",
+    "award": "University of the West of England, UK",
+    "at": "The British College",
+    "years": "3 years",
+    "elig": "+2 ma 60% (GPA 2.4) wa mathi",
+    "url": "https://www.thebritishcollege.edu.np/programme/bsc-hons-cyber-security-and-digital-forensics"
+  },
+  {
+    "name": "Bachelor of Information Technology (Hons)",
+    "kind": "foreign",
+    "award": "HELP University, Malaysia",
+    "at": "Mid-Valley International College",
+    "years": "4 years (8 semesters)",
+    "elig": null,
+    "url": "https://midvalley.edu.np/programs/bachelors-of-information-technology-hons/"
+  },
+  {
+    "name": "BSc CSIT",
+    "kind": "nepal",
+    "award": "Tribhuvan University (IOST)",
+    "at": "TU ka constituent ra affiliated colleges",
+    "years": "4 years (8 semesters)",
+    "elig": "+2 Science ra IOST, TU ko entrance exam",
+    "url": "https://www.tuiost.edu.np/programs"
+  },
+  {
+    "name": "BIT",
+    "kind": "nepal",
+    "award": "Tribhuvan University (IOST)",
+    "at": "TU ka constituent ra affiliated colleges",
+    "years": "4 years (8 semesters)",
+    "elig": "+2 (jun-sukai stream) ra TU ko entrance exam",
+    "url": "https://www.tuiost.edu.np/programs"
+  },
+  {
+    "name": "BCA",
+    "kind": "nepal",
+    "award": "Tribhuvan University (FOHSS)",
+    "at": "Kathmandu Model College lagayat TU-affiliated colleges",
+    "years": "4 years (8 semesters)",
+    "elig": "+2 ma kam-se-kam 45% ra entrance (Kathmandu Model College ko criteria)",
+    "url": "https://kmcen.edu.np/best-bca-college-nepal/"
+  },
+  {
+    "name": "BIM",
+    "kind": "nepal",
+    "award": "Tribhuvan University (Faculty of Management)",
+    "at": "TU ka constituent ra affiliated colleges",
+    "years": "4 years (8 semesters)",
+    "elig": null,
+    "url": "https://memc.tu.edu.np/pages/bachelor-of-information-management-bim-2935"
+  },
+  {
+    "name": "BIT",
+    "kind": "nepal",
+    "award": "Purbanchal University",
+    "at": "Himalayan WhiteHouse International College",
+    "years": "4 years (8 semesters)",
+    "elig": null,
+    "url": "https://whitehousecmt.edu.np/bit"
+  },
+  {
+    "name": "BE Computer",
+    "kind": "nepal",
+    "award": "Purbanchal University",
+    "at": "Himalayan WhiteHouse International College",
+    "years": "4 years (8 semesters)",
+    "elig": null,
+    "url": "https://whitehousecmt.edu.np/be-computer"
+  }
+]

@@ -9,6 +9,7 @@ from html import escape
 from urllib.parse import quote
 
 import build_site as B
+import cms_data as C
 
 # --------------------------------------------------------------------------- one place for links
 
@@ -223,31 +224,7 @@ def patch_free_learning(s):
 
 # --------------------------------------------------------------------------- home: FAQ
 
-HOME_FAQ = [
-    ('IT Wala Dai ke ho?',
-     'IT Wala Dai Nepal ka +2 ra bachelor students lai coding sikna, project ideas explore garna, ra IT course ra college '
-     'chhanna help garne educational platform ho.'),
-    ('IT Wala Dai bata free ma coding sikna milchha?',
-     'IT Wala Dai le free coding education ra computer-related learning resources ma focus garchha. Available courses ra '
-     'resources website ma explore garnuhos.'),
-    ('+2 pachhi IT padhna kun course rojne?',
-     'Yo hajurko interest, eligibility, academic background, budget, ra future goals ma bhar parchha. BSc CSIT, BIT, BCA, '
-     'BIM wa aru relevant programs ko requirements bujhera compare garnuhos.'),
-    ('IT college chhanna IT Wala Dai le help garchha?',
-     'Ho, IT Wala Dai ko goal hajurlai available IT courses ra colleges bujhna, information compare garna, ra informed '
-     'decision lina free guidance dinu ho.'),
-    ('Programming suru garna pahile coding aaunu parchha?',
-     'Pardaina. Beginner-friendly resources bata basics sikdai practice garna suru garna saknuhunchha.'),
-    ('Project idea ra viva preparation ma help painchha?',
-     'Website ma available project categories, project ideas, ra project workflow explore garnuhos. Available resources '
-     'anusar project develop garna ra presentation ko tayari garna madat milna sakchha.'),
-    ('College ra course compare kasari garne?',
-     'Available college ra course details herera university affiliation, eligibility, curriculum, fees, location, ra '
-     'admission requirements jasta factors compare garnuhos. Official college sources bata important details verify garnuhos.'),
-    ('IT Wala Dai sanga direct contact kasari garne?',
-     'WhatsApp consultation button use garera wa website ko Contact page bata available contact options follow garera '
-     'kura garnuhos.'),
-]
+HOME_FAQ = C.pairs(C.load('faqs')['home'])  # edited in the admin CMS (content/data/faqs.json)
 
 
 def faq_accordion(items, acc_id='faqAccordion1', prefix='itwd-faq'):
@@ -280,32 +257,7 @@ def patch_home_faq(s):
 
 # status: 'published' = real feedback supplied by IT Wala Dai; 'sample' = layout sample, shown with a "Sample" tag
 #   until real feedback replaces it. image: optional path (e.g. '/testimonials-img/aakash.jpg'); initials are used when empty.
-TESTIMONIALS = [
-    dict(name='Bibek K.', image='', context='BSc CSIT · TU', category='project', status='published',
-         text='Mero AI attendance project aba college mai use bhairaheko chha. External le ‘production-ready’ bhannu bhayo!'),
-    dict(name='Kritika B.', image='', context='BCA · Pokhara Univ.', category='project', status='published',
-         text='Documentation ra viva prep sabai bhanda helpful thiyo. Pahilo choti viva ma confident bhaye.'),
-    dict(name='Rohan M.', image='', context='BIT · Purbanchal', category='project', status='published',
-         text='Mentor review le mero naramro coding habits samatyo. Yahi project le malai internship dilayo.'),
-    dict(name='Aakash', image='', context='+2 Student', category='college', status='sample',
-         text='+2 sakepachhi CSIT ki BIT bhanne confusion thiyo. Dai sanga kura garepachhi dubai course ko farak clear bhayo.'),
-    dict(name='Anil', image='', context='+2 Student', category='coding', status='sample',
-         text='C programming pahile garo lagthyo. Simple examples ra practice le loops ra functions bujhna sajilo bhayo.'),
-    dict(name='Irfan', image='', context='Bachelor Student', category='project', status='sample',
-         text='Final year project ko scope fix garna help paye. Weekly review le kaam samaya mai sakiyo.'),
-    dict(name='Kashish', image='', context='+2 Student', category='college', status='sample',
-         text='College compare garda ke-ke hernu parchha bhanne kura pahilo choti bujhe — affiliation, curriculum, location sabai.'),
-    dict(name='Saurav', image='', context='Bachelor Student', category='coding', status='sample',
-         text='Python ko basics bata suru gare. Aba sano project aafai banauna sakchhu.'),
-    dict(name='Manish', image='', context='+2 Student', category='coding', status='sample',
-         text='Free classes ra notes le +2 ko computer science ko tayari ma dherai madat garyo.'),
-    dict(name='Sushma', image='', context='Bachelor Student', category='project', status='sample',
-         text='Viva ko lagi mock questions practice garda confidence dherai badhyo.'),
-    dict(name='Prakriti', image='', context='+2 Student', category='college', status='sample',
-         text='TU ra foreign-affiliated college ko barema clear information paye. Decision lina sajilo bhayo.'),
-    dict(name='Nabin', image='', context='Bachelor Student', category='coding', status='sample',
-         text='GitHub ma project rakhna ra deploy garna sikiye. Portfolio banauna yo dherai kaam lagyo.'),
-]
+TESTIMONIALS = C.load('testimonials')  # edited in the admin CMS (content/data/testimonials.json)
 T_CATEGORY = {'coding': 'Coding', 'college': 'College Guidance', 'project': 'Project Guidance'}
 
 
@@ -429,23 +381,7 @@ IT_COURSES = [  # widely known Nepal IT bachelor programs; all are 4-year (8-sem
     ('BE Computer', 'Computer Engineering', 'TU (IOE), KU, PU, Purbanchal', 'Hardware ra software dubai — engineering approach.'),
 ]
 
-CONSULT_FAQ = [
-    ('IT Wala Dai ko consultation free ho?',
-     'Ho, IT Wala Dai ko IT course ra college guidance free ho. Kunai consultation fee lagdaina.'),
-    ('+2 pachhi kun IT course explore garna milchha?',
-     'BSc CSIT, BIT, BCA, BIM, BE Computer jasta programs explore garna milchha. Kun course mildo chha bhanne kura hajurko '
-     'interest, +2 ko stream ra eligibility ma bhar parchha.'),
-    ('College compare garda ke-ke hernu parchha?',
-     'University affiliation, curriculum, faculty, lab ra practical facilities, location, fee structure ra admission '
-     'requirements herna sakinchha. Important details sadhai official college source bata verify garnuhos.'),
-    ('Foreign-affiliated college chhanna ke bujhnu parchha?',
-     'Kun foreign university sanga affiliation chha, degree ko recognition, total cost, ra Nepal ma tyo degree ko '
-     'equivalence jasta kura bujhnu parchha. Official sources bata confirm garnuhos.'),
-    ('Coding suru garna pahile experience chahinchha?',
-     'Chahidaina. Beginner-friendly free courses bata basics sikna suru garna saknuhunchha.'),
-    ('Consultation ko lagi kasari contact garne?',
-     'Yo page ko form bharnuhos wa WhatsApp button thichnuhos. Hajurko message WhatsApp ma IT Wala Dai lai pugchha.'),
-]
+CONSULT_FAQ = C.pairs(C.load('faqs')['consult'])
 
 
 def consult_content():

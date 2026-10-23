@@ -15,6 +15,7 @@ to the live files instead:
 
 Run:  python scripts/patch_site.py
 """
+import os
 import re
 import sys
 from html import escape
@@ -24,21 +25,13 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 import build_site as B  # project/category data + html helpers (block, hidden, ...)
 import nepali_copy
+import cms_data as C
 import v2_content as V
 import v3_content as V3
 
 ROOT = B.ROOT
 
-NAV = [  # simple text menu (no icons)
-    ('/', 'Home'),
-    ('/programs', 'Bachelor Project'),
-    ('/plus-two', 'For +2'),
-    ('/free-it-consultation', 'Free Guidance After +2'),
-    ('/community', 'Community'),
-    ('/testimonials', 'Testimonials'),
-    ('/about', 'About'),
-    ('/contact', 'Contact'),
-]
+NAV = [(n['href'], n['label']) for n in C.load('nav')]  # edited in the admin CMS
 PAGES = {
     'index.html': '/',
     'hackathon/index.html': '/hackathon',
@@ -93,14 +86,15 @@ def set_menus(s, active):
 
 # --------------------------------------------------------------------------- Find Project: tabs + cards
 
-CAT_ICON = {
-    'ai-ml': 'fal fa-brain',
-    'web': 'fal fa-globe',
-    'mobile': 'fal fa-mobile',
-    'vision': 'fal fa-eye',
-    'data': 'fal fa-chart-mixed',
-    'nlp': 'fal fa-comments',
-}
+_PROJ = C.load('projects')  # edited in the admin CMS (content/data/projects.json)
+CATEGORIES = [(c['slug'], c['name'], c['template_icon']) for c in _PROJ['categories']]
+CAT_ICON = {c['slug']: c['icon'] for c in _PROJ['categories']}
+CAT_NAME = {c['slug']: c['name'] for c in _PROJ['categories']}
+PROJECTS = [(p['cat'], p['title'], p['level'], p['duration'], p['tech'], p['image']) for p in _PROJ['projects']]
+
+
+def proj_img(img):
+    return img if img.startswith('/') else B.unsplash(img)
 
 
 def split_stack(tech):
@@ -109,17 +103,17 @@ def split_stack(tech):
 
 
 def projects_block():
-    first = B.CATEGORIES[0][0]
+    first = CATEGORIES[0][0]
     tabs = []
-    for slug, name, _ in B.CATEGORIES:
-        n = sum(1 for p in B.PROJECTS if p[0] == slug)
+    for slug, name, _ in CATEGORIES:
+        n = sum(1 for p in PROJECTS if p[0] == slug)
         tabs.append(
             '<button type="button" class="itwd-tab%s" role="tab" aria-selected="%s" data-itwd-filter="%s">'
             '<i class="%s"></i><span>%s</span><em>%d</em></button>'
             % (' is-active' if slug == first else '', 'true' if slug == first else 'false', slug, CAT_ICON[slug], name, n))
     cards = []
     counters = {}
-    for cat, title, level, dur, tech, pid in B.PROJECTS:
+    for cat, title, level, dur, tech, pid in PROJECTS:
         i = counters[cat] = counters.get(cat, -1) + 1
         stack = ''.join('<li>%s</li>' % t for t in split_stack(tech))
         cards.append(
@@ -132,8 +126,8 @@ def projects_block():
             '<div class="itwd-proj__foot"><span class="itwd-proj__dur"><i class="fal fa-clock"></i>%(dur)s</span>'
             '<a href="#start-project" class="th-btn btn-sm itwd-start" data-project="%(alt)s">Start Project%(arrow)s</a>'
             '</div></div></article>'
-            % dict(cat=cat, i=i, hidden='' if cat == first else ' hidden', img=B.unsplash(pid), alt=title,
-                   icon=CAT_ICON[cat], catname=B.CAT_NAME[cat], lvl=level.lower(), level=level, title=title,
+            % dict(cat=cat, i=i, hidden='' if cat == first else ' hidden', img=proj_img(pid), alt=title,
+                   icon=CAT_ICON[cat], catname=CAT_NAME[cat], lvl=level.lower(), level=level, title=title,
                    stack=stack, dur=dur, arrow=B.ARROW_SVG))
     return ('<!-- itwd:projects:start -->\n'
             '<div class="itwd-projects">'
@@ -614,6 +608,14 @@ def create_new_pages(force=False):
 
 
 def main():
+    # pages edited in the visual admin (/admin) may no longer match what these patches expect;
+    # re-running could undo or duplicate those edits, so it needs an explicit opt-in once the admin was used
+    revisions = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'content', 'revisions')
+    if os.path.isdir(revisions) and any(os.scandir(revisions)) and '--after-admin-edits' not in sys.argv[1:]:
+        sys.exit('patch_site.py: pages have been published from the visual admin (content/revisions exists).\n'
+                 'Running this patcher can overwrite those edits. Edit content in /admin instead, or commit first\n'
+                 'and re-run with --after-admin-edits, then review the git diff. CMS data lives in content/data/*.json\n'
+                 '(re-render with: python scripts/cms_render.py all).')
     # --force-new-pages regenerates both new pages; --force-new-pages=testimonials (or =plus-two) just one
     force = False
     for arg in sys.argv[1:]:

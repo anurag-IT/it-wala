@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>IT Wala Dai — Visual Editor</title>
+<link rel="icon" href="/assets/itwd/pranam-logo.png">
+<link rel="stylesheet" href="/admin/admin.css">
+<script type="module" src="/admin/admin.js"></script>
+</head>
+<body>
+<div id="boot" class="boot">Loading editor…</div>
+
+<section id="login" class="login" hidden aria-labelledby="loginTitle">
+  <form id="loginForm" class="login__card" novalidate>
+    <img src="/assets/itwd/logo-horizontal.webp" alt="IT Wala Dai" class="login__logo" width="600" height="197">
+    <h1 id="loginTitle">Visual editor</h1>
+    <p class="login__hint" id="loginHint">Sign in with the admin account.</p>
+    <label for="loginUser">Username</label>
+    <input id="loginUser" name="username" autocomplete="username" required>
+    <label for="loginPass">Password</label>
+    <input id="loginPass" name="password" type="password" autocomplete="current-password" required>
+    <p class="login__error" id="loginError" role="alert"></p>
+    <button type="submit" class="btn btn--primary btn--block">Log in</button>
+  </form>
+</section>
+
+<div id="app" class="app" hidden>
+  <header class="topbar">
+    <div class="topbar__brand"><img src="/assets/itwd/pranam-logo.png" alt="" width="22" height="25"><span>IT Wala Dai <b>Editor</b></span></div>
+    <label class="sr-only" for="pageSelect">Page</label>
+    <select id="pageSelect" class="topbar__page"></select>
+    <div class="topbar__group" role="group" aria-label="History">
+      <button type="button" class="ibtn" id="undoBtn" title="Undo (Ctrl+Z)" aria-label="Undo">↶</button>
+      <button type="button" class="ibtn" id="redoBtn" title="Redo (Ctrl+Y)" aria-label="Redo">↷</button>
+    </div>
+    <div class="topbar__group seg" role="group" aria-label="Device preview">
+      <button type="button" data-device="desktop" class="is-active" title="Desktop (≥1200px)">🖥 Desktop</button>
+      <button type="button" data-device="tablet" title="Tablet (768–1199px)">▭ Tablet</button>
+      <button type="button" data-device="mobile" title="Mobile (≤767px)">▯ Mobile</button>
+    </div>
+    <span class="topbar__vp" id="vpSize" aria-live="polite"></span>
+    <span class="topbar__status" id="status" role="status">—</span>
+    <div class="topbar__spacer"></div>
+    <button type="button" class="btn" id="settingsBtn">Page settings</button>
+    <button type="button" class="btn" id="historyBtn">History</button>
+    <button type="button" class="btn" id="previewBtn">Preview</button>
+    <button type="button" class="btn" id="saveBtn">Save draft</button>
+    <button type="button" class="btn btn--primary" id="publishBtn">Publish</button>
+    <button type="button" class="ibtn" id="logoutBtn" title="Log out" aria-label="Log out">⎋</button>
+  </header>
+
+  <aside class="left" aria-label="Site structure">
+    <nav class="ltabs" role="tablist" aria-label="Panels">
+      <button type="button" role="tab" data-panel="pages" class="is-active">Pages</button>
+      <button type="button" role="tab" data-panel="layers">Layers</button>
+      <button type="button" role="tab" data-panel="add">Add</button>
+      <button type="button" role="tab" data-panel="media">Media</button>
+      <button type="button" role="tab" data-panel="content">Content</button>
+      <button type="button" role="tab" data-panel="theme">Theme</button>
+    </nav>
+    <div class="lpanel" id="leftPanel"></div>
+  </aside>
+
+  <main class="stage" id="stage" aria-label="Page canvas">
+    <div class="stage__frame" id="frameWrap"><iframe id="canvas" title="Page being edited"></iframe></div>
+    <div class="stage__empty" id="stageEmpty">Choose a page on the left to start editing.</div>
+  </main>
+
+  <aside class="right" id="props" aria-label="Properties"></aside>
+</div>
+
+<div id="modalRoot"></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

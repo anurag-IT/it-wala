@@ -523,6 +523,32 @@
     });
   });
 
+  // ---- Contact forms added in the visual editor (form.itwd-wa-form): every filled field -> WhatsApp message
+  document.querySelectorAll('form.itwd-wa-form').forEach(function (form) {
+    var status = form.querySelector('.itwd-form-status');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var lines = [];
+      var missing = [];
+      Array.prototype.forEach.call(form.querySelectorAll('input, select, textarea'), function (el) {
+        if (!el.name || el.type === 'submit') return;
+        var v = (el.value || '').trim();
+        var bad = (el.required && !v) || (el.type === 'tel' && v && !PHONE_RE.test(v));
+        el.classList.toggle('is-invalid', bad);
+        el.setAttribute('aria-invalid', bad ? 'true' : 'false');
+        var lab = form.querySelector('label[for="' + el.id + '"]') || (el.closest('div') && el.closest('div').querySelector('label'));
+        var name = lab ? lab.textContent.replace(/\*/g, '').trim() : el.name;
+        if (bad) missing.push(name);
+        else if (v) lines.push(name + ': ' + v);
+      });
+      if (missing.length) {
+        if (status) { status.classList.add('is-error'); status.textContent = 'Kripaya ' + missing.join(', ') + ' sahi bharnuhos.'; }
+        return;
+      }
+      openWhatsApp('Namaste IT Wala Dai! 🙏\n\n' + lines.join('\n'), status, form.querySelector('button[type="submit"]'));
+    });
+  });
+
   // ---- Free IT consultation page: college search
   var collegeSearch = document.getElementById('itwd-college-search');
   if (collegeSearch) {

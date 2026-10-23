@@ -1,0 +1,282 @@
+{
+  "categories": [
+    {
+      "slug": "ai-ml",
+      "name": "AI &amp; Machine Learning",
+      "icon": "fal fa-brain",
+      "template_icon": 2
+    },
+    {
+      "slug": "web",
+      "name": "Web Applications",
+      "icon": "fal fa-globe",
+      "template_icon": 4
+    },
+    {
+      "slug": "mobile",
+      "name": "Mobile Apps",
+      "icon": "fal fa-mobile",
+      "template_icon": 3
+    },
+    {
+      "slug": "vision",
+      "name": "Computer Vision",
+      "icon": "fal fa-eye",
+      "template_icon": 1
+    },
+    {
+      "slug": "data",
+      "name": "Data Science",
+      "icon": "fal fa-chart-mixed",
+      "template_icon": 5
+    },
+    {
+      "slug": "nlp",
+      "name": "NLP &amp; Chatbots",
+      "icon": "fal fa-comments",
+      "template_icon": 6
+    }
+  ],
+  "projects": [
+    {
+      "cat": "ai-ml",
+      "title": "Student Performance Predictor",
+      "level": "Intermediate",
+      "duration": "5 weeks",
+      "tech": "Python, Pandas, scikit-learn, Flask, React",
+      "image": "1557989048-03456d01a26e"
+    },
+    {
+      "cat": "ai-ml",
+      "title": "Crop Disease Detector App (Nepali)",
+      "level": "Advanced",
+      "duration": "6 weeks",
+      "tech": "TensorFlow, Keras (CNN), TFLite, Flutter",
+      "image": "1692481060581-98c224124f12"
+    },
+    {
+      "cat": "ai-ml",
+      "title": "NEPSE Stock Price Forecaster",
+      "level": "Advanced",
+      "duration": "6 weeks",
+      "tech": "Python, TensorFlow (LSTM), FastAPI, Next.js, Chart.js",
+      "image": "1611974789855-9c2a0a7236a3"
+    },
+    {
+      "cat": "ai-ml",
+      "title": "Movie &amp; Book Recommendation System",
+      "level": "Intermediate",
+      "duration": "5 weeks",
+      "tech": "Python, scikit-learn, Surprise, Django, PostgreSQL",
+      "image": "1512070750041-b9479c107194"
+    },
+    {
+      "cat": "ai-ml",
+      "title": "Loan Default Risk Predictor",
+      "level": "Intermediate",
+      "duration": "5 weeks",
+      "tech": "Python, XGBoost, SHAP, Streamlit",
+      "image": "1607863680198-23d4b2565df0"
+    },
+    {
+      "cat": "web",
+      "title": "Hospital OPD Queue Tracker",
+      "level": "Beginner",
+      "duration": "5 weeks",
+      "tech": "Next.js, Supabase (PostgreSQL), Tailwind CSS",
+      "image": "1758654860024-9e352f70d1f9"
+    },
+    {
+      "cat": "web",
+      "title": "College Hostel Management System",
+      "level": "Beginner",
+      "duration": "5 weeks",
+      "tech": "Laravel, MySQL, Bootstrap",
+      "image": "1555854877-bab0e564b8d5"
+    },
+    {
+      "cat": "web",
+      "title": "Event Ticketing with Khalti/eSewa",
+      "level": "Intermediate",
+      "duration": "6 weeks",
+      "tech": "MERN (MongoDB, Express, React, Node.js), Khalti API",
+      "image": "1459749411175-04bf5292ceea"
+    },
+    {
+      "cat": "web",
+      "title": "Blood Bank &amp; Donor Finder",
+      "level": "Intermediate",
+      "duration": "5 weeks",
+      "tech": "React, Node.js, MongoDB, Leaflet Maps",
+      "image": "1615461066159-fea0960485d5"
+    },
+    {
+      "cat": "web",
+      "title": "Student Freelance Marketplace",
+      "level": "Advanced",
+      "duration": "6 weeks",
+      "tech": "Next.js, Prisma, PostgreSQL, Socket.io",
+      "image": "1612299273045-362a39972259"
+    },
+    {
+      "cat": "mobile",
+      "title": "College Bus Live Tracker",
+      "level": "Intermediate",
+      "duration": "5 weeks",
+      "tech": "Flutter, Firebase, Google Maps API",
+      "image": "1613688263142-67f1e0c25ef1"
+    },
+    {
+      "cat": "mobile",
+      "title": "Personal Expense Tracker (NPR)",
+      "level": "Beginner",
+      "duration": "4 weeks",
+      "tech": "Flutter, Hive (offline DB), fl_chart",
+      "image": "1763729948735-df50fc3540df"
+    },
+    {
+      "cat": "mobile",
+      "title": "Nepal Trekking Guide (Offline Maps)",
+      "level": "Advanced",
+      "duration": "6 weeks",
+      "tech": "React Native, Mapbox, SQLite",
+      "image": "1544735716-392fe2489ffa"
+    },
+    {
+      "cat": "mobile",
+      "title": "Local Food Delivery App",
+      "level": "Advanced",
+      "duration": "6 weeks",
+      "tech": "Flutter, Node.js, MongoDB, Khalti SDK",
+      "image": "1617347454431-f49d7ff5c3b1"
+    },
+    {
+      "cat": "mobile",
+      "title": "Medicine Reminder App",
+      "level": "Beginner",
+      "duration": "4 weeks",
+      "tech": "Kotlin, Jetpack Compose, Room, WorkManager",
+      "image": "1584308666744-24d5c474f2ae"
+    },
+    {
+      "cat": "vision",
+      "title": "Smart Attendance with Face Recognition",
+      "level": "Intermediate",
+      "duration": "6 weeks",
+      "tech": "Python, OpenCV, face_recognition, Flask, Next.js",
+      "image": "1776329255945-15212b50cd7f"
+    },
+    {
+      "cat": "vision",
+      "title": "Nepali Number Plate Recognition",
+      "level": "Advanced",
+      "duration": "6 weeks",
+      "tech": "YOLOv8, EasyOCR, OpenCV, FastAPI",
+      "image": "1553708917-68ce200d86b2"
+    },
+    {
+      "cat": "vision",
+      "title": "Helmet Detection for Traffic",
+      "level": "Intermediate",
+      "duration": "5 weeks",
+      "tech": "YOLOv8, OpenCV, Flask",
+      "image": "1634015190736-3cecd58f89fe"
+    },
+    {
+      "cat": "vision",
+      "title": "Sign Language to Text Translator",
+      "level": "Advanced",
+      "duration": "6 weeks",
+      "tech": "MediaPipe, TensorFlow, Python, React",
+      "image": "1773800924117-a387786c60a0"
+    },
+    {
+      "cat": "vision",
+      "title": "Smart Waste Sorting Classifier",
+      "level": "Intermediate",
+      "duration": "5 weeks",
+      "tech": "PyTorch (ResNet), Raspberry Pi, OpenCV",
+      "image": "1595278069441-2cf29f8005a4"
+    },
+    {
+      "cat": "data",
+      "title": "Kathmandu Air Quality Dashboard",
+      "level": "Beginner",
+      "duration": "4 weeks",
+      "tech": "Python, Pandas, Plotly Dash, OpenAQ API",
+      "image": "1720412077065-ccd68a913720"
+    },
+    {
+      "cat": "data",
+      "title": "Nepal Tourism Trends Analysis",
+      "level": "Beginner",
+      "duration": "4 weeks",
+      "tech": "Python, Pandas, Seaborn, Power BI",
+      "image": "1518002054494-3a6f94352e9d"
+    },
+    {
+      "cat": "data",
+      "title": "E-commerce Sales Analytics",
+      "level": "Intermediate",
+      "duration": "5 weeks",
+      "tech": "SQL, Python, Pandas, Metabase",
+      "image": "1551288049-bebda4e38f71"
+    },
+    {
+      "cat": "data",
+      "title": "Telecom Customer Churn Analysis",
+      "level": "Intermediate",
+      "duration": "5 weeks",
+      "tech": "Python, scikit-learn, Streamlit",
+      "image": "1766066014237-00645c74e9c6"
+    },
+    {
+      "cat": "data",
+      "title": "Dengue Outbreak Prediction",
+      "level": "Advanced",
+      "duration": "6 weeks",
+      "tech": "Python, Prophet, GeoPandas, Folium",
+      "image": "1707943768453-7850f916ebde"
+    },
+    {
+      "cat": "nlp",
+      "title": "AI Study Buddy (RAG Chatbot)",
+      "level": "Intermediate",
+      "duration": "6 weeks",
+      "tech": "Next.js, Vercel AI SDK, LangChain, pgvector",
+      "image": "1513258496099-48168024aec0"
+    },
+    {
+      "cat": "nlp",
+      "title": "Nepali Fake News Detector",
+      "level": "Advanced",
+      "duration": "6 weeks",
+      "tech": "Python, Hugging Face (mBERT), FastAPI",
+      "image": "1504711434969-e33886168f5c"
+    },
+    {
+      "cat": "nlp",
+      "title": "College FAQ WhatsApp Bot",
+      "level": "Intermediate",
+      "duration": "5 weeks",
+      "tech": "Node.js, WhatsApp Cloud API, OpenAI API",
+      "image": "1682941664177-7920d0e59418"
+    },
+    {
+      "cat": "nlp",
+      "title": "Nepali Text Summarizer",
+      "level": "Advanced",
+      "duration": "6 weeks",
+      "tech": "Python, Hugging Face Transformers (mT5), Streamlit",
+      "image": "1532012197267-da84d127e765"
+    },
+    {
+      "cat": "nlp",
+      "title": "Resume Screening with NLP",
+      "level": "Intermediate",
+      "duration": "5 weeks",
+      "tech": "Python, spaCy, Django, PostgreSQL",
+      "image": "1698047681432-006d2449c631"
+    }
+  ]
+}

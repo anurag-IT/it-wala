@@ -1,0 +1,99 @@
+[
+  {
+    "name": "Islington College",
+    "logo": null,
+    "univ": "London Metropolitan University, UK",
+    "kind": "foreign",
+    "location": null,
+    "progs": [
+      "BSc (Hons) Computing",
+      "BSc (Hons) Computing with AI",
+      "BSc (Hons) Computer Networking &amp; IT Security"
+    ],
+    "url": "https://islington.edu.np/"
+  },
+  {
+    "name": "Softwarica College of IT &amp; E-Commerce",
+    "logo": "/college/softwrica.png",
+    "univ": "Coventry University, UK",
+    "kind": "foreign",
+    "location": "Kathmandu",
+    "progs": [
+      "BSc (Hons) Computer Science with AI",
+      "BSc (Hons) Software Engineering",
+      "BSc (Hons) Ethical Hacking &amp; Cybersecurity"
+    ],
+    "url": "https://softwarica.edu.np/courses"
+  },
+  {
+    "name": "Sunway College Kathmandu",
+    "logo": "/college/sunway.png",
+    "univ": "Birmingham City University, UK",
+    "kind": "foreign",
+    "location": "Maitidevi, Kathmandu",
+    "progs": [
+      "BSc (Hons) Computer Science with AI",
+      "BSc (Hons) Business Information Technology"
+    ],
+    "url": "https://sunway.edu.np/programs/"
+  },
+  {
+    "name": "Herald College Kathmandu",
+    "logo": null,
+    "univ": "University of Wolverhampton, UK",
+    "kind": "foreign",
+    "location": "Naxal, Kathmandu",
+    "progs": [
+      "BSc (Hons) Computer Science",
+      "BSc (Hons) Cybersecurity"
+    ],
+    "url": "https://heraldcollege.edu.np/"
+  },
+  {
+    "name": "The British College",
+    "logo": null,
+    "univ": "Leeds Beckett University ra University of the West of England, UK",
+    "kind": "foreign",
+    "location": "Thapathali, Kathmandu",
+    "progs": [
+      "BSc (Hons) Computing",
+      "BSc (Hons) Computer Science &ndash; AI",
+      "BSc (Hons) Cyber Security &amp; Digital Forensics"
+    ],
+    "url": "https://www.thebritishcollege.edu.np/"
+  },
+  {
+    "name": "Mid-Valley International College",
+    "logo": "/college/images.png",
+    "univ": "HELP University, Malaysia",
+    "kind": "foreign",
+    "location": null,
+    "progs": [
+      "Bachelor of Information Technology (Hons)"
+    ],
+    "url": "https://midvalley.edu.np/programs/bachelors-of-information-technology-hons/"
+  },
+  {
+    "name": "Kathmandu Model College",
+    "logo": "/college/kmc.png",
+    "univ": "Tribhuvan University",
+    "kind": "nepal",
+    "location": null,
+    "progs": [
+      "BCA"
+    ],
+    "url": "https://kmcen.edu.np/best-bca-college-nepal/"
+  },
+  {
+    "name": "Himalayan WhiteHouse International College",
+    "logo": "/college/white%20house.png",
+    "univ": "Purbanchal University",
+    "kind": "nepal",
+    "location": null,
+    "progs": [
+      "BIT",
+      "BE Computer"
+    ],
+    "url": "https://whitehousecmt.edu.np/"
+  }
+]

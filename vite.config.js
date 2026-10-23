@@ -52,6 +52,11 @@ const rawLegacyAssets = () => ({
 
 export default defineConfig({
   appType: 'mpa',
-  server: { port: 3000 },
+  server: {
+    port: 3000,
+    // Vite's defaults + the admin's private working data (audit log, drafts, revisions, unpublished pages)
+    fs: { deny: ['.env', '.env.*', '*.{crt,pem}', '**/.git/**', '**/content/private/**', '**/content/drafts/**',
+      '**/content/revisions/**', '**/content/unpublished/**'] },
+  },
   plugins: [cleanUrls(), rawLegacyAssets()],
 })

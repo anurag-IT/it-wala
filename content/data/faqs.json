@@ -1,0 +1,84 @@
+{
+  "home": [
+    {
+      "q": "IT Wala Dai ke ho?",
+      "a": "IT Wala Dai Nepal ka +2 ra bachelor students lai coding sikna, project ideas explore garna, ra IT course ra college chhanna help garne educational platform ho."
+    },
+    {
+      "q": "IT Wala Dai bata free ma coding sikna milchha?",
+      "a": "IT Wala Dai le free coding education ra computer-related learning resources ma focus garchha. Available courses ra resources website ma explore garnuhos."
+    },
+    {
+      "q": "+2 pachhi IT padhna kun course rojne?",
+      "a": "Yo hajurko interest, eligibility, academic background, budget, ra future goals ma bhar parchha. BSc CSIT, BIT, BCA, BIM wa aru relevant programs ko requirements bujhera compare garnuhos."
+    },
+    {
+      "q": "IT college chhanna IT Wala Dai le help garchha?",
+      "a": "Ho, IT Wala Dai ko goal hajurlai available IT courses ra colleges bujhna, information compare garna, ra informed decision lina free guidance dinu ho."
+    },
+    {
+      "q": "Programming suru garna pahile coding aaunu parchha?",
+      "a": "Pardaina. Beginner-friendly resources bata basics sikdai practice garna suru garna saknuhunchha."
+    },
+    {
+      "q": "Project idea ra viva preparation ma help painchha?",
+      "a": "Website ma available project categories, project ideas, ra project workflow explore garnuhos. Available resources anusar project develop garna ra presentation ko tayari garna madat milna sakchha."
+    },
+    {
+      "q": "College ra course compare kasari garne?",
+      "a": "Available college ra course details herera university affiliation, eligibility, curriculum, fees, location, ra admission requirements jasta factors compare garnuhos. Official college sources bata important details verify garnuhos."
+    },
+    {
+      "q": "IT Wala Dai sanga direct contact kasari garne?",
+      "a": "WhatsApp consultation button use garera wa website ko Contact page bata available contact options follow garera kura garnuhos."
+    }
+  ],
+  "consult": [
+    {
+      "q": "IT Wala Dai ko consultation free ho?",
+      "a": "Ho, IT Wala Dai ko IT course ra college guidance free ho. Kunai consultation fee lagdaina."
+    },
+    {
+      "q": "+2 pachhi kun IT course explore garna milchha?",
+      "a": "BSc CSIT, BIT, BCA, BIM, BE Computer jasta programs explore garna milchha. Kun course mildo chha bhanne kura hajurko interest, +2 ko stream ra eligibility ma bhar parchha."
+    },
+    {
+      "q": "College compare garda ke-ke hernu parchha?",
+      "a": "University affiliation, curriculum, faculty, lab ra practical facilities, location, fee structure ra admission requirements herna sakinchha. Important details sadhai official college source bata verify garnuhos."
+    },
+    {
+      "q": "Foreign-affiliated college chhanna ke bujhnu parchha?",
+      "a": "Kun foreign university sanga affiliation chha, degree ko recognition, total cost, ra Nepal ma tyo degree ko equivalence jasta kura bujhnu parchha. Official sources bata confirm garnuhos."
+    },
+    {
+      "q": "Coding suru garna pahile experience chahinchha?",
+      "a": "Chahidaina. Beginner-friendly free courses bata basics sikna suru garna saknuhunchha."
+    },
+    {
+      "q": "Consultation ko lagi kasari contact garne?",
+      "a": "Yo page ko form bharnuhos wa WhatsApp button thichnuhos. Hajurko message WhatsApp ma IT Wala Dai lai pugchha."
+    }
+  ],
+  "course": [
+    {
+      "q": "Ke course sachchai free ho?",
+      "a": "Ho, pura free. Fees Rs. 0 &mdash; kunai hidden charge chhaina."
+    },
+    {
+      "q": "Classes kaha hunchhan?",
+      "a": "Sabai classes IT Wala Dai App ma hunchhan &mdash; live classes, recordings, notes ra practice questions sabai app mai painchha."
+    },
+    {
+      "q": "Pahile nai coding wa computer aaunu parchha?",
+      "a": "Chahidaina. C++ course, C course ra Complete Computer Course &mdash; sabai basics bata suru hunchhan."
+    },
+    {
+      "q": "Laptop chahinchha?",
+      "a": "Laptop/computer ramro hunchha. Classes phone ma pani herna saknuhunchha, tara practice ka lagi computer bhaye sajilo hunchha."
+    },
+    {
+      "q": "Kasari join garne?",
+      "a": "\"Free ma join garnuhos\" thichnuhos, form bharnuhos &mdash; WhatsApp ma Dai sanga kura garera course ko barema clear information paunuhunchha."
+    }
+  ]
+}
