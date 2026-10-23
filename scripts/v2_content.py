@@ -139,8 +139,8 @@ def patch_home_promo(s):
 
 # --------------------------------------------------------------------------- home: "All Things in One Place" (one brand colour, no coming-soon)
 
-ALL_THINGS_LINKS = {'AI Project': '/programs', 'Free +2': LEARN_URL, 'Student': '/community',
-                    'College': COLLEGES_URL, 'Monthly': '/#more-for-plus-two'}
+ALL_THINGS_LINKS = {'AI Project': '/programs', 'Find': '/programs', 'Free +2': LEARN_URL, 'Student': '/community',
+                    'College': COLLEGES_URL, 'Monthly': '/hackathon'}
 
 
 def patch_all_things(s):
@@ -632,10 +632,11 @@ PRANAM_TAB = (
     '<!-- itwd:pranam-tab:start -->'
     '<a class="itwd-pranam-tab" href="https://www.pranamsoftware.com.np/" target="_blank" rel="noopener" '
     'aria-label="Powered by Pranam Software — website kholnuhos">'
-    '<span class="itwd-pranam-tab__icon" aria-hidden="true"><i class="fas fa-code"></i></span>'
+    '<span class="itwd-pranam-tab__icon"><img src="/assets/itwd/pranam-logo.png" alt="Pranam Software logo" width="30" height="34"></span>'
     '<span class="itwd-pranam-tab__vertical" aria-hidden="true">Powered by <b>Pranam Software</b></span>'
     '<span class="itwd-pranam-tab__panel"><small>Powered by</small><strong>Pranam Software</strong>'
-    '<em>Website, App &amp; Software Development</em></span>'
+    '<ul class="itwd-pranam-tab__list"><li>Website Development</li><li>App Development</li>'
+    '<li>Software Development</li><li>Company</li></ul></span>'
     '</a>'
     '<!-- itwd:pranam-tab:end -->')
 

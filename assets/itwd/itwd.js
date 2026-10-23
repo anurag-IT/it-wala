@@ -62,6 +62,53 @@
     a.setAttribute('rel', 'noopener');
   });
 
+  // ---- Coming Soon countdowns ([data-countdown="hackathon" | "community"])
+  // ONE place for the launch targets (about four months of development from October 2026).
+  // Change a date here and every countdown and "Target launch" label on the site follows.
+  var LAUNCH_TARGETS = {
+    hackathon: '2027-02-23T10:00:00+05:45',
+    community: '2027-02-23T10:00:00+05:45'
+  };
+  var pad2 = function (n) { return (n < 10 ? '0' : '') + n; };
+  document.querySelectorAll('[data-countdown-target]').forEach(function (el) {
+    var t = new Date(LAUNCH_TARGETS[el.getAttribute('data-countdown-target')]);
+    if (!isNaN(t)) el.textContent = t.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+  });
+  var countdowns = Array.prototype.slice.call(document.querySelectorAll('[data-countdown]'));
+  if (countdowns.length) {
+    var tick = function () {
+      var now = Date.now(); // real current time on every tick, never a fake decrementing counter
+      countdowns.forEach(function (box) {
+        var key = box.getAttribute('data-countdown');
+        var left = new Date(LAUNCH_TARGETS[key]).getTime() - now;
+        if (!(left > 0)) {
+          box.hidden = true;
+          var done = document.querySelector('[data-countdown-done="' + key + '"]');
+          if (done) done.hidden = false;
+          return;
+        }
+        var parts = {
+          days: Math.floor(left / 864e5),
+          hours: Math.floor(left / 36e5) % 24,
+          minutes: Math.floor(left / 6e4) % 60,
+          seconds: Math.floor(left / 1e3) % 60
+        };
+        box.querySelectorAll('[data-unit]').forEach(function (el) {
+          var u = el.getAttribute('data-unit');
+          var v = u === 'days' ? String(parts.days) : pad2(parts[u]);
+          if (el.textContent !== v) {
+            el.textContent = v;
+            el.classList.remove('is-tick');
+            void el.offsetWidth;
+            el.classList.add('is-tick');
+          }
+        });
+      });
+    };
+    tick();
+    setInterval(tick, 1000);
+  }
+
   // ---- "All Things in One Place" cards: enable the paint-out animation only after a real hover
   document.addEventListener('mouseover', function (e) {
     var card = e.target.closest && e.target.closest('.elementor-element-faea3de .category-card3');
@@ -129,6 +176,27 @@
     }, { passive: true });
 
     showCategory(tabs[0].getAttribute('data-itwd-filter'));
+
+    // header search ("Search..." -> /programs?q=...): show the matching project ideas
+    var query = (new URLSearchParams(location.search).get('q') || '').trim();
+    if (query) {
+      var ql = query.toLowerCase();
+      var hits = cards.filter(function (c) { return c.textContent.toLowerCase().indexOf(ql) !== -1; });
+      var note = document.createElement('p');
+      note.className = 'itwd-search-note';
+      note.setAttribute('role', 'status');
+      if (hits.length) {
+        tabs.forEach(function (t) { t.classList.remove('is-active'); t.setAttribute('aria-selected', 'false'); });
+        cards.forEach(function (c) { c.hidden = hits.indexOf(c) === -1; });
+        if (totalEl) totalEl.textContent = hits.length;
+        note.textContent = '"' + query + '" ko lagi ' + hits.length + ' project idea bhetiyo. Category thichera sabai hernuhos.';
+      } else {
+        note.textContent = '"' + query + '" sanga milne project idea bhetiyena. Category bata hernuhos wa Dai lai sodhnuhos.';
+      }
+      projWrap.insertBefore(note, projWrap.firstChild);
+      document.querySelectorAll('.itwd-nav-search input[name="q"]').forEach(function (i) { i.value = query; });
+      setTimeout(function () { scrollToEl(projectsSection); refreshScroll(); }, 600);
+    }
   }
 
   // ---- Find Project: "Start Project" modal -> WhatsApp
@@ -139,13 +207,34 @@
     var startForm = modal.querySelector('form');
     var title = modal.querySelector('.itwd-modal__title');
     var eyebrow = modal.querySelector('.itwd-modal__eyebrow');
+    var lead = modal.querySelector('.itwd-modal__lead');
+    var intro = modal.querySelector('.itwd-modal__text');
     var kind = 'project';
     var startStatus = startForm.querySelector('.itwd-form-status');
+    // Why the form opens WhatsApp: one message for free courses, one for the paid project-guidance service
+    var MODAL_COPY = {
+      course: {
+        eyebrow: 'Free Course',
+        lead: 'Hajurko learning journey yahi bata suru hunchha!',
+        text: 'Form bharnuhos, ani WhatsApp bata Dai sanga direct kura garnuhos. Hajurko interest ra learning needs bujhera course ko barema clear information pauna saknuhunchha.',
+        placeholder: 'Kun class ma padhdai hunuhunchha? Aru kura bhaye lekhnuhos...'
+      },
+      project: {
+        eyebrow: 'Project Guidance',
+        lead: 'Aafno project idea ko lagi sahi guidance khojdai hunuhunchha?',
+        text: 'Project ko idea ra requirements share garnuhos. WhatsApp ma Dai sanga kura garera guidance, scope ra project-anusar ko pricing bujhna saknuhunchha.',
+        placeholder: 'Project ko barema bataunuhos: college, semester, deadline, aafno idea...'
+      }
+    };
 
     var openModal = function (project, k) {
-      kind = k || 'project';
+      kind = k === 'course' ? 'course' : 'project';
+      var copy = MODAL_COPY[kind];
       title.textContent = project;
-      if (eyebrow) eyebrow.textContent = kind === 'course' ? 'Free Course' : 'Start Project';
+      if (eyebrow) eyebrow.textContent = copy.eyebrow;
+      if (lead) lead.textContent = copy.lead;
+      if (intro) intro.textContent = copy.text;
+      startForm.elements.description.setAttribute('placeholder', copy.placeholder);
       startForm.elements.project.value = project;
       startStatus.textContent = '';
       startStatus.classList.remove('is-error');
@@ -187,7 +276,7 @@
         'Hello IT Wala Dai! 🙏\n' +
         (kind === 'course'
           ? 'Malai "' + f.project.value + '" free course join garnu xa.\n\n'
-          : 'Malai "' + f.project.value + '" project banaunu xa.\n\n') +
+          : 'Malai "' + f.project.value + '" ko lagi project guidance chahiyo. Mero project ko idea ra requirements share garna chahanchhu.\n\n') +
         'Name: ' + name + '\n' +
         'Phone: ' + phone + '\n' +
         'Email: ' + email + '\n' +

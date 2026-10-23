@@ -25,14 +25,15 @@ sys.path.insert(0, str(Path(__file__).parent))
 import build_site as B  # project/category data + html helpers (block, hidden, ...)
 import nepali_copy
 import v2_content as V
+import v3_content as V3
 
 ROOT = B.ROOT
 
 NAV = [  # simple text menu (no icons)
     ('/', 'Home'),
-    ('/programs', 'Find Project'),
+    ('/programs', 'Bachelor Project'),
     ('/plus-two', 'For +2'),
-    ('/free-it-consultation', 'Free Guidance'),
+    ('/free-it-consultation', 'Free Guidance After +2'),
     ('/community', 'Community'),
     ('/testimonials', 'Testimonials'),
     ('/about', 'About'),
@@ -40,6 +41,7 @@ NAV = [  # simple text menu (no icons)
 ]
 PAGES = {
     'index.html': '/',
+    'hackathon/index.html': '/hackathon',
     'programs/index.html': '/programs',
     'plus-two/index.html': '/plus-two',
     'free-it-consultation/index.html': '/free-it-consultation',
@@ -229,7 +231,7 @@ def plus_two_content():
         % (1 + i, ic, t, d) for i, (ic, t, d) in enumerate(app_features))
 
     steps = [('fal fa-download', 'App download garnuhos', 'IT Wala Dai App &mdash; Android ra Windows ma available chha.'),
-             ('fal fa-hand-pointer', 'C wa C++ chhannuhos', 'Aafno course select garnuhos &mdash; pura free.'),
+             ('fal fa-hand-pointer', 'Aafno course chhannuhos', 'C++, Complete Computer Course wa C &mdash; pura free.'),
              ('fal fa-chalkboard-user', 'Live class join garnuhos', 'Schedule app ma painchha, join garnuhos ra siknuhos.')]
     step_html = ''.join(
         '<div class="col-md-4"><div class="itwd-step th_fade_anim" data-delay="0.%d"><span class="itwd-step__num">%d</span>'
@@ -241,10 +243,12 @@ def plus_two_content():
   <div class="container">
     <div class="title-area text-center mb-30">
       <span class="sub-title th_fade_anim"><img decoding="async" src="/wp-content/uploads/2026/02/subtitle-icon1-4.svg" alt="">For +2 Students &middot; 100%% Free</span>
-      <h2 class="sec-title th_fade_anim"><span class="th-text-perspective">C ra C++ siknuhos &mdash; pura free</span></h2>
+      <h2 class="sec-title th_fade_anim"><span class="th-text-perspective">Class 11 ra Class 12 ka free courses</span></h2>
       <p class="th_fade_anim itwd-sub-lead">Sabai padhai <strong>IT Wala Dai App</strong> ma hunchha &mdash; live classes, videos, notes ra practice. App download garnuhos ra suru garnuhos.</p>
     </div>
     <ul class="itwd-pills th_fade_anim">
+      <li><i class="fal fa-code"></i>Class 11: C++</li>
+      <li><i class="fal fa-desktop"></i>Class 12: Complete Computer Course</li>
       <li><i class="fal fa-badge-percent"></i>Rs. 0 fees</li>
       <li><i class="fal fa-mobile"></i>Sabai kura App ma</li>
       <li><i class="fal fa-book-open"></i>+2 syllabus anusar</li>
@@ -343,7 +347,8 @@ def patch_mentor_cards(s):
     return s[:st] + sec + s[en:]
 
 
-FOOTER_CREDIT = (' <span class="itwd-credit">An initiative by <a href="%s" target="_blank" rel="noopener">Pranam Software'
+FOOTER_CREDIT = (' <span class="itwd-credit">An initiative by <a href="%s" target="_blank" rel="noopener">'
+                 '<img src="/assets/itwd/pranam-logo.png" alt="" width="16" height="18" class="itwd-credit__logo">Pranam Software'
                  '<i class="far fa-arrow-up-right"></i></a></span>' % PRANAM_URL)
 
 
@@ -353,7 +358,7 @@ def patch_footer_credit(s):
 
 
 ABOUT_BADGE = ('<a class="itwd-pranam-badge th_fade_anim" href="%s" target="_blank" rel="noopener">'
-               '<span class="itwd-pranam-badge__icon"><i class="fal fa-building"></i></span>'
+               '<span class="itwd-pranam-badge__icon"><img src="/assets/itwd/pranam-logo.png" alt="Pranam Software logo" width="30" height="34"></span>'
                '<span><small>An initiative by</small><strong>Pranam Software</strong></span>'
                '<i class="far fa-arrow-up-right"></i></a>' % PRANAM_URL)
 
@@ -382,94 +387,7 @@ def instructor_photo():
     return '/wp-content/uploads/2026/02/team_2_1.jpg'
 
 
-COURSES = [
-    dict(
-        slug='c-programming', code='C', cls='c', name='C Programming',
-        title='C Programming &mdash; zero dekhi pointers samma',
-        short='Programming ko suruwat C bata garnuhos. Variables dekhi pointers ra file handling samma &mdash; '
-              'simple bhasha, live classes ra dainik practice sanga.',
-        img='1515879218367-8466d910aaa4', level='Beginner', weeks='~8 weeks',
-        goals=['C program lekhna, compile ra run garna', 'Variables, data types ra operators bujhna',
-               'if-else, switch ra loops bata logic banauna', 'Arrays ra strings sanga kaam garna',
-               'Functions ra recursion use garna', 'Pointers ko concept clear garna',
-               'Structures bata aafnai data type banauna', 'Files ma data save ra read garna'],
-        skills=['C Language', 'Logic Building', 'Problem Solving', 'Loops &amp; Patterns', 'Arrays',
-                'Functions', 'Pointers', 'Structures', 'File Handling', 'Debugging'],
-        desc=['Yo course programming pura zero bata suru garna chahane +2 students ka lagi ho. '
-              'Har topic pahile simple example bata bujhaincha, ani live class ma sangai code garinchha.',
-              'Sabai classes <strong>IT Wala Dai App</strong> ma hunchhan &mdash; live class chhutyo bhane recording hernuhos, '
-              'notes download garnuhos ra har chapter pachhi practice questions solve garnuhos.'],
-        reqs=['Coding experience chahidaina', 'Laptop/computer ramro &mdash; phone ma online compiler pani chalchha',
-              'Internet connection (live classes ka lagi)', 'Sikne icchha &mdash; baaki Dai le sambhalchha!'],
-        audience=['Grade 11&ndash;12 ka Computer Science students', 'Pahilo choti programming sikdai gareka students',
-                  'Board exam ko C questions ko tayari garne students', 'Pachhi BSc CSIT / BIT / BCA padhna chahane students'],
-        modules=[
-            ('Getting Started', ['Programming ke ho ra C kina?', 'Setup: VS Code / Code::Blocks + GCC',
-                                 'Pahilo program: Hello World']),
-            ('C ka Basics', ['Variables &amp; data types', 'Input / Output: printf &amp; scanf',
-                             'Operators &amp; expressions', 'Type conversion']),
-            ('Control Flow', ['if, else-if &amp; switch', 'Loops: for, while, do-while', 'break &amp; continue',
-                              'Practice: pattern printing']),
-            ('Arrays &amp; Strings', ['1D arrays', '2D arrays (matrix)', 'Strings &amp; string functions',
-                                      'Practice: searching &amp; sorting']),
-            ('Functions', ['Function banauna ra call garna', 'Call by value vs call by reference', 'Recursion']),
-            ('Pointers, Structures &amp; Files', ['Pointers ka basics', 'Pointers + arrays', 'Structures &amp; unions',
-                                                   'File handling: fopen, fprintf, fscanf']),
-        ],
-    ),
-    dict(
-        slug='cpp-programming', code='C++', cls='cpp', name='C++ Programming',
-        title='C++ Programming &mdash; OOP simple tarika le',
-        short='C pachhi arko level. Classes, objects, inheritance ra polymorphism &mdash; '
-              'Object-Oriented Programming real examples ra mini project sanga siknuhos.',
-        img='1555066931-4365d14bab8c', level='Intermediate', weeks='~8 weeks',
-        goals=['C ra C++ ko farak bujhna', 'Classes ra objects design garna',
-               'Constructors &amp; destructors use garna', 'Inheritance bata code reuse garna',
-               'Function &amp; operator overloading', 'Virtual functions ra polymorphism',
-               'fstream bata file I/O garna', 'Euta complete mini project banauna'],
-        skills=['C++', 'OOP', 'Classes &amp; Objects', 'Inheritance', 'Polymorphism', 'Overloading',
-                'Templates', 'File I/O', 'Exception Handling', 'Mini Project'],
-        desc=['Yo course ma hami Object-Oriented Programming simple tarika le bujhchhau &mdash; har concept euta '
-              'real-life example (student, bank account, library) sanga.',
-              'Sabai classes <strong>IT Wala Dai App</strong> ma hunchhan &mdash; live classes, recordings, notes ra practice '
-              'questions sabai ek thau ma. Course ko anta ma hajurle aafnai mini project banaunuhunchha.'],
-        reqs=['C ka basics aaunchha bhane ramro (aaudaina bhane pahile hamro free C course garnuhos)',
-              'Laptop/computer ramro &mdash; phone ma online compiler pani chalchha',
-              'Internet connection (live classes ka lagi)', 'Practice garne josh!'],
-        audience=['Grade 12 ka Computer Science students (OOP chapter)', 'C siki sakeka ra agadi badhna chahane students',
-                  'OOP concepts clear garna chahane students', 'Pachhi BSc CSIT / BIT / BCA padhna chahane students'],
-        modules=[
-            ('C bata C++ samma', ['C vs C++', 'cin, cout &amp; namespaces', 'References &amp; function overloading']),
-            ('OOP Basics', ['Classes &amp; objects', 'Access specifiers', 'Constructors &amp; destructors',
-                            'this pointer &amp; static members']),
-            ('Inheritance', ['Types of inheritance', 'Constructors in inheritance', 'Practice: student result system']),
-            ('Polymorphism', ['Function overloading', 'Operator overloading', 'Virtual functions',
-                              'Abstract classes']),
-            ('Files &amp; Templates', ['File I/O with fstream', 'Templates ko intro', 'Exception handling basics']),
-            ('Mini Project', ['Project plan: library / bank system', 'Build &amp; present']),
-        ],
-    ),
-]
-
-COURSE_FAQ = [
-    ('Ke course sachchai free ho?', 'Ho, pura free. Fees Rs. 0 &mdash; kunai hidden charge chhaina.'),
-    ('Classes kaha hunchhan?', 'Sabai classes IT Wala Dai App ma hunchhan &mdash; live classes, recordings, notes ra practice '
-                             'questions sabai app mai painchha.'),
-    ('Pahile nai coding aaunu parchha?', 'C course pura zero bata suru hunchha. C++ ka lagi C ka basics helpful hunchhan '
-                                          '&mdash; aaudaina bhane pahile free C course garnuhos.'),
-    ('Laptop chahinchha?', 'Laptop/computer ramro hunchha. Classes phone ma pani herna saknuhunchha ra practice online '
-                            'compiler ma garna saknuhunchha.'),
-    ('Kasari join garne?', '"Free ma join garnuhos" thichnuhos, form bharnuhos &mdash; WhatsApp ma class details ra app '
-                           'access ko jaankari hami pathaunchhau.'),
-]
-
-
-def course_url(c):
-    return '/plus-two/%s' % c['slug']
-
-
-def n_lessons(c):
-    return sum(len(ls) for _, ls in c['modules'])
+from course_data import COURSES, COURSE_FAQ, n_lessons, course_url, course_img  # noqa: E402  (single source of truth)
 
 
 def course_card(c, delay=0.2):
@@ -480,17 +398,25 @@ def course_card(c, delay=0.2):
         '<span class="itwd-ec__lang">%(code)s</span>'
         '<button type="button" class="itwd-ec__wish" data-wish="%(slug)s" aria-label="Save course"><i class="far fa-heart"></i></button></div>'
         '<div class="itwd-ec__body">'
-        '<div class="itwd-ec__catlvl"><span class="itwd-ec__cat">+2 Computer Science</span><span class="itwd-ec__lvl">%(level)s</span></div>'
+        '<div class="itwd-ec__catlvl"><span class="itwd-ec__cat">%(cat)s</span><span class="itwd-ec__lvl">%(level)s</span></div>'
         '<h3 class="itwd-ec__title"><a href="%(url)s">%(title)s</a></h3>'
-        '<div class="itwd-ec__author"><img src="%(photo)s" alt="%(iname)s"><span>%(iname)s</span></div>'
+        '%(author)s'
         '<div class="itwd-ec__meta"><span><i class="fal fa-book-open"></i>%(lessons)d Lessons</span>'
-        '<span><i class="fal fa-clock"></i>%(weeks)s</span><span><i class="fal fa-signal-stream"></i>Live</span></div>'
+        '<span><i class="fal fa-clock"></i>%(duration)s</span><span><i class="fal fa-signal-stream"></i>Live</span></div>'
         '<div class="itwd-ec__foot"><span class="itwd-ec__app"><i class="fal fa-mobile"></i>IT Wala Dai App</span>'
         '<span class="itwd-ec__price">Free</span></div>'
         '<a href="%(url)s" class="th-btn w-100 itwd-ec__btn">Course hernuhos%(arrow)s</a>'
         '</div></article>'
-        % dict(c, url=url, img=B.unsplash(c['img']), delay=delay, photo=instructor_photo(),
-               iname=INSTRUCTOR['name'], lessons=n_lessons(c), arrow=B.ARROW_SVG))
+        % dict(c, url=url, img=course_img(c, B.unsplash), delay=delay, author=course_author(c),
+               lessons=n_lessons(c), arrow=B.ARROW_SVG))
+
+
+def course_author(c):
+    if c['instructor']:
+        return '<div class="itwd-ec__author"><img src="%s" alt="%s"><span>%s</span></div>' % (
+            instructor_photo(), INSTRUCTOR['name'], INSTRUCTOR['name'])
+    return ('<div class="itwd-ec__author"><img src="/assets/itwd/logo-trimmed.png" alt="IT Wala Dai" class="is-logo">'
+            '<span>IT Wala Dai</span></div>')
 
 
 def course_detail_content(c):
@@ -530,18 +456,18 @@ def course_detail_content(c):
     <div class="row">
       <div class="col-lg-8">
         <ul class="itwd-cd-crumb th_fade_anim"><li><a href="/"><i class="fal fa-house"></i>Home</a></li><li><a href="/plus-two">For +2</a></li><li>%(name)s</li></ul>
-        <span class="itwd-cd-cat th_fade_anim">+2 Computer Science &middot; Free Course</span>
+        <span class="itwd-cd-cat th_fade_anim">%(cat)s &middot; Free Course</span>
         <h1 class="itwd-cd-title th_fade_anim">%(title)s</h1>
         <p class="itwd-cd-lead th_fade_anim">%(short)s</p>
         <ul class="itwd-cd-pills th_fade_anim">
           <li><i class="fal fa-signal-bars"></i>%(level)s</li>
           <li><i class="fal fa-book-open"></i>%(lessons)d Lessons</li>
-          <li><i class="fal fa-clock"></i>%(weeks)s</li>
+          <li><i class="fal fa-clock"></i>%(duration)s</li>
           <li><i class="fal fa-signal-stream"></i>Live on App</li>
           <li class="is-free"><i class="fal fa-tag"></i>Rs. 0</li>
         </ul>
         <div class="itwd-cd-by th_fade_anim">
-          <div class="itwd-cd-by__who"><img src="%(photo)s" alt="%(iname)s"><span><small>Instructor</small><strong>%(iname)s</strong>%(iorgsmall)s</span></div>
+          %(bywho)s
           <div class="itwd-cd-by__actions">
             <button type="button" class="itwd-cd-action" data-share><i class="far fa-share-nodes"></i>Share</button>
             <button type="button" class="itwd-cd-action" data-wish="%(slug)s"><i class="far fa-heart"></i>Wishlist</button>
@@ -560,7 +486,7 @@ def course_detail_content(c):
       <div class="col-lg-8 itwd-cd__main">
         <nav class="itwd-cd-tabs" aria-label="Course sections">
           <a href="#cd-overview" class="is-active">Overview</a><a href="#cd-curriculum">Curriculum</a>
-          <a href="#cd-instructor">Instructor</a><a href="#cd-faq">FAQs</a>
+          %(insttab)s<a href="#cd-faq">FAQs</a>
         </nav>
 
         <div id="cd-overview" class="itwd-cd-sec">
@@ -576,7 +502,7 @@ def course_detail_content(c):
           <div class="itwd-acc-group">%(mods)s</div>
         </div>
 
-        <div id="cd-instructor" class="itwd-cd-sec">
+        %(instopen)s
           <h3 class="itwd-cd-h">Aafno instructor sanga chinjan</h3>
           <div class="itwd-cd-inst th_fade_anim">
             <div class="itwd-cd-inst__img"><img src="%(photo)s" alt="%(iname)s"></div>
@@ -587,7 +513,7 @@ def course_detail_content(c):
               <div class="itwd-cd-inst__social">%(isocial)s</div>
             </div>
           </div>
-        </div>
+        %(instclose)s
 
         <div id="cd-faq" class="itwd-cd-sec">
           <h3 class="itwd-cd-h">Dherai sodhine prashnaharu</h3>
@@ -598,6 +524,7 @@ def course_detail_content(c):
       <div class="col-lg-4">
         <aside class="itwd-cd-side">
           <div class="itwd-cd-side__img"><img src="%(img)s" alt="%(name)s"><span class="itwd-cd-side__lang">%(code)s</span></div>
+          <ul class="itwd-cd-side__facts"><li><span>Lessons</span><strong>%(lessons)d</strong></li><li><span>Duration</span><strong>%(duration)s</strong></li><li><span>Level</span><strong>%(level)s</strong></li></ul>
           <div class="itwd-cd-side__price"><strong>Free</strong><span>100%% Free</span></div>
           <a href="#start-project" class="th-btn w-100 itwd-start" data-kind="course" data-project="%(name)s">Free ma join garnuhos%(arrow)s</a>
           <a href="#" data-app-link="android" class="itwd-cd-side__ghost"><i class="fal fa-mobile"></i>IT Wala Dai App download garnuhos</a>
@@ -629,7 +556,15 @@ def course_detail_content(c):
            iorgsmall=pranam_role(INSTRUCTOR['name'], 'itwd-pranam-role itwd-pranam-role--sm', 'span'),
            isocial=mentor_social(INSTRUCTOR['name']),
            lessons=lessons, nmods=len(c['modules']), goals=goals, skills=skills, desc0=c['desc'][0], desc1=c['desc'][1],
-           reqs=reqs, audience=audience, mods=''.join(mods), faqs=faqs, inc=inc, img=B.unsplash(c['img']),
+           reqs=reqs, audience=audience, mods=''.join(mods), faqs=faqs, inc=inc, img=course_img(c, B.unsplash),
+           bywho=('<div class="itwd-cd-by__who"><img src="%s" alt="%s"><span><small>Instructor</small><strong>%s</strong>%s</span></div>'
+                  % (photo, INSTRUCTOR['name'], INSTRUCTOR['name'],
+                     pranam_role(INSTRUCTOR['name'], 'itwd-pranam-role itwd-pranam-role--sm', 'span')) if c['instructor'] else
+                  '<div class="itwd-cd-by__who"><img src="/assets/itwd/logo-trimmed.png" alt="IT Wala Dai" class="is-logo">'
+                  '<span><small>Course by</small><strong>IT Wala Dai</strong></span></div>'),
+           insttab='<a href="#cd-instructor">Instructor</a>' if c['instructor'] else '',
+           instopen='<div id="cd-instructor" class="itwd-cd-sec">' if c['instructor'] else '<template data-itwd-hidden="no-instructor">',
+           instclose='</div>' if c['instructor'] else '</template>',
            arrow=B.ARROW_SVG, related=related,
            shareurl=quote('IT Wala Dai — free %s course: https://itwaladai.com%s' % (c['name'], course_url(c))))
 
@@ -637,9 +572,12 @@ def course_detail_content(c):
 def create_new_pages(force=False):
     modal = start_modal_html()
     pages = {
-        'plus-two/index.html': ('For +2 Students &#8211; Free C &amp; C++ Courses &#8211; IT Wala Dai',
-                                'Free C and C++ programming courses for +2 (Grade 11-12) students in Nepal.',
-                                'Free C &amp; C++ for +2', 'For +2', plus_two_content(), modal),
+        'plus-two/index.html': ('For +2 Students &#8211; Free C++ &amp; Computer Courses &#8211; IT Wala Dai',
+                                'Free C++ (Class 11), Complete Computer Course (Class 12) and C programming for +2 students in Nepal.',
+                                'Free Courses for +2', 'For +2', plus_two_content(), modal),
+        'hackathon/index.html': ('Monthly Hackathon &#8211; Coming Soon &#8211; IT Wala Dai',
+                                 'IT Wala Dai Monthly Hackathon is under development. Launch countdown and what to expect.',
+                                 None, None, V3.hackathon_content(), ''),
         'testimonials/index.html': ('Testimonials &#8211; IT Wala Dai',
                                     'IT Wala Dai sanga coding, project ra college guidance liyeka students ko anubhav.',
                                     'Testimonials', 'Testimonials', V.testimonials_content(), ''),
@@ -653,7 +591,8 @@ def create_new_pages(force=False):
     for c in COURSES:
         pages['plus-two/%s/index.html' % c['slug']] = (
             '%s &#8211; Free +2 Course &#8211; IT Wala Dai' % c['name'],
-            'Free %s course for +2 students in Nepal, live on the IT Wala Dai App. Instructor: %s.' % (c['name'], INSTRUCTOR['name']),
+            'Free %s course for +2 students in Nepal (%s, %d lessons), live on the IT Wala Dai App.' % (
+                c['name'], c['duration'], n_lessons(c)),
             None, None, course_detail_content(c), modal)
     for rel, (title, desc, ctitle, crumb, content, extra) in pages.items():
         path = ROOT / rel
@@ -691,6 +630,7 @@ def main():
             s = V.patch_free_learning(s)
             s = V.patch_home_faq(s)
             s = V.patch_home_testimonials(s)
+            s = V3.patch_home(s, start_modal_html())
             # hero: the two buttons sit on one line (the trust line below wraps to its own row)
             s = s.replace('<div class="btn-wrap wow animate__fadeInUp" data-wow-delay="0.9s">',
                           '<div class="btn-wrap itwd-btn-pair itwd-hero-btns wow animate__fadeInUp" data-wow-delay="0.9s">', 1)
@@ -714,6 +654,7 @@ def main():
 
 def shared(s, active):
     s = set_menus(s, active)
+    s = V3.patch_page(s, active, s if active == '/' else read('index.html'))
     s = patch_footer_credit(s)
     s = V.patch_footer_cta(s)
     s = V.patch_app_buttons(s)
