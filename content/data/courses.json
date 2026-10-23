@@ -127,7 +127,7 @@
     "img": "/assets/itwd/course-computer.jpg",
     "level": "Beginner",
     "duration": "40 hours",
-    "instructor": false,
+    "instructor": true,
     "home_cta": "Free Computer Course Siknuhos",
     "goals": [
       "Computer ka parts ra kaam garne tarika bujhna",
