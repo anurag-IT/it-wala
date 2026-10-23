@@ -3476,3 +3476,217 @@ html.itwd-modal-open, html.itwd-modal-open body { overflow: hidden; }
   .itwd-soon__dot, .itwd-countdown__num.is-tick { animation: none; }
   .itwd-pg-card, .itwd-prog, .itwd-col2, .itwd-soon-card { transition: none; }
 }
+
+/* ============================================================ fix pass: layout, mobile, forms, accordion */
+
+/* ---- visible keyboard focus everywhere (the theme removes outlines) */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible,
+.th-btn:focus-visible, [tabindex]:focus-visible {
+  outline: 2px solid var(--itwd-green);
+  outline-offset: 2px;
+}
+
+/* ---- mobile / tablet header: logo left, hamburger right, both vertically centred */
+@media (max-width: 991px) {
+  .header-layout3 .menu-area > .row { flex-wrap: nowrap; align-items: center; }
+  .header-layout3 .menu-area > .row > .col-auto:first-child { flex: 0 1 auto; min-width: 0; }
+  .header-layout3 .menu-area > .row > .col-auto:nth-child(2) {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-left: 12px;
+  }
+  .header-layout3 .menu-area > .row > .col-auto:nth-child(2) .main-menu { display: none !important; }
+  .header-layout3 .th-menu-toggle { margin: 0; flex: 0 0 auto; }
+  .header-layout3 .header-logo img { max-width: min(190px, 52vw); height: auto; }
+}
+/* mobile menu: Join Now + call inside the panel */
+.itwd-mobile-join { display: grid; gap: 10px; margin: 26px 0 10px; padding: 0 20px; }
+.itwd-mobile-join .th-btn { justify-content: center; }
+.itwd-mobile-join__call { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; color: var(--itwd-green); }
+
+/* ---- home hero: the three title lines never run into each other */
+.hero-style3 .hero-title > span { display: block; }
+@media (max-width: 767px) {
+  .hero-style3 { padding-top: 120px; text-align: center; }
+  .hero-style3 .hero-title { margin-bottom: 18px; }
+  .hero-style3 .hero-title .title1 { font-size: clamp(36px, 10vw, 46px); line-height: 1.08; }
+  .hero-style3 .hero-title .title2 { font-size: clamp(20px, 5.6vw, 26px); line-height: 1.25; margin-top: 6px; }
+  .hero-style3 .hero-title .title3 { font-size: clamp(34px, 9.4vw, 44px); line-height: 1.1; margin-top: 6px; }
+  .hero-style3 .hero-text { max-width: 34ch; margin-left: auto; margin-right: auto; }
+  .hero-style3 .itwd-hero-btns { justify-content: center; }
+}
+
+/* ---- student sections: image first on phones / tablets (all three) */
+@media (max-width: 991px) {
+  .itwd-cpp__content { order: 0; }
+  .itwd-cpp__visual { order: -1; }
+  .itwd-promo__visual { order: -1; }
+}
+
+/* ---- third student section: bachelor's project guidance (teal tint, same family as the C++ section) */
+.itwd-cpp--bachelor { background: linear-gradient(180deg, #ffffff 0%, #EEF9F6 60%, #ffffff 100%); }
+.itwd-cpp--bachelor .itwd-cpp__blob { left: auto; right: -160px; background: radial-gradient(circle, rgba(28, 176, 152, .14) 0%, rgba(28, 176, 152, 0) 70%); }
+.itwd-cpp--bachelor .itwd-cpp__ring { background: radial-gradient(circle, rgba(28, 176, 152, .2) 0%, rgba(28, 176, 152, .05) 58%, rgba(28, 176, 152, 0) 70%); }
+.itwd-cpp--bachelor .itwd-cpp__label { background: #E8F7F4; border-color: #CDEBE4; color: #0d7f6d; }
+.itwd-cpp--bachelor .itwd-cpp__points i { background: var(--itwd-green); color: #fff; }
+
+/* ---- "IT Wala Dai ko mission": image is a normal grid column, centred with the text */
+.itwd-mission .cta-wrap4 > .container { position: relative; z-index: 2; }
+.itwd-mission__visual { display: flex; justify-content: center; align-items: center; }
+.itwd-mission .cta-img4-1 {
+  position: relative;
+  inset: auto;
+  left: auto;
+  right: auto;
+  bottom: auto;
+  transform: none;
+  max-width: 100%;
+  margin: 0;
+  width: auto;
+  display: block;
+}
+.itwd-mission .cta-img4-1 > img { display: block; width: 100%; max-width: 560px; height: auto; margin: 0 auto; }
+@media (max-width: 1199px) {
+  .itwd-mission .cta-img4-1 > img { max-width: 480px; }
+}
+@media (max-width: 575px) {
+  .itwd-mission .cta-img4-1 { margin: 0 auto; }
+}
+
+/* ---- AI Project Lab: compact accordion */
+.itwd-gacc { display: grid; gap: 10px; }
+.itwd-gacc__item {
+  border: 1px solid #e3efec;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(0, 70, 59, .04);
+  transition: border-color .3s ease, box-shadow .3s ease;
+}
+.itwd-gacc__item.is-open { border-color: rgba(28, 176, 152, .45); box-shadow: 0 14px 30px rgba(0, 70, 59, .08); }
+.itwd-gacc__h { margin: 0; font-size: inherit; }
+.itwd-gacc__btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 56px;
+  padding: 10px 16px;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  color: var(--itwd-dark);
+  font-size: 15.5px;
+  font-weight: 700;
+  line-height: 1.3;
+  cursor: pointer;
+}
+.itwd-gacc__icon {
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: #E8F7F4;
+  color: var(--itwd-green);
+  font-size: 16px;
+  transition: background .3s ease, color .3s ease;
+}
+.itwd-gacc__item.is-open .itwd-gacc__icon, .itwd-gacc__btn:hover .itwd-gacc__icon { background: var(--itwd-green); color: #fff; }
+.itwd-gacc__title { flex: 1 1 auto; }
+.itwd-gacc__chev { flex: 0 0 auto; font-size: 13px; color: var(--itwd-green); transition: transform .3s ease; }
+.itwd-gacc__item.is-open .itwd-gacc__chev { transform: rotate(180deg); }
+.itwd-gacc__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows .32s ease, visibility 0s linear .32s;
+}
+.itwd-gacc__item.is-open .itwd-gacc__panel { grid-template-rows: 1fr; visibility: visible; transition: grid-template-rows .32s ease; }
+.itwd-gacc__inner { overflow: hidden; }
+.itwd-gacc__inner p { margin: 0; padding: 0 16px 16px 66px; font-size: 14.5px; line-height: 1.65; color: #5b6770; }
+@media (max-width: 575px) {
+  .itwd-gacc__inner p { padding-left: 16px; }
+  .itwd-gacc__btn { font-size: 15px; }
+}
+
+/* Bachelor Project page: six guidance cards -> 3 + 3 */
+.itwd-pg-grid--wide > :nth-child(4), .itwd-pg-grid--wide > :nth-child(5) { grid-column: span 2; }
+@media (max-width: 991px) {
+  .itwd-pg-grid--wide > *, .itwd-pg-grid--wide > :nth-child(4), .itwd-pg-grid--wide > :nth-child(5) { grid-column: auto; }
+}
+
+/* ---- forms: labels, choice pills (contact method), WhatsApp fallback link */
+.itwd-flabel { display: block; margin-bottom: 6px; font-size: 14px; font-weight: 700; color: var(--itwd-dark); }
+.itwd-flabel span { font-weight: 500; color: #8a959d; }
+.itwd-join .form-control, .itwd-join .form-select { min-height: 48px; border-radius: 12px; }
+.itwd-join .form-control.is-invalid, .itwd-join .form-select.is-invalid { border-color: #dc3545; }
+.itwd-choice { margin: 0; padding: 0; border: 0; min-width: 0; }
+.itwd-choice legend { float: none; width: auto; margin-bottom: 8px; font-size: inherit; }
+.itwd-choice__opts { display: flex; flex-wrap: wrap; gap: 10px; }
+/* the theme hides every radio input with display:none; keep ours focusable but visually hidden */
+.itwd-choice .itwd-choice__input {
+  position: absolute !important;
+  display: inline-block !important;
+  visibility: visible !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  opacity: 0 !important;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+.itwd-choice__opt {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  min-height: 46px;
+  margin: 0 !important;
+  padding: 10px 18px !important;
+  border: 1.5px solid #d5e9e4;
+  border-radius: 12px;
+  background: #fff;
+  color: var(--itwd-dark);
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color .2s ease, background .2s ease, color .2s ease;
+}
+.itwd-choice__opt::before, .itwd-choice__opt::after { display: none !important; }
+.itwd-choice__opt i { color: var(--itwd-green); }
+.itwd-choice__input:checked + .itwd-choice__opt { border-color: var(--itwd-green); background: var(--itwd-green); color: #fff; }
+.itwd-choice__input:checked + .itwd-choice__opt i { color: #fff; }
+.itwd-choice__input:focus-visible + .itwd-choice__opt { outline: 2px solid var(--itwd-green); outline-offset: 2px; }
+.itwd-wa-fallback { display: inline-flex; align-items: center; gap: 6px; margin-left: 4px; font-weight: 800; color: var(--itwd-green); text-decoration: underline; text-underline-offset: 3px; }
+button[aria-busy="true"] { opacity: .7; cursor: progress; }
+.itwd-modal__box { max-height: calc(100vh - 32px); overflow-y: auto; }
+@media (max-width: 575px) {
+  .itwd-modal__box { max-height: calc(100vh - 20px); padding: 26px 18px 22px; }
+}
+
+/* header Join Now is now a real <button> */
+button.itwd-join-cta { border: 0; cursor: pointer; }
+
+@media (prefers-reduced-motion: reduce) {
+  .itwd-gacc__panel, .itwd-gacc__chev, .itwd-gacc__item { transition: none; }
+}
+
+/* ---- phones: the Pranam side tab must not cover page content -> small logo button above "back to top" */
+@media (max-width: 767px) {
+  .itwd-pranam-tab {
+    top: auto;
+    bottom: 96px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 12px 0 0 12px;
+    transform: none;
+  }
+  .itwd-pranam-tab__vertical { display: none; }
+  .itwd-pranam-tab__icon { margin: 0; width: 28px; height: 28px; flex-basis: 28px; }
+  .itwd-pranam-tab:hover, .itwd-pranam-tab:focus-visible { width: 40px; }
+  .itwd-pranam-tab:hover .itwd-pranam-tab__panel, .itwd-pranam-tab:focus-visible .itwd-pranam-tab__panel { opacity: 0; }
+  .itwd-pranam-tab:hover .itwd-pranam-tab__icon, .itwd-pranam-tab:focus-visible .itwd-pranam-tab__icon { position: static; margin: 0; }
+}

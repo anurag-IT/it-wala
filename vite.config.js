@@ -19,8 +19,39 @@ const cleanUrls = () => ({
   },
 })
 
+// The mirrored WordPress theme/plugin files (/wp-content, /wp-includes) are already-minified classic scripts and
+// stylesheets. Without this, Vite's dev server transforms every one of them and appends an inline source map
+// (three.js 1.1 MB -> 6 MB, ~16 MB of JS/CSS per page), which made first page loads slow or incomplete until a
+// refresh hit Vite's cache. Serve them exactly as they are on disk instead (the same bytes a static host serves).
+const RAW_PREFIXES = ['/wp-content/', '/wp-includes/']
+const RAW_TYPES = { '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8' }
+const rawLegacyAssets = () => ({
+  name: 'raw-legacy-assets',
+  configureServer(server) {
+    const root = path.resolve(server.config.root)
+    server.middlewares.use((req, res, next) => {
+      if (req.method !== 'GET' && req.method !== 'HEAD') return next()
+      let pathname
+      try { pathname = decodeURIComponent(req.url.split('?')[0]) } catch { return next() }
+      const type = RAW_TYPES[path.extname(pathname)]
+      if (!type || !RAW_PREFIXES.some((p) => pathname.startsWith(p))) return next()
+      const file = path.join(root, pathname)
+      if (!file.startsWith(root) || !fs.existsSync(file) || !fs.statSync(file).isFile()) return next()
+      const stat = fs.statSync(file)
+      const etag = `W/"${stat.size}-${stat.mtimeMs}"`
+      res.setHeader('Content-Type', type)
+      res.setHeader('ETag', etag)
+      res.setHeader('Cache-Control', 'no-cache')
+      if (req.headers['if-none-match'] === etag) { res.statusCode = 304; return res.end() }
+      res.setHeader('Content-Length', stat.size)
+      if (req.method === 'HEAD') return res.end()
+      fs.createReadStream(file).pipe(res)
+    })
+  },
+})
+
 export default defineConfig({
   appType: 'mpa',
   server: { port: 3000 },
-  plugins: [cleanUrls()],
+  plugins: [cleanUrls(), rawLegacyAssets()],
 })

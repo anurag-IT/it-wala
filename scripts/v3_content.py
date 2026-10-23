@@ -85,9 +85,17 @@ MODAL_INTRO = (
 
 
 def patch_modal_copy(s):
-    if '<div class="itwd-modal__intro">' in s:
-        return re.sub(r'<div class="itwd-modal__intro">.*?</p></div>', lambda m: MODAL_INTRO, s, count=1, flags=re.S)
-    return re.sub(r'<p class="itwd-modal__text">.*?</p>', lambda m: MODAL_INTRO, s, count=1, flags=re.S)
+    """Only inside the start-project / course enquiry modal (other modals have their own copy)."""
+    if '<div class="itwd-modal" id="start-project"' not in s:
+        return s
+    st = s.index('<div class="itwd-modal" id="start-project"')
+    en = V.block(s, st)
+    m = s[st:en]
+    if '<div class="itwd-modal__intro">' in m:
+        m = re.sub(r'<div class="itwd-modal__intro">.*?</p></div>', lambda x: MODAL_INTRO, m, count=1, flags=re.S)
+    else:
+        m = re.sub(r'<p class="itwd-modal__text">.*?</p>', lambda x: MODAL_INTRO, m, count=1, flags=re.S)
+    return s[:st] + m + s[en:]
 
 
 def patch_home_modal(s, modal_html):
@@ -286,20 +294,20 @@ def patch_popular_promos(s):
 
 # --------------------------------------------------------------------------- project guidance (home "AI Project Lab" + Bachelor Project page)
 
-GUIDANCE_FEATURES = [
+GUIDANCE_FEATURES = [  # guidance only: nothing here is built or delivered for the student
     ('fab fa-github', 'GitHub &amp; Source Code Guidance',
-     'GitHub repository setup, source-code structure, version control ra code bujhna ra manage garna step-by-step guidance linuhos.'),
+     'Git ra GitHub ko basics bujhna, code organize garna, version control sikna ra aafno source code manage garna guidance paunuhos.'),
     ('fal fa-cloud-arrow-up', 'Live Deployment Guidance',
-     'Hosting options, deployment process, environment configuration ra project lai live URL ma publish garne tarika bujhnuhos. '
-     'Hajurko project ko requirements-anusar deployment steps siknuhos.'),
-    ('fal fa-file-lines', 'Project Report Guidance',
-     'Proposal, documentation, methodology ra college ko required report structure bujhna help linuhos. Aafno project ko actual '
-     'work anusar report tayar garna guidance paunuhos.'),
+     'Aafno project lai suitable hosting platform ma deploy garna, environment variables bujhna ra deployment errors solve garna '
+     'step-by-step guidance linuhos.'),
+    ('fal fa-file-lines', 'Project Report &amp; Documentation Guidance',
+     'Proposal, system design, diagrams, implementation details ra final report aafai prepare garna structured guidance paunuhos.'),
     ('fal fa-presentation-screen', 'PPT Slides &amp; Demo Video Guidance',
-     'Project presentation ko structure, slide planning, demo recording ra presentation delivery ko lagi practical guidance linuhos.'),
+     'Aafno project ko main features explain garne presentation ra demo video prepare garna siknuhos.'),
+    ('fal fa-comments-question', 'Viva Preparation Guidance',
+     'Mentor sanga common viva questions practice garera aafno project ra technical decisions confidently explain garna siknuhos.'),
     ('fal fa-chalkboard-user', 'Live Project Guidance',
-     'Project idea lai smaller tasks ma divide garna, technology chhanna, AI tools use garna, errors debug garna ra step-by-step '
-     'implementation sikna guidance linuhos.'),
+     'Project planning dekhi implementation, testing ra final presentation samma aafno pace ma agadi badhna technical guidance paunuhos.'),
 ]
 
 
@@ -308,6 +316,20 @@ def guidance_grid(extra_cls=''):
         '<div class="itwd-pg-card th_fade_anim" data-delay="0.%d"><span class="itwd-pg-card__icon"><i class="%s"></i></span>'
         '<div><h3 class="itwd-pg-card__title">%s</h3><p class="itwd-pg-card__text">%s</p></div></div>'
         % (1 + i, ic, t, d) for i, (ic, t, d) in enumerate(GUIDANCE_FEATURES)))
+
+
+def guidance_accordion():
+    """Compact accordion for the home "AI Project Lab": headings first, one description open at a time."""
+    items = []
+    for i, (ic, t, d) in enumerate(GUIDANCE_FEATURES):
+        items.append(
+            '<div class="itwd-gacc__item"><h3 class="itwd-gacc__h">'
+            '<button type="button" class="itwd-gacc__btn" id="itwd-gacc-btn-%(i)d" aria-expanded="false" aria-controls="itwd-gacc-panel-%(i)d">'
+            '<span class="itwd-gacc__icon" aria-hidden="true"><i class="%(ic)s"></i></span><span class="itwd-gacc__title">%(t)s</span>'
+            '<i class="far fa-chevron-down itwd-gacc__chev" aria-hidden="true"></i></button></h3>'
+            '<div class="itwd-gacc__panel" id="itwd-gacc-panel-%(i)d" role="region" aria-labelledby="itwd-gacc-btn-%(i)d">'
+            '<div class="itwd-gacc__inner"><p>%(d)s</p></div></div></div>' % dict(i=i, ic=ic, t=t, d=d))
+    return '<div class="itwd-gacc th_fade_anim" data-itwd-accordion>%s</div>' % ''.join(items)
 
 
 def patch_project_lab(s):
@@ -320,7 +342,7 @@ def patch_project_lab(s):
     st = s.index('elementor-element-e21c93c')
     wc = s.index('<div class="elementor-widget-container">', st)
     en = V.block(s, wc)
-    s = s[:wc] + '<div class="elementor-widget-container">' + guidance_grid() + '</div>' + s[en:]
+    s = s[:wc] + '<div class="elementor-widget-container">' + guidance_accordion() + '</div>' + s[en:]
     return s.replace('>PROJECT HERNUHOS<', '>Bachelor Project Guidance Hernuhos<')
 
 
@@ -355,7 +377,7 @@ def patch_plus2_section(s):
 
 
 def patch_home(s, modal_html):
-    for f in (patch_hero_message, patch_cpp_section, patch_all_things, patch_app_banner, patch_featured_courses,
+    for f in (patch_hero_message, patch_cpp_section, patch_bachelor_section, patch_all_things, patch_app_banner, patch_featured_courses,
               patch_popular_promos, patch_project_lab, patch_stats, patch_plus2_section):
         s = f(s)
     return patch_home_modal(s, modal_html)
@@ -695,14 +717,256 @@ def patch_contact(s):
 
 def patch_page(s, active, home):
     s = patch_header(s, home)
+    s = patch_join(s)
     s = patch_modal_copy(s)
     s = patch_footer_links(s)
+    s = patch_mission_layout(s)
+    if active == '/about':
+        s = patch_stats(s)
     if active == '/programs':
         s = patch_programs(s)
     elif active == '/community':
         s = patch_community(s)
     elif active == '/free-it-consultation':
         s = patch_consult(s)
+        s = patch_consult_form(s)
     elif active == '/contact':
         s = patch_contact(s)
+    # last, so page-specific sections rebuilt above get the same treatment
+    s = fix_placeholders(s)
+    s = patch_a11y(s)
+    return patch_performance(s)
+
+
+# =========================================================================== fix pass (Oct 2026)
+
+# --------------------------------------------------------------------------- home: third student section (bachelor's project guidance)
+
+BACHELOR_GUIDANCE_SERVICE = "Bachelor's Project Guidance"
+
+
+def bachelor_section():
+    points = ['Project idea ra technology selection', 'Coding, database ra debugging guidance',
+              'Project report ra documentation guidance', 'PPT, demo ra viva preparation guidance']
+    return '''
+<section class="itwd-cpp itwd-cpp--bachelor" aria-labelledby="itwd-bp-title">
+  <span class="itwd-promo__blob itwd-cpp__blob" aria-hidden="true"></span>
+  <div class="container">
+    <div class="itwd-cpp__grid">
+      <div class="itwd-cpp__visual th_fade_anim">
+        <span class="itwd-cpp__ring" aria-hidden="true"></span>
+        <img src="/assets/itwd/bachelor-project-boy.webp" alt="Bachelor ma kun project banaune bhanera sochdai gareko student" width="640" height="960" decoding="async">
+        <span class="itwd-promo__badge itwd-cpp__badge--a"><i class="fas fa-lightbulb"></i>Idea dekhi viva samma</span>
+        <span class="itwd-promo__badge itwd-cpp__badge--b"><i class="fas fa-user-graduate"></i>Aafai banaunuhos</span>
+      </div>
+      <div class="itwd-cpp__content">
+        <span class="itwd-promo__label itwd-cpp__label th_fade_anim"><i class="fal fa-diagram-project"></i>Bachelor's Project Guidance</span>
+        <h2 class="itwd-promo__title th_fade_anim" id="itwd-bp-title">Project banaunu chha, tara <span class="itwd-hl">suru kata bata</span> garne?</h2>
+        <p class="itwd-promo__text th_fade_anim">Bachelor's project suru garda idea chhanna, technology select garna, coding bujhna, database design garna, errors solve garna, report lekhna ra presentation dina garo huna sakchha. IT Wala Dai le hajurlai step-by-step guide garchha, jasle garda hajur aafai project develop garna, technical concepts bujhna ra confidently present garna saknuhunchha.</p>
+        <ul class="itwd-cpp__points th_fade_anim">%(points)s</ul>
+        <div class="itwd-btn-pair th_fade_anim">
+          <a href="/programs" class="th-btn">Bachelor Project Explore Garnuhos%(arrow)s</a>
+          <a href="#start-project" class="th-btn style-border2 itwd-start" data-kind="project" data-project="%(service)s">Project Guidance Sodhnuhos</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+''' % dict(points=''.join('<li><i class="fas fa-check"></i>%s</li>' % p for p in points), arrow=ARROW,
+           service=BACHELOR_GUIDANCE_SERVICE)
+
+
+def patch_bachelor_section(s):
+    def after_promo(s, html):
+        i = s.index('<!-- itwd:consult-promo:end -->') + len('<!-- itwd:consult-promo:end -->')
+        return s[:i] + '\n' + html + s[i:]
+    return put(s, 'bachelor-promo', bachelor_section(), after_promo)
+
+
+# --------------------------------------------------------------------------- mission section: image is a grid column (no absolute positioning)
+
+def patch_mission_layout(s):
+    if 'class="cta-img4-1' not in s or 'itwd-mission__visual' in s:
+        return s
+    m = re.search(r'<section class="overflow-hidden"><div class="cta-wrap4 space"', s)
+    if not m:
+        return s
+    st = m.start()
+    en = s.index('</section>', st)
+    sec = s[st:en]
+    img_st = sec.index('<div class="cta-img4-1')
+    img = sec[img_st:V.block(sec, img_st)]
+    sec = sec[:img_st] + sec[img_st + len(img):]
+    # the content column ends right before the container/row close: <div class="col-xxl-7 col-xl-6">...</div></div></div>
+    col_st = sec.index('<div class="col-xxl-7 col-xl-6">')
+    col_en = V.block(sec, col_st)
+    sec = (sec[:col_en] + '<div class="col-xxl-5 col-xl-6 itwd-mission__visual">' + img + '</div>' + sec[col_en:])
+    sec = sec.replace('<section class="overflow-hidden"><div class="cta-wrap4 space"',
+                      '<section class="overflow-hidden itwd-mission"><div class="cta-wrap4 space"', 1)
+    sec = sec.replace('<div class="row">', '<div class="row align-items-center gy-4">', 1)
+    return s[:st] + sec + s[en:]
+
+
+# --------------------------------------------------------------------------- "Join Now" (header) -> join form -> WhatsApp
+
+JOIN_LEVELS = ['Class 11', 'Class 12', 'Completed +2', "Bachelor's", 'Other']
+JOIN_INTERESTS = ['Free C++ course', 'Complete computer course', 'IT course and college guidance',
+                  "Bachelor's project guidance", 'Student community', 'Other']
+
+
+def _options(items):
+    return ('<option value="" disabled selected>Chhannuhos</option>' +
+            ''.join('<option value="%s">%s</option>' % (escape(i), escape(i)) for i in items))
+
+
+JOIN_MODAL = '''<div class="itwd-modal itwd-join" id="itwd-join" role="dialog" aria-modal="true" aria-labelledby="itwd-join-title" hidden>
+  <div class="itwd-modal__backdrop" data-itwd-join-close></div>
+  <div class="itwd-modal__box">
+    <button type="button" class="itwd-modal__close" data-itwd-join-close aria-label="Close"><i class="far fa-times"></i></button>
+    <span class="itwd-modal__eyebrow">Join IT Wala Dai</span>
+    <h3 class="itwd-modal__title" id="itwd-join-title">IT Wala Dai sanga jodinuhos</h3>
+    <div class="itwd-modal__intro"><p class="itwd-modal__lead">Form bharnuhos, ani WhatsApp ma Dai sanga direct kura garnuhos.</p>
+      <p class="itwd-modal__text">Yo form le hajurko details WhatsApp message ma rakhchha &mdash; WhatsApp ma <strong>Send</strong> thichepachhi matra message Dai lai pugchha. Website le kunai details save gardaina.</p></div>
+    <form class="itwd-join-form" novalidate>
+      <div class="row g-3">
+        <div class="col-12"><label class="itwd-flabel" for="join-name">Pura naam *</label>
+          <input class="form-control" id="join-name" name="name" type="text" autocomplete="name" required></div>
+        <div class="col-md-6"><label class="itwd-flabel" for="join-level">Ahile ko padhai *</label>
+          <select class="form-select" id="join-level" name="level" required>%(levels)s</select></div>
+        <div class="col-md-6"><label class="itwd-flabel" for="join-interest">Mukhya interest *</label>
+          <select class="form-select" id="join-interest" name="interest" required>%(interests)s</select></div>
+        <div class="col-12"><label class="itwd-flabel" for="join-phone">WhatsApp number *</label>
+          <input class="form-control" id="join-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="98XXXXXXXX" required></div>
+        <div class="col-12"><label class="itwd-flabel" for="join-msg">Sano prashna wa message <span>(optional)</span></label>
+          <textarea class="form-control" id="join-msg" name="message" rows="3"></textarea></div>
+      </div>
+      <p class="itwd-form-status" role="status" aria-live="polite"></p>
+      <button type="submit" class="th-btn w-100"><i class="fab fa-whatsapp me-2"></i>WhatsApp ma pathaunuhos</button>
+    </form>
+  </div>
+</div>''' % dict(levels=_options(JOIN_LEVELS), interests=_options(JOIN_INTERESTS))
+
+
+def patch_join(s):
+    """Header "Join Now" is a real button that opens the join form (the modal lives outside #smooth-content)."""
+    s = re.sub(r'<a href="[^"]*" class="itwd-join-cta">(.*?)</a>',
+               r'<button type="button" class="itwd-join-cta" data-itwd-join aria-haspopup="dialog" aria-controls="itwd-join">\1</button>',
+               s, flags=re.S)
+
+    # the modal must come BEFORE itwd.js (the script binds the form when it runs), so it is re-placed on every run
+    ma, mb = '<!-- itwd:join-modal:start -->', '<!-- itwd:join-modal:end -->'
+    if ma in s:
+        s = s[:s.index(ma)] + s[s.index(mb) + len(mb):].lstrip('\n')
+    i = s.index('<script src="/assets/itwd/itwd.js"></script>')
+    s = s[:i] + ma + JOIN_MODAL + mb + '\n' + s[i:]
+    # the mobile menu gets the same Join Now action (the header buttons are hidden below 1200px)
+    mobile = ('<!-- itwd:mobile-join:start --><div class="itwd-mobile-join"><button type="button" class="th-btn w-100" data-itwd-join '
+              'aria-haspopup="dialog" aria-controls="itwd-join"><i class="fas fa-graduation-cap me-2"></i>Join Now</button>'
+              '<a class="itwd-mobile-join__call" href="tel:+9779823415625"><i class="far fa-phone-alt"></i>+977-9823415625</a></div>'
+              '<!-- itwd:mobile-join:end -->')
+    if '<!-- itwd:mobile-join:start -->' in s:
+        s = s[:s.index('<!-- itwd:mobile-join:start -->')] + mobile + s[s.index('<!-- itwd:mobile-join:end -->') + len('<!-- itwd:mobile-join:end -->'):]
+    else:
+        st = s.index('<div class="th-mobile-menu">')
+        en = V.block(s, st)
+        s = s[:en] + mobile + s[en:]
+    return s
+
+
+# --------------------------------------------------------------------------- free consultation form: usable contact method + real placeholders
+
+CONTACT_FIELD = ('<fieldset class="itwd-choice" aria-required="true"><legend class="itwd-fc-form__label">Kasari contact garne? *</legend>'
+                 '<div class="itwd-choice__opts">'
+                 '<input class="itwd-choice__input" type="radio" name="contact" id="fc-contact-wa" value="WhatsApp" required checked>'
+                 '<label class="itwd-choice__opt" for="fc-contact-wa"><i class="fab fa-whatsapp"></i>WhatsApp</label>'
+                 '<input class="itwd-choice__input" type="radio" name="contact" id="fc-contact-call" value="Phone call" required>'
+                 '<label class="itwd-choice__opt" for="fc-contact-call"><i class="far fa-phone-alt"></i>Phone call</label>'
+                 '</div></fieldset>')
+
+
+def patch_consult_form(s):
+    s = re.sub(r'<span class="itwd-fc-form__label">Kasari contact garne\? \*</span>\s*<div class="itwd-fc-radio">.*?</div>',
+               lambda m: CONTACT_FIELD, s, count=1, flags=re.S)
+    return fix_placeholders(s)
+
+
+def fix_placeholders(s):
+    """"Chhannuhos" is a disabled placeholder, never a real choice."""
+    return s.replace('<option value="">Chhannuhos</option>', '<option value="" disabled selected>Chhannuhos</option>')
+
+
+# --------------------------------------------------------------------------- page weight + third-party requests
+
+def patch_performance(s):
+    # WordPress emoji loader: fetched a script from the old demo server (wordpress.themehour.net) on every page
+    s = re.sub(r'<script id="wp-emoji-settings" type="application/json">.*?</script>\s*<script type="module">\s*/\*! This file is auto-generated \*/.*?</script>\s*',
+               '', s, flags=re.S)
+    # WooCommerce "smart wishlist" (not used on this static site) POSTed to /escul/?wc-ajax=woosw_get_data -> 404 on every page
+    s = re.sub(r'<script id="woosw-frontend-js" src="[^"]*"></script>\s*', '', s)
+    # Elementor lazy-loads its "text-editor" handler chunks from the demo server; the widget is plain text here
+    s = s.replace('data-widget_type="text-editor.default"', 'data-widget_type="itwd-static-text.default"')
+    # 600-700 KB logo PNGs shown at ~120-190px -> resized WebP copies (originals stay in assets/itwd)
+    s = s.replace('src="/assets/itwd/logo-horizontal.png"', 'src="/assets/itwd/logo-horizontal.webp" width="600" height="197"')
+    s = s.replace('src="/assets/itwd/logo.png"', 'src="/assets/itwd/logo-mark.webp" width="360" height="324"')
+    # 0.8-2.4 MB PNG photos -> WebP at ~2x their displayed size (11.7 MB of images on the home page before)
+    for old, new in HEAVY_IMAGES:
+        s = s.replace('src="%s"' % old, 'src="%s"' % new)
+    return s
+
+
+HEAVY_IMAGES = [
+    ('/assets/itwd/hero-main.png', '/assets/itwd/hero-main.webp'),
+    ('/assets/itwd/popular course 2.png', '/assets/itwd/popular-course-2.webp'),
+    ('/assets/itwd/popular course1.png', '/assets/itwd/popular-course-1.webp'),
+    ('/app section/hi.png', '/assets/itwd/app-section.webp'),
+    ('/app%20section/hi.png', '/assets/itwd/app-section.webp'),
+    ('/assets/itwd/group-image.png', '/assets/itwd/group-image.webp'),
+    ('/assets/itwd/consult-thinking.png', '/assets/itwd/consult-thinking.webp'),
+    ('/college/softwrica.png', '/assets/itwd/college-softwarica.webp'),
+    ('/mentor/sachin%20kushwaha%20mentor%201.png', '/assets/itwd/mentor-sachin-kushwaha-mentor-1.webp'),
+    ('/mentor/Anurag%20Thakur.jpg', '/assets/itwd/mentor-anurag-thakur.webp'),
+    ('/assets/itwd/logo-trimmed.png', '/assets/itwd/logo-mark.webp'),
+]
+
+
+# --------------------------------------------------------------------------- links/buttons audit fixes (every page)
+
+SOCIAL_NAMES = {'facebook.com': 'Facebook', 'instagram.com': 'Instagram', 'youtube.com': 'YouTube', 'github.com': 'GitHub',
+                'linkedin.com': 'LinkedIn', 'twitter.com': 'Twitter'}
+
+
+def patch_a11y(s):
+    # logo links that still pointed to "#"
+    s = re.sub(r'<a href="#">(\s*<img[^>]*alt="IT Wala Dai")', r'<a href="/">\1', s)
+    # footer "Terms / Privacy / Cookies" pointed to "#" and no such pages exist -> removed instead of dead links
+    s = re.sub(r'<div class="footer-links"><ul><li><a href="#">Terms of service</a></li><li><a href="#">Privacy policy</a></li>'
+               r'<li><a href="#">Cookies</a></li></ul></div>', '', s)
+    # icon-only controls get accessible names
+    s = s.replace('<button type="button" class="th-menu-toggle d-block d-lg-none">',
+                  '<button type="button" class="th-menu-toggle d-block d-lg-none" aria-label="Menu kholnuhos">')
+    s = s.replace('<button class="th-menu-toggle">', '<button type="button" class="th-menu-toggle" aria-label="Menu band garnuhos">')
+    s = s.replace('<button type="button" class="icon-btn style-border sideMenuInfo">',
+                  '<button type="button" class="icon-btn style-border sideMenuInfo" aria-label="Info panel">')
+    s = re.sub(r'<button (data-slider-prev="[^"]*" class="[^"]*slider-prev")>', r'<button type="button" \1 aria-label="Pahilako">', s)
+    s = re.sub(r'<button (data-slider-next="[^"]*" class="[^"]*slider-next")>', r'<button type="button" \1 aria-label="Arko">', s)
+
+    def social(m):
+        tag = m.group(0)
+        if 'aria-label' in tag:
+            return tag
+        name = next((v for k, v in SOCIAL_NAMES.items() if k in m.group(1)), None)
+        return tag[:-1] + ' aria-label="IT Wala Dai on %s">' % name if name else tag
+    s = re.sub(r'<a href="(https://(?:www\.)?(?:facebook|instagram|youtube|github|linkedin|twitter)\.com/@?itwaladai[^"]*)"[^>]*>', social, s)
+
+    # card arrow links: name them after the card title
+    def card_arrow(m):
+        card = m.group(0)
+        title = re.search(r'<h3 class="box-title"><a[^>]*>(.*?)</a>', card, re.S)
+        if not title:
+            return card
+        label = re.sub(r'<[^>]+>', ' ', title.group(1))
+        label = ' '.join(re.sub(r'<span class="itwd-cat-count">.*', '', title.group(1)).replace('<br>', ' ').split())
+        label = re.sub(r'<[^>]+>', '', label)
+        return re.sub(r'<a class="icon-btn (style8|style-border2)"(?! aria-label)', r'<a class="icon-btn \1" aria-label="%s"' % label, card, count=1)
+    s = re.sub(r'<div class="category-card[23]?".*?</a></div>', card_arrow, s, flags=re.S)
     return s
