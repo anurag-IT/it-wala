@@ -1,0 +1,9 @@
+[
+  { "name": "CCRC College", "image": "/college/ccrc.png", "url": null, "alt": "CCRC College", "order": 1, "active": true },
+  { "name": "Mid-Valley International College", "image": "/college/images.png", "url": null, "alt": "Mid-Valley International College", "order": 2, "active": true },
+  { "name": "Kathmandu Model College", "image": "/college/kmc.png", "url": null, "alt": "Kathmandu Model College", "order": 3, "active": true },
+  { "name": "Softwarica College", "image": "/assets/itwd/college-softwarica.webp", "url": null, "alt": "Softwarica College", "order": 4, "active": true },
+  { "name": "Sunway College", "image": "/college/sunway.png", "url": null, "alt": "Sunway College", "order": 5, "active": true },
+  { "name": "Urbana School of Science", "image": "/college/urbana%20school%20ofscience.png", "url": null, "alt": "Urbana School of Science", "order": 6, "active": true },
+  { "name": "White House College", "image": "/college/white%20house.png", "url": null, "alt": "White House College", "order": 7, "active": true }
+]

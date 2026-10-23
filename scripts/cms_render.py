@@ -18,6 +18,7 @@ Prints a JSON summary: {"changed": [relative file paths], "created": [...]}
 import json
 import re
 import sys
+from html import escape
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
@@ -35,6 +36,7 @@ BLOCK_FILE = {
     'cpp-facts': 'index.html',
     'home-testimonials': 'index.html',
     'home-faq': 'index.html',
+    'home-college-strip': 'index.html',
     'projects': 'programs/index.html',
     'plus2-courses': 'plus-two/index.html',
     'testimonials-grid': 'testimonials/index.html',
@@ -44,12 +46,14 @@ BLOCK_FILE = {
 }
 TYPE_BLOCKS = {
     'courses': ['home-courses', 'cpp-facts', 'plus2-courses'],
+    'college_strip': ['home-college-strip'],
     'testimonials': ['home-testimonials', 'testimonials-grid'],
     'faqs': ['home-faq', 'consult-faq'],
     'programmes': ['consult-programmes'],
     'colleges': ['consult-colleges'],
     'projects': ['projects'],
     'nav': [],
+    'header_controls': [],
 }
 COURSE_PAGES_TYPES = ('courses', 'faqs')   # course detail pages are generated from course data + course FAQ
 
@@ -64,6 +68,21 @@ def finalize(html):
 
 
 def render(name):
+    if name == 'home-college-strip':
+        data = json.loads((ROOT / 'content' / 'data' / 'college_strip.json').read_text(encoding='utf-8'))
+        active = sorted((item for item in data if item.get('active')), key=lambda item: item['order'])
+        def items(repeated=False):
+            out = []
+            for item in active:
+                image = escape(item['image'], quote=True)
+                alt = '' if repeated else escape(item.get('alt') or item['name'], quote=True)
+                logo = '<img src="%s" alt="%s" decoding="async">' % (image, alt)
+                url = item.get('url')
+                if url:
+                    logo = '<a href="%s"%s>%s</a>' % (escape(url, quote=True), ' aria-hidden="true" tabindex="-1"' if repeated else '', logo)
+                out.append('<li class="itwd-marquee__item"%s>%s</li>' % (' aria-hidden="true"' if repeated else '', logo))
+            return ''.join(out)
+        return '<ul class="itwd-marquee__track">%s%s</ul>' % (items(), items(True))
     if name == 'home-courses':
         return '<div class="th-course-row columns-3 itwd-home-courses">' + V3.home_courses() + '</div>'
     if name == 'cpp-facts':
@@ -108,6 +127,30 @@ def replace_block(s, name, inner):
     return s[:st] + inner + s[s.index(b):]
 
 
+def replace_marker(s, name, inner):
+    a, b = markers(name)
+    if a not in s or b not in s:
+        raise ValueError('managed block %s has no markers (run --init first)' % name)
+    st = s.index(a) + len(a)
+    en = s.index(b, st)
+    return s[:st] + inner + s[en:]
+
+
+def render_header_controls(data, mobile=False):
+    phone = str(data['phoneNumber']).strip()
+    tel = ('+' if phone.startswith('+') else '') + re.sub(r'\D', '', phone)
+    label = escape(str(data['joinLabel']).strip())
+    phone_text = escape(phone)
+    if mobile:
+        call = '<a class="itwd-mobile-join__call" href="tel:%s"><i class="far fa-phone-alt" aria-hidden="true"></i><span>%s</span></a>' % (escape(tel, quote=True), phone_text)
+        join = '<button type="button" class="th-btn w-100" data-itwd-join aria-haspopup="dialog" aria-controls="itwd-join"><i class="fas fa-graduation-cap me-2" aria-hidden="true"></i><span>%s</span></button>' % label
+    else:
+        call = '<a href="tel:%s" class="th-btn itwd-phone-cta" aria-label="Call IT Wala Dai"><i class="far fa-phone-alt" aria-hidden="true"></i><span>%s</span></a>' % (escape(tel, quote=True), phone_text)
+        join = '<button type="button" class="itwd-join-cta" data-itwd-join aria-haspopup="dialog" aria-controls="itwd-join"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span>%s</span><i class="far fa-arrow-right" aria-hidden="true"></i></button>' % label
+    items = {'call': call, 'join': join}
+    return ''.join(items[x] for x in data['order'])
+
+
 # ---------------------------------------------------------------- one-time marker insertion (wrap the current blocks)
 
 def _wrap(s, name, start, end):
@@ -130,6 +173,19 @@ def _wrap_section(s, name, opening):
 
 
 def init_file(rel, s):
+    if '<!-- itwd:header-actions:start -->' not in s:
+        head = s.find('<div class="header-button">')
+        phone = s.find('<a href="tel:', head)
+        join = s.find('class="itwd-join-cta"', phone)
+        end = s.find('</button>', join)
+        if head < 0 or phone < 0 or join < 0 or end < 0:
+            raise ValueError('header action buttons not found in %s' % rel)
+        s = _wrap(s, 'header-actions', phone, end + len('</button>'))
+    if '<!-- itwd:mobile-actions:start -->' not in s:
+        start = s.find('<div class="itwd-mobile-join">')
+        if start < 0:
+            raise ValueError('mobile header actions not found in %s' % rel)
+        s = _wrap(s, 'mobile-actions', start, B.block(s, start))
     if rel == 'index.html':
         s = _wrap_div(s, 'home-courses', '<div class="th-course-row columns-3 itwd-home-courses">')
         if markers('cpp-facts')[0] not in s:
@@ -137,6 +193,10 @@ def init_file(rel, s):
             s = _wrap(s, 'cpp-facts', st, s.index('</ul>', st) + len('</ul>'))
         s = _wrap_div(s, 'home-testimonials', '<div class="swiper-wrapper">', after='id="testiSlide1"')
         s = _wrap_div(s, 'home-faq', '<div class="accordion" id="faqAccordion1">')
+        if markers('home-college-strip')[0] not in s:
+            st = s.index('<ul class="itwd-marquee__track">', s.index('<section class="itwd-marquee-section"'))
+            end = s.index('</ul>', st) + len('</ul>')
+            s = _wrap(s, 'home-college-strip', st, end)
     elif rel == 'plus-two/index.html':
         s = _wrap_div(s, 'plus2-courses', '<div class="row gy-4 justify-content-center">', after='<section class="itwd-plus2 space">')
     elif rel == 'testimonials/index.html':
@@ -197,6 +257,14 @@ def run(types):
             files[rel] = (ROOT / rel).read_text(encoding='utf-8')
         return files[rel]
     for t in types:
+        if t == 'header_controls':
+            data = json.loads((ROOT / 'content' / 'data' / 'header_controls.json').read_text(encoding='utf-8'))
+            for rel, _active in site_pages():
+                page = get(rel)
+                page = replace_marker(page, 'header-actions', render_header_controls(data))
+                page = replace_marker(page, 'mobile-actions', render_header_controls(data, mobile=True))
+                files[rel] = page
+            continue
         for name in TYPE_BLOCKS[t]:
             rel = BLOCK_FILE[name]
             files[rel] = replace_block(get(rel), name, finalize(render(name)))

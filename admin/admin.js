@@ -50,6 +50,7 @@ const S = {
   canvas: null, boot: null, saved: null, history: [], hi: -1, changeCount: 0, dirty: false, saving: null, blocked: false,
   device: 'desktop', bp: null, sel: null, ptab: 'content', panel: 'pages', themeCss: null, clipboard: null,
   data: {}, components: [], snippets: [], expanded: new Set(), hasDraft: false,
+  editMode: false,
 }
 const DEVICES = { desktop: 1280, tablet: 820, mobile: 390 }
 const BPQ = { tablet: '(max-width: 1199px)', mobile: '(max-width: 767px)' }
@@ -152,6 +153,7 @@ async function startApp() {
   $('#login').hidden = true
   $('#app').hidden = false
   addDrawerButtons()
+  updateEditMode()
   await Promise.all([loadPages(), loadLibraryData()])
   showPanel('pages')
   renderProps()
@@ -163,10 +165,53 @@ async function startApp() {
 function addDrawerButtons() {
   if ($('.drawer-btns')) return
   const app = $('#app')
+  const expanded = (side) => innerWidth <= 1080
+    ? app.classList.contains(`show-${side}`)
+    : !app.classList.contains(`hide-${side}`)
+  const syncExpanded = () => {
+    for (const side of ['left', 'right']) {
+      const button = $(`[aria-label="Toggle ${side === 'left' ? 'pages and layers' : 'editing'} panel"]`)
+      if (button) button.setAttribute('aria-expanded', String(expanded(side)))
+    }
+  }
   const box = h('div', { class: 'drawer-btns' },
-    h('button', { type: 'button', class: 'ibtn', title: 'Structure panel', 'aria-label': 'Toggle structure panel', onclick: () => { app.classList.toggle('show-left'); app.classList.remove('show-right') } }, '☰'),
-    h('button', { type: 'button', class: 'ibtn', title: 'Properties panel', 'aria-label': 'Toggle properties panel', onclick: () => { app.classList.toggle('show-right'); app.classList.remove('show-left') } }, '⚙'))
+    h('button', { type: 'button', class: 'ibtn', title: 'Toggle pages and layers panel', 'aria-label': 'Toggle pages and layers panel', 'aria-expanded': 'false', onclick: () => { const mobile = innerWidth <= 1080; app.classList.toggle(mobile ? 'show-left' : 'hide-left'); syncExpanded() } }, '☰'),
+    h('button', { type: 'button', class: 'ibtn', title: 'Toggle editing panel', 'aria-label': 'Toggle editing panel', 'aria-expanded': 'false', onclick: () => { const mobile = innerWidth <= 1080; app.classList.toggle(mobile ? 'show-right' : 'hide-right'); syncExpanded() } }, '☰'))
   $('.topbar').prepend(box)
+  syncExpanded()
+  window.addEventListener('resize', syncExpanded)
+}
+
+function updateEditMode() {
+  const b = $('#editModeBtn')
+  if (!b) return
+  b.setAttribute('aria-pressed', String(S.editMode))
+  b.classList.toggle('is-unlocked', S.editMode)
+  b.textContent = S.editMode ? '✎ Unlocked — Editing is on' : '🔒 Locked — Editing is off'
+  if (S.canvas) S.canvas.setEditingMode(S.editMode)
+}
+$('#editModeBtn').addEventListener('click', async () => {
+  if (S.editMode && S.canvas) S.canvas.finishTextEditing()
+  if (S.editMode && S.dirty) {
+    const choice = await unsavedChoice('Lock editing')
+    if (choice === 'continue') return
+    if (choice === 'save' && !(await save())) return
+    if (choice === 'discard') { S.dirty = false; if (S.saved) restore(S.saved); S.dirty = false; setStatus() }
+  }
+  S.editMode = !S.editMode
+  updateEditMode()
+})
+function unsavedChoice(action) {
+  return new Promise((resolve) => {
+    let decided = false
+    const done = (value) => { decided = true; resolve(value) }
+    modal({ title: 'Unsaved changes', body: h('p', { text: 'Save your changes before ' + action.toLowerCase() + ', discard them, or continue editing.' }),
+      onClose: () => { if (!decided) resolve('continue') }, actions: [
+        { label: 'Continue editing', onClick: () => done('continue') },
+        { label: 'Discard changes', danger: true, onClick: () => done('discard') },
+        { label: 'Save draft', primary: true, onClick: () => done('save') },
+      ] })
+  })
 }
 
 async function loadPages() {
@@ -188,12 +233,15 @@ async function loadLibraryData() {
 
 // ------------------------------------------------------------------ open a page in the canvas
 async function openPage(key) {
+  if (S.canvas) S.canvas.finishTextEditing()
   if (S.key && S.key !== key && S.dirty) {
-    const ok = await save()
-    if (!ok && !(await confirmBox('Unsaved changes', 'Saving failed. Leave this page and lose the unsaved changes?', 'Leave page', true))) {
+    const choice = await unsavedChoice('leaving this page')
+    if (choice === 'continue') {
       $('#pageSelect').value = S.key
       return
     }
+    if (choice === 'save' && !(await save())) { $('#pageSelect').value = S.key; return }
+    if (choice === 'discard') { S.dirty = false; if (S.saved) restore(S.saved); S.dirty = false; setStatus() }
   }
   const st = await api('GET', '/api/pages/' + encodeURIComponent(key))
   Object.assign(S, {
@@ -215,6 +263,7 @@ async function openPage(key) {
 window.ITWDEditor = {
   onCanvasReady(canvas, boot) {
     S.canvas = canvas
+    updateEditMode()
     S.boot = boot
     $('#stageEmpty').hidden = true
     applyCss()
@@ -243,6 +292,13 @@ window.ITWDEditor = {
   insertSnippetAt: (id, refEid, pos) => insertSnippet(id, refEid, pos),
   copyElement: (eid) => copyElement(eid),
   pasteElement: (eid) => pasteElement(eid),
+  navigate: (url) => {
+    const target = new URL(url, location.origin)
+    if (target.origin !== location.origin) { window.open(target.href, '_blank', 'noopener'); return }
+    const page = S.pages.find((p) => p.route.replace(/\/$/, '') === target.pathname.replace(/\/$/, '') || p.route === target.pathname)
+    if (page) openPage(page.key)
+    else window.open(target.href, '_blank', 'noopener')
+  },
 }
 
 // ------------------------------------------------------------------ styles model -> CSS (same format as the server)
@@ -294,7 +350,7 @@ function restore(snap) {
   S.styles = JSON.parse(snap.styles)
   S.gstyles = JSON.parse(snap.gstyles)
   S.meta = JSON.parse(snap.meta)
-  S.canvas.load({ main: snap.main, header: snap.header, footer: snap.footer })
+  S.canvas.load({ main: snap.main, header: snap.header, footer: snap.footer, sideTab: snap.sideTab })
   applyCss()
   S.changeCount++
   setDirty(true)
@@ -346,7 +402,7 @@ async function save() {
     const counter = S.changeCount
     const sv = S.saved
     const pageChanged = snap.main !== sv.main || snap.styles !== sv.styles || snap.meta !== sv.meta
-    const globalChanged = snap.header !== sv.header || snap.footer !== sv.footer || snap.gstyles !== sv.gstyles
+    const globalChanged = snap.header !== sv.header || snap.footer !== sv.footer || snap.sideTab !== sv.sideTab || snap.gstyles !== sv.gstyles
     if (!pageChanged && !globalChanged) { setDirty(false); return true }
     setStatus('saving')
     try {
@@ -356,9 +412,9 @@ async function save() {
         Object.assign(S.saved, { main: snap.main, styles: snap.styles, meta: snap.meta })
       }
       if (globalChanged) {
-        const r = await api('PUT', '/api/global/draft', { version: S.gversion, header: snap.header, footer: snap.footer, styles: JSON.parse(snap.gstyles) })
+        const r = await api('PUT', '/api/global/draft', { version: S.gversion, header: snap.header, footer: snap.footer, sideTab: snap.sideTab, styles: JSON.parse(snap.gstyles) })
         S.gversion = r.version
-        Object.assign(S.saved, { header: snap.header, footer: snap.footer, gstyles: snap.gstyles })
+        Object.assign(S.saved, { header: snap.header, footer: snap.footer, sideTab: snap.sideTab, gstyles: snap.gstyles })
       }
       S.hasDraft = true
       S.dirty = S.changeCount !== counter
@@ -401,6 +457,9 @@ function markPageDraft() {
   const p = S.pages.find((x) => x.key === S.key)
   if (p && !p.hasDraft) { p.hasDraft = true; loadPages(); if (S.panel === 'pages') renderPagesPanel() }
 }
+$('#saveBtn').textContent = 'Save Draft'
+$('#previewBtn').textContent = 'Preview'
+$('#publishBtn').textContent = 'Publish'
 $('#saveBtn').addEventListener('click', async () => { if (await save()) toast('Draft saved — the live site is unchanged until you publish.') })
 window.addEventListener('beforeunload', (e) => { if (S.dirty || S.saving) { e.preventDefault(); e.returnValue = '' } })
 document.addEventListener('keydown', (e) => {
@@ -608,7 +667,7 @@ function renderProps({ keepFocus = false } = {}) {
     body.append(h('div', { class: 'notice notice--lock' }, '🔒 This content is filled from Content › ' + type + '. Edit it there so every page that shows it stays in sync.',
       h('div', { class: 'actions' }, h('button', { type: 'button', class: 'btn btn--sm', onclick: () => cmsEditor(type) }, 'Open in Content'))))
   } else if (i.global) {
-    body.append(h('div', { class: 'notice notice--global' }, '◆ Shared ' + i.region + ': changes apply to every page when you publish the shared header/footer (you will be asked to confirm).'))
+    body.append(h('div', { class: 'notice notice--global' }, '◆ Shared site element: changes apply to every page when you publish the header, footer, or Pranam side tab (you will be asked to confirm).'))
   }
   if (!i.managed) {
     if (S.ptab === 'content') contentTab(i, body)
@@ -673,10 +732,14 @@ function contentTab(i, body) {
     }
   }
   if (i.kind === 'button' || i.kind === 'link') {
-    const t = h('input', { type: 'text', value: i.text, 'aria-label': 'Button text' })
-    t.addEventListener('input', () => S.canvas.setText(eid, t.value))
-    t.addEventListener('change', () => commit('Button text'))
-    body.append(field(i.kind === 'button' ? 'Button text' : 'Link text', t))
+    const isPranamTab = (i.attrs.class || '').split(/\s+/).includes('itwd-pranam-tab')
+    if (isPranamTab) body.append(h('div', { class: 'notice notice--info', text: 'Select the logo or text inside this badge to edit it. The destination link is below.' }))
+    else {
+      const t = h('input', { type: 'text', value: i.text, 'aria-label': 'Button text' })
+      t.addEventListener('input', () => S.canvas.setText(eid, t.value))
+      t.addEventListener('change', () => commit('Button text'))
+      body.append(field(i.kind === 'button' ? 'Button text' : 'Link text', t))
+    }
     const a = i.action
     if (a.enquiry) body.append(h('div', { class: 'notice notice--info' }, 'This button opens the ' + (a.kind === 'course' ? 'course' : 'project-guidance') + ' enquiry form → WhatsApp' + (a.project ? ' for "' + a.project + '"' : '') + '. Changing its text, style or position keeps that action.'))
     if (a.join) body.append(h('div', { class: 'notice notice--info' }, 'This button opens the Join Now form → WhatsApp. Its action is kept when you restyle it.'))
@@ -794,7 +857,7 @@ const STYLE_GROUPS = [
     ['align-items', 'Align items', ['', 'stretch', 'flex-start', 'center', 'flex-end']], ['gap', 'Gap', 'len'], ['grid-template-columns', 'Grid columns', 'cols']]],
   ['Image', ['image'], [['object-fit', 'Fit', ['', 'cover', 'contain', 'fill', 'none']], ['object-position', 'Crop position', ['', 'center', 'top', 'bottom', 'left', 'right']],
     ['aspect-ratio', 'Aspect ratio', ['', '1 / 1', '4 / 3', '3 / 2', '16 / 9', '3 / 4', '2 / 3']], ['border-radius', 'Rounded corners', 'len']]],
-  ['Position', null, [['order', 'Order in row/column', 'text'], ['align-self', 'Self align', ['', 'flex-start', 'center', 'flex-end', 'stretch']]]],
+  ['Position', null, [['order', 'Order in row/column', 'text'], ['top', 'Top', 'len'], ['right', 'Right', 'len'], ['bottom', 'Bottom', 'len'], ['left', 'Left', 'len'], ['align-self', 'Self align', ['', 'flex-start', 'center', 'flex-end', 'stretch']]]],
 ]
 const LEN = /^(-?\d*\.?\d+(px|rem|em|%|vw|vh|ch)?|auto|0|none|normal)$/
 
@@ -1003,14 +1066,19 @@ async function renderContentPanel() {
   panel().replaceChildren(h('p', { class: 'muted', text: 'Loading…' }))
   const r = await api('GET', '/api/data')
   panel().replaceChildren(h('div', { class: 'ph' }, h('h2', { text: 'Content' })),
-    h('p', { class: 'muted', text: 'Structured content shown on several pages. Publishing regenerates exactly the blocks that show it (🔒 in Layers).' }),
-    h('ul', { class: 'list' }, r.types.map((t) => h('li', { class: 'page-item' },
+    h('p', { class: 'muted', text: 'Manage content that appears across the website.' }),
+    h('div', { class: 'page-item' },
+      h('div', { class: 'page-item__top' }, h('span', { class: 'page-item__title', text: 'Homepage College Strip' })),
+      h('div', { class: 'page-item__route', text: 'College and university logos moving below the homepage hero.' }),
+      h('div', { class: 'page-item__actions' }, h('button', { type: 'button', class: 'btn btn--sm btn--primary', onclick: () => collegeStripManager() }, 'Manage'))),
+    h('ul', { class: 'list' }, r.types.filter((t) => t.type !== 'college_strip').map((t) => h('li', { class: 'page-item' },
       h('div', { class: 'page-item__top' }, h('span', { class: 'page-item__title', text: t.label })),
       h('div', { class: 'page-item__route', text: t.note || '' }),
       h('div', { class: 'page-item__actions' }, h('button', { type: 'button', class: 'btn btn--sm', onclick: () => cmsEditor(t.type) }, 'Edit'))))))
 }
 
 async function cmsEditor(type) {
+  if (type === 'college_strip') return collegeStripManager()
   let d
   try { d = await api('GET', '/api/data/' + type) } catch (e) { toast(e.message, { error: true }); return }
   const schema = d.schema
@@ -1036,7 +1104,7 @@ async function cmsEditor(type) {
         return el
       }
       case 'enum': {
-        const el = h('select', {}, def.options.map((o) => h('option', { value: o, text: o })))
+        const el = h('select', {}, def.options.map((o) => h('option', { value: o, text: def.labels?.[o] || o })))
         el.value = value ?? def.options[0]
         el.addEventListener('change', () => { onChange(el.value); touch() })
         return el
@@ -1076,10 +1144,25 @@ async function cmsEditor(type) {
       case 'list': {
         const arr = Array.isArray(value) ? value : []
         const box = h('div', { class: 'cms-list' })
+        const position = (n) => h('label', { class: 'cms-position' },
+          h('span', { text: 'Position' }),
+          h('select', {
+            'aria-label': `Position for item ${n + 1}`,
+            onclick: (e) => e.stopPropagation(),
+            onkeydown: (e) => e.stopPropagation(),
+            onchange: (e) => {
+              const target = Number(e.currentTarget.value)
+              if (!Number.isInteger(target) || target < 1 || target > arr.length || target === n + 1) return
+              const [item] = arr.splice(n, 1)
+              arr.splice(target - 1, 0, item)
+              touch()
+              draw()
+            }
+          }, Array.from({ length: arr.length }, (_, i) => h('option', { value: String(i + 1), text: String(i + 1), selected: i === n }))))
         const draw = () => {
           box.replaceChildren(...arr.map((v, n) => h('div', { class: 'cms-list__row' },
             control({ ...def.item }, v, (nv) => { arr[n] = nv }, ctx),
-            h('button', { type: 'button', class: 'ibtn', 'aria-label': 'Move up', disabled: n === 0, onclick: () => { [arr[n - 1], arr[n]] = [arr[n], arr[n - 1]]; touch(); draw() } }, '↑'),
+            position(n),
             h('button', { type: 'button', class: 'ibtn', 'aria-label': 'Remove', onclick: () => { arr.splice(n, 1); touch(); draw() } }, '✕'))),
           h('button', { type: 'button', class: 'btn btn--sm', onclick: () => { arr.push(''); touch(); draw() } }, '+ Add'))
         }
@@ -1098,12 +1181,26 @@ async function cmsEditor(type) {
     const arr = Array.isArray(value) ? value : []
     onChange(arr)
     const box = h('div', {})
+    const position = (n) => h('label', { class: 'cms-position', onclick: (e) => e.stopPropagation() },
+      h('span', { text: 'Position' }),
+      h('select', {
+        'aria-label': `Position for ${plain(arr[n]?.[def.itemLabel || Object.keys(def.fields)[0]] || 'item')}`,
+        onclick: (e) => e.stopPropagation(),
+        onkeydown: (e) => e.stopPropagation(),
+        onchange: (e) => {
+          const target = Number(e.currentTarget.value)
+          if (!Number.isInteger(target) || target < 1 || target > arr.length || target === n + 1) return
+          const [item] = arr.splice(n, 1)
+          arr.splice(target - 1, 0, item)
+          touch()
+          draw()
+        }
+      }, Array.from({ length: arr.length }, (_, i) => h('option', { value: String(i + 1), text: String(i + 1), selected: i === n }))))
     const draw = () => {
       box.replaceChildren(...arr.map((obj, n) => {
         const det = h('details', { class: 'cms-item' })
         det.append(h('summary', {}, h('span', { text: plain(obj[def.itemLabel || Object.keys(def.fields)[0]] || '(new item)') }),
-          h('button', { type: 'button', class: 'ibtn', 'aria-label': 'Move up', disabled: n === 0, onclick: (e) => { e.preventDefault(); [arr[n - 1], arr[n]] = [arr[n], arr[n - 1]]; touch(); draw() } }, '↑'),
-          h('button', { type: 'button', class: 'ibtn', 'aria-label': 'Move down', disabled: n === arr.length - 1, onclick: (e) => { e.preventDefault(); [arr[n + 1], arr[n]] = [arr[n], arr[n + 1]]; touch(); draw() } }, '↓'),
+          position(n),
           h('button', { type: 'button', class: 'ibtn', 'aria-label': 'Delete item', onclick: async (e) => { e.preventDefault(); if (await confirmBox('Delete item', 'Remove this item from ' + def.label + '?', 'Remove', true)) { arr.splice(n, 1); touch(); draw() } } }, '✕')))
         det.addEventListener('toggle', () => { if (det.open && !det.querySelector('.cms-item__body')) det.append(h('div', { class: 'cms-item__body' }, objectFields(def, obj, ctx))) }, { once: false })
         return det
@@ -1172,6 +1269,92 @@ async function cmsEditor(type) {
         } catch (x) {
           issuesBox.replaceChildren(h('div', { class: 'notice notice--warn', text: x.message }), issuesList((x.data.issues || []).map((i) => ({ ...i, level: 'error' }))))
         } finally { btn.disabled = false; btn.textContent = 'Publish' }
+      } },
+    ] })
+}
+
+async function collegeStripManager() {
+  let payload
+  try { payload = await api('GET', '/api/data/college_strip') } catch (e) { toast(e.message, { error: true }); return }
+  let data = clone(payload.draft ?? payload.published ?? [])
+  let version = payload.version
+  const list = h('div', { class: 'college-strip-list' })
+  const status = h('p', { class: 'muted', text: payload.draft ? 'Unpublished draft' : 'Showing published items' })
+  const draw = () => {
+    const ordered = data.map((item, index) => ({ item, index })).sort((a, b) => a.item.order - b.item.order || a.index - b.index)
+    list.replaceChildren(...ordered.map(({ item, index }) => h('article', { class: 'college-strip-row' },
+      h('img', { class: 'college-strip-thumb', src: item.image, alt: '' }),
+      h('div', { class: 'college-strip-info' }, h('strong', { text: item.name }),
+        h('span', { class: 'muted', text: 'Order ' + item.order + ' · ' + (item.active ? 'Active' : 'Inactive') })),
+      h('button', { type: 'button', class: 'btn btn--sm', onclick: () => editItem(index) }, 'Edit'),
+      h('button', { type: 'button', class: 'btn btn--sm btn--danger', onclick: async () => {
+        if (!(await confirmBox('Remove from homepage strip?', 'Remove “' + item.name + '” from the homepage marquee only? Its college page, college record, and image file will remain.', 'Remove', true))) return
+        const next = clone(data); next.splice(index, 1)
+        if (await persist(next)) { data = next; draw() }
+      } }, 'Remove'))))
+    if (!ordered.length) list.append(h('p', { class: 'muted', text: 'No colleges are in the strip. Add one to show a logo.' }))
+  }
+  const persist = async (next = data) => {
+    try {
+      const result = await api('PUT', '/api/data/college_strip', { version, data: next })
+      version = result.version
+      status.textContent = 'Draft saved ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      return true
+    } catch (e) {
+      status.textContent = e.message
+      toast(e.message + (e.data.issues ? ' Check the item fields.' : ''), { error: true })
+      return false
+    }
+  }
+  const editItem = (index = -1) => {
+    const original = index < 0 ? { name: '', image: '', url: null, alt: '', order: data.length ? Math.max(...data.map((x) => x.order)) + 1 : 1, active: true } : clone(data[index])
+    const name = h('input', { type: 'text', value: original.name, maxlength: '160', required: '' })
+    const image = h('input', { type: 'text', value: original.image || '', readonly: '', placeholder: 'Choose or upload a logo' })
+    const thumb = h('img', { class: 'college-strip-form-thumb', src: original.image || '', alt: '', hidden: !original.image })
+    const choose = h('button', { type: 'button', class: 'btn', onclick: () => mediaDialog({ pick: (m) => { image.value = m.url; thumb.src = m.url; thumb.hidden = false } }) }, 'Choose / upload image')
+    const url = h('input', { type: 'text', value: original.url || '', placeholder: 'https://… or /page/ (optional)' })
+    const alt = h('input', { type: 'text', value: original.alt || '', maxlength: '200' })
+    const order = h('input', { type: 'number', value: original.order, min: '0', max: '9999', step: '1', required: '' })
+    const active = h('input', { type: 'checkbox', checked: original.active })
+    const error = h('p', { class: 'field-error', role: 'alert' })
+    const body = h('div', {}, field('College or university name', name), field('Logo or image', h('div', {}, h('div', { class: 'row' }, image, choose), thumb)),
+      field('Destination URL (optional)', url), field('Alternative text (optional)', alt), field('Display order', order),
+      h('label', { class: 'check' }, active, 'Active — show in the homepage strip'), error)
+    modal({ title: index < 0 ? 'Add College' : 'Edit college', body, actions: [
+      { label: 'Cancel' },
+      { label: 'Save item', primary: true, onClick: async () => {
+        const nextItem = { name: name.value.trim(), image: image.value.trim(), url: url.value.trim() || null,
+          alt: alt.value.trim() || null, order: Number(order.value), active: active.checked }
+        if (!nextItem.name || !nextItem.image || !Number.isInteger(nextItem.order) || nextItem.order < 0 || nextItem.order > 9999) { error.textContent = 'Enter a name, choose an image, and use a whole display order from 0 to 9999.'; return false }
+        if (nextItem.url && !(/^(https?:\/\/[^\s<>"`]+|\/(?!\/)[^\s<>"`]*)$/i.test(nextItem.url))) { error.textContent = 'Use a valid http(s) address or a same-site path beginning with /.'; return false }
+        const next = clone(data)
+        if (index < 0) next.push(nextItem); else next[index] = nextItem
+        if (!(await persist(next))) return false
+        data = next; draw()
+      } },
+    ] })
+  }
+  draw()
+  const dlg = modal({ title: 'Homepage College Strip', wide: true,
+    body: h('div', {}, h('p', { class: 'notice notice--info', text: 'These logos appear below the homepage hero. Changes are saved as an unpublished draft; publish them to update the live strip. Removing an item only removes it from this strip.' }),
+      status, list, h('button', { type: 'button', class: 'btn', onclick: () => editItem() }, '+ Add College')),
+    actions: [
+      { label: 'Save Draft', keepOpen: true, onClick: () => persist() },
+      { label: 'Publish', primary: true, keepOpen: true, onClick: async (e) => {
+        if (!(await persist())) return
+        if (!(await confirmBox('Publish Homepage College Strip', 'Update the moving logo strip on the live homepage now?', 'Publish'))) return
+        const btn = e.target
+        btn.disabled = true; btn.textContent = 'Publishing…'
+        try {
+          const result = await api('POST', '/api/data/college_strip/publish', {})
+          data = clone(data); version = 0
+          status.textContent = 'Published successfully.'
+          toast('Homepage College Strip published.' + (result.changed.length ? ' Updated: ' + result.changed.join(', ') : ''))
+          await loadPages()
+          if (S.key === 'home' || S.info?.route === '/') openPage(S.key)
+          dlg.close()
+        } catch (e2) { toast(e2.message, { error: true }) }
+        finally { btn.disabled = false; btn.textContent = 'Publish' }
       } },
     ] })
 }
@@ -1302,7 +1485,7 @@ $('#historyBtn').addEventListener('click', () => revisionsDialog())
 
 $('#previewBtn').addEventListener('click', async () => {
   if (!S.key) return
-  await save()
+  if (S.dirty && !(await save())) { toast('Preview is unavailable until the draft saves successfully.', { error: true }); return }
   window.open('/__admin/render/' + encodeURIComponent(S.key) + '?mode=preview', '_blank', 'noopener')
 })
 
@@ -1349,8 +1532,8 @@ $('#publishBtn').addEventListener('click', async () => {
       pv.hasDraft ? h('label', { class: 'check' }, pageBox, 'Publish this page' + (pageErr ? ' (fix the errors first)' : '')) : null,
     ]
     if (gv.hasDraft) {
-      parts.push(h('h3', { text: 'Shared header / footer / their styles' }), h('div', { class: 'notice notice--global', text: '◆ Publishing this updates the header and footer on all ' + gv.pages + ' pages.' }),
-        issuesList(gv.issues), h('label', { class: 'check' }, gBox, 'Yes, apply the shared header/footer to all ' + gv.pages + ' pages'))
+      parts.push(h('h3', { text: 'Shared header, footer, and Pranam side tab' }), h('div', { class: 'notice notice--global', text: '◆ Publishing this updates shared site elements on all ' + gv.pages + ' pages.' }),
+        issuesList(gv.issues), h('label', { class: 'check' }, gBox, 'Yes, apply shared site elements to all ' + gv.pages + ' pages'))
     }
     if (warnings) parts.push(h('label', { class: 'check' }, reviewed, 'I reviewed the warnings above'))
     parts.push(h('div', { class: 'actions' },

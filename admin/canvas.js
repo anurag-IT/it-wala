@@ -6,7 +6,7 @@
   const boot = JSON.parse(document.getElementById('itwd-editor-boot').textContent)
   const ED = window.parent && window.parent.ITWDEditor
   if (!ED) return
-  document.documentElement.classList.add('itwd-editing')
+  let editingMode = false
 
   const SKIP = new Set(['SCRIPT', 'STYLE', 'LINK', 'META', 'TEMPLATE', 'NOSCRIPT', 'BR', 'WBR'])
   const VOID = new Set(['IMG', 'INPUT', 'HR', 'BR', 'IFRAME', 'VIDEO', 'SVG', 'svg', 'I', 'SOURCE', 'TEXTAREA', 'SELECT'])
@@ -43,6 +43,8 @@
     const f = footer()
     if (h && (el === h || h.contains(el))) return 'header'
     if (f && (el === f || f.contains(el))) return 'footer'
+    const badge = document.querySelector('.itwd-pranam-tab')
+    if (badge && (el === badge || badge.contains(el))) return 'sideTab'
     const s = smooth()
     if (s && s.contains(el) && el !== s) return 'main'
     return null
@@ -71,7 +73,7 @@
     }
     return null
   }
-  const isRoot = (el) => el === header() || el === footer()
+  const isRoot = (el) => el === header() || el === footer() || el === document.querySelector('.itwd-pranam-tab')
 
   // ------------------------------------------------------------ element description for the properties panel
 
@@ -126,12 +128,12 @@
       'background-color', 'background-image', 'margin-top', 'margin-right', 'margin-bottom', 'margin-left', 'padding-top', 'padding-right',
       'padding-bottom', 'padding-left', 'width', 'max-width', 'height', 'min-height', 'display', 'flex-direction', 'justify-content',
       'align-items', 'gap', 'grid-template-columns', 'border-width', 'border-style', 'border-color', 'border-radius', 'box-shadow', 'opacity',
-      'object-fit', 'object-position', 'order', 'aspect-ratio', 'overflow']
+      'object-fit', 'object-position', 'order', 'position', 'top', 'right', 'bottom', 'left', 'z-index', 'aspect-ratio', 'overflow']
     const computed = {}
     for (const p of pick) computed[p] = cs.getPropertyValue(p)
     return {
       eid: el.dataset.itwdEid, tag: el.tagName.toLowerCase(), kind: kindOf(el), label: label(el), region, managed,
-      isRoot: isRoot(el), global: region === 'header' || region === 'footer',
+      isRoot: isRoot(el), global: region === 'header' || region === 'footer' || region === 'sideTab',
       canMove: Boolean(region) && !managed && !isRoot(el), canDelete: Boolean(region) && !managed && !isRoot(el),
       canEdit: Boolean(region) && !managed, textEditable: !managed && textEditable(el),
       text: textEditable(el) && !el.children.length ? el.textContent.trim() : ownText(el), hasChildren: el.children.length > 0,
@@ -236,6 +238,7 @@
   // ------------------------------------------------------------ pointer + keyboard
 
   document.addEventListener('mousemove', (e) => {
+    if (!editingMode) return
     if (dragging) return
     const el = targetFrom(e.target)
     hovered = el && regionOf(el) ? el : null
@@ -245,6 +248,14 @@
 
   document.addEventListener('click', (e) => {
     if (e.target.closest && e.target.closest('#itwd-ed-layer')) return
+    if (!editingMode) {
+      const a = e.target.closest && e.target.closest('a[href]')
+      if (a && a.getAttribute('href') && !a.getAttribute('href').startsWith('#')) {
+        e.preventDefault()
+        ED.navigate(a.href)
+      }
+      return
+    }
     if (editing && editing.contains(e.target)) return
     e.preventDefault()
     e.stopPropagation()
@@ -255,10 +266,11 @@
     }
     selectEl(el)
   }, true)
-  document.addEventListener('submit', (e) => e.preventDefault(), true)
-  document.addEventListener('auxclick', (e) => e.preventDefault(), true)
+  document.addEventListener('submit', (e) => { if (editingMode) e.preventDefault() }, true)
+  document.addEventListener('auxclick', (e) => { if (editingMode) e.preventDefault() }, true)
 
   document.addEventListener('dblclick', (e) => {
+    if (!editingMode) return
     const el = targetFrom(e.target)
     if (!el || !regionOf(el)) return
     e.preventDefault()
@@ -271,6 +283,7 @@
   }, true)
 
   document.addEventListener('keydown', (e) => {
+    if (!editingMode) return
     const mod = e.ctrlKey || e.metaKey
     if (editing) {
       if (e.key === 'Escape' || (e.key === 'Enter' && !e.shiftKey && /^H[1-6]$/.test(editing.tagName))) { e.preventDefault(); finishEditing() }
@@ -291,6 +304,7 @@
   })
 
   toolbar.addEventListener('click', (e) => {
+    if (!editingMode) return
     const b = e.target.closest('button')
     if (!b || b.disabled || b.dataset.act === 'drag') return
     act(b.dataset.act)
@@ -423,6 +437,7 @@
   }
 
   toolbar.addEventListener('pointerdown', (e) => {
+    if (!editingMode) return
     const b = e.target.closest('button[data-act="drag"]')
     if (!b || b.disabled || !selected) return
     e.preventDefault()
@@ -451,6 +466,7 @@
 
   const SNIPPET_TYPE = 'application/x-itwd-snippet'
   document.addEventListener('dragover', (e) => {
+    if (!editingMode) return
     if (!e.dataTransfer || ![...e.dataTransfer.types].includes(SNIPPET_TYPE)) return
     e.preventDefault()
     dragging = dragging || { snippet: true }
@@ -461,6 +477,7 @@
   })
   document.addEventListener('dragleave', (e) => { if (!e.relatedTarget) endDrag() })
   document.addEventListener('drop', (e) => {
+    if (!editingMode) return
     if (!e.dataTransfer || ![...e.dataTransfer.types].includes(SNIPPET_TYPE)) return
     e.preventDefault()
     const id = e.dataTransfer.getData(SNIPPET_TYPE)
@@ -524,6 +541,18 @@
 
   const ALLOWED_ATTRS = new Set(['href', 'target', 'rel', 'src', 'alt', 'title', 'loading', 'width', 'height', 'id', 'aria-label', 'data-bg-src', 'srcset'])
   const api = {
+    finishTextEditing() { if (editing) finishEditing() },
+    setEditingMode(on) {
+      editingMode = Boolean(on)
+      document.documentElement.classList.toggle('itwd-editing', editingMode)
+      if (!editingMode) {
+        if (editing) finishEditing()
+        selected = hovered = null
+        drawSelection()
+        drawHover()
+        ED.onSelect(null)
+      }
+    },
     info: (eid) => { const el = get(eid); return el ? info(el) : null },
     select: (eid, opts) => { const el = eid ? get(eid) : null; selectEl(el, { notify: true, scroll: opts && opts.scroll }); return Boolean(el) },
     hover: (eid) => { hovered = eid ? get(eid) : null; drawHover() },
@@ -587,7 +616,7 @@
         key = 'itwd-e-' + Math.random().toString(36).slice(2, 10).replace(/[^a-z0-9]/g, 'x').padEnd(8, '0')
         el.classList.add(key)
       }
-      return { key, global: ['header', 'footer'].includes(regionOf(el)) }
+      return { key, global: ['header', 'footer', 'sideTab'].includes(regionOf(el)) }
     },
     setCss(pageCss, globalCss, themeCss) {
       const put = (id, css) => {
@@ -692,15 +721,18 @@
     },
     serialize() {
       if (editing) finishEditing()
-      return { main: htmlOf(mainNodes()), header: htmlOf([header()]), footer: htmlOf([footer()]) }
+      const badge = document.querySelector('.itwd-pranam-tab')
+      return { main: htmlOf(mainNodes()), header: htmlOf([header()]), footer: htmlOf([footer()]), sideTab: badge ? htmlOf([badge]) : '' }
     },
     load(state) {
       selectEl(null, { notify: false })
       const h = header()
       const f = footer()
+      const badge = document.querySelector('.itwd-pranam-tab')
       const tpl = document.createElement('template')
       if (state.header !== undefined) { tpl.innerHTML = state.header; const n = tpl.content.firstElementChild; if (n) h.replaceWith(n) }
       if (state.footer !== undefined) { tpl.innerHTML = state.footer; const n = tpl.content.firstElementChild; if (n) f.replaceWith(n) }
+      if (state.sideTab !== undefined && badge) { tpl.innerHTML = state.sideTab; const n = tpl.content.firstElementChild; if (n) badge.replaceWith(n) }
       if (state.main !== undefined) {
         for (const n of mainNodes()) n.remove()
         tpl.innerHTML = state.main

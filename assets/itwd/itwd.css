@@ -813,7 +813,7 @@ html.itwd-modal-open, html.itwd-modal-open body { overflow: hidden; }
   .itwd-app-features { grid-template-columns: repeat(2,1fr); }
   .itwd-study-note { display: none; }
 }
-@media (max-width: 991px) {
+@media (max-width: 767px) {
   .itwd-app-banner { grid-template-columns: 1fr; padding: 45px 20px; }
   .itwd-app-banner__visual { display: none; }
   .itwd-app-banner__content { padding: 0; text-align: center; }
@@ -893,7 +893,7 @@ html.itwd-modal-open, html.itwd-modal-open body { overflow: hidden; }
 @media (max-width: 1199px) {
   .itwd-app-banner__content { padding-top: 42px; padding-bottom: 42px; }
 }
-@media (max-width: 991px) {
+@media (max-width: 767px) {
   .itwd-app-banner { min-height: auto; }
   .itwd-app-banner__content { padding: 0; }
 }
@@ -1174,6 +1174,9 @@ html.itwd-modal-open, html.itwd-modal-open body { overflow: hidden; }
   max-width: none;
   padding: 0;
 }
+.header-layout3 .menu-area > .row > .col-auto:first-child { order: 0; }
+.header-layout3 .menu-area > .row > .col-auto:nth-child(2) { order: 1; }
+.header-layout3 .menu-area > .row > .col-auto:nth-child(3) { order: 2; }
 /* middle column (nav) is the flexible one so nothing gets clipped */
 .header-layout3 .menu-area > .row > .col-auto:nth-child(2) {
   flex: 1 1 auto;
@@ -1355,9 +1358,9 @@ html.itwd-modal-open, html.itwd-modal-open body { overflow: hidden; }
   object-position: center;
 }
 @media (max-width: 1199px) {
-  .itwd-app-banner { grid-template-columns: minmax(380px,.9fr) minmax(520px,1.1fr); }
+  .itwd-app-banner { grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); }
 }
-@media (max-width: 991px) {
+@media (max-width: 767px) {
   .itwd-app-banner { grid-template-columns: 1fr; }
   .itwd-app-banner__visual {
     display: block;
@@ -2756,7 +2759,7 @@ html.itwd-modal-open, html.itwd-modal-open body { overflow: hidden; }
 .itwd-promo__badge i { color: var(--itwd-green); }
 .itwd-promo__badge--a { left: 2%; top: 46%; }
 .itwd-promo__badge--b { right: 0; bottom: 14%; animation-delay: -2.5s; }
-@media (max-width: 991px) {
+@media (max-width: 767px) {
   .itwd-promo { padding: 60px 0 50px; text-align: center; }
   .itwd-promo__grid { grid-template-columns: 1fr; gap: 30px; }
   .itwd-promo__text { margin-left: auto; margin-right: auto; }
@@ -3017,8 +3020,8 @@ html.itwd-modal-open, html.itwd-modal-open body { overflow: hidden; }
 @media (min-width: 1200px) and (max-width: 1399px) {
   .header-layout3 .main-menu > ul { gap: 4px; }
   .header-layout3 .main-menu > ul > li > a { padding-left: 6px; padding-right: 6px; font-size: 12px; }
-  .header-layout3 .header-button .th-btn.itwd-phone-cta { min-width: 0; width: 46px; padding: 0; }
-  .header-layout3 .header-button .th-btn.itwd-phone-cta span { display: none; }
+  .header-layout3 .header-button .th-btn.itwd-phone-cta { min-width: 150px; width: auto; padding: 0 10px; gap: 7px; font-size: 12px; white-space: nowrap; }
+  .header-layout3 .header-button .th-btn.itwd-phone-cta span { display: inline; }
 }
 
 /* ---- home: brand message under the hero image */
@@ -3116,7 +3119,7 @@ html.itwd-modal-open, html.itwd-modal-open body { overflow: hidden; }
   font-size: 10px;
 }
 .itwd-cpp .itwd-btn-pair { margin-top: 26px; }
-@media (max-width: 991px) {
+@media (max-width: 767px) {
   .itwd-cpp { padding: 60px 0 40px; text-align: center; }
   .itwd-cpp__grid { grid-template-columns: 1fr; gap: 26px; }
   .itwd-cpp__content { order: -1; }
@@ -3527,8 +3530,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .hero-style3 .itwd-hero-btns { justify-content: center; }
 }
 
-/* ---- student sections: image first on phones / tablets (all three) */
-@media (max-width: 991px) {
+/* ---- preserve desktop image/text order on tablets; image-first is phone-only */
+@media (max-width: 767px) {
   .itwd-cpp__content { order: 0; }
   .itwd-cpp__visual { order: -1; }
   .itwd-promo__visual { order: -1; }
@@ -3540,6 +3543,148 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .itwd-cpp--bachelor .itwd-cpp__ring { background: radial-gradient(circle, rgba(28, 176, 152, .2) 0%, rgba(28, 176, 152, .05) 58%, rgba(28, 176, 152, 0) 70%); }
 .itwd-cpp--bachelor .itwd-cpp__label { background: #E8F7F4; border-color: #CDEBE4; color: #0d7f6d; }
 .itwd-cpp--bachelor .itwd-cpp__points i { background: var(--itwd-green); color: #fff; }
+
+/* Tablet layout: keep home image/text pairs in their authored desktop order. */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .hero-3 > .container > .row {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+  .hero-3 > .container > .row > .col-xl-5 {
+    flex: 0 0 44%;
+    width: 44%;
+    max-width: 44%;
+    min-width: 0;
+  }
+  .hero-3 > .container > .row > .col-xl-7 {
+    flex: 0 0 56%;
+    width: 56%;
+    max-width: 56%;
+    min-width: 0;
+    text-align: left !important;
+  }
+  .hero-style3 { padding: 28px 0 22px; text-align: left; }
+  .hero-style3 .sub-title { font-size: clamp(16px, 2vw, 21px); }
+  .hero-style3 .hero-title { margin-bottom: 14px; }
+  .hero-style3 .hero-title .title1 { font-size: clamp(36px, 4.4vw, 54px); line-height: 1.04; }
+  .hero-style3 .hero-title .title2 { font-size: clamp(21px, 2.8vw, 32px); line-height: 1.16; }
+  .hero-style3 .hero-title .title3 { font-size: clamp(30px, 3.7vw, 44px); line-height: 1.08; }
+  .hero-style3 .hero-text { max-width: 38ch; margin: 0 0 18px; font-size: clamp(14px, 1.45vw, 17px); line-height: 1.5; }
+  .hero-style3 .itwd-hero-btns { justify-content: flex-start; gap: 10px; }
+  .hero-style3 .itwd-hero-btns .th-btn { padding: 12px 16px; font-size: 14px; }
+  .hero-thumb3-1 { margin: 0; width: 100%; }
+  .hero-thumb3-1 .itwd-hero-main-image { max-width: 100%; margin: 0; }
+  .hero-thumb3-1 .itwd-hero-main-image img { width: 100%; height: auto; object-fit: contain; }
+  .itwd-brandmsg { max-width: 100%; padding: 0 8px; }
+  .itwd-brandmsg__script { font-size: clamp(25px, 3vw, 34px); }
+  .itwd-brandmsg__text { font-size: 14px; }
+
+  .itwd-cpp { padding: 58px 0 52px; text-align: left; }
+  .itwd-cpp__grid { grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); gap: clamp(22px, 3vw, 38px); }
+  .itwd-cpp__content, .itwd-cpp__visual,
+  .itwd-promo__content, .itwd-promo__visual { min-width: 0; order: initial; }
+  .itwd-cpp__visual img { max-width: 100%; max-height: 380px; object-fit: contain; }
+  .itwd-cpp__content .itwd-promo__title,
+  .itwd-promo__content .itwd-promo__title { font-size: clamp(25px, 3vw, 36px); line-height: 1.14; }
+  .itwd-cpp__content .itwd-promo__text,
+  .itwd-promo__content .itwd-promo__text { font-size: 15px; line-height: 1.58; }
+  .itwd-cpp__points { gap: 8px 14px; }
+  .itwd-cpp__points li { font-size: 13.5px; }
+  .itwd-cpp .itwd-btn-pair, .itwd-cpp .itwd-promo__facts,
+  .itwd-promo .itwd-btn-pair { justify-content: flex-start; }
+
+  .itwd-promo { padding: 58px 0 52px; text-align: left; }
+  .itwd-promo__grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(22px, 3vw, 38px); }
+  .itwd-promo__visual img { max-width: 100%; max-height: 370px; height: auto; object-fit: contain; }
+  .itwd-promo__chips, .itwd-promo__facts { justify-content: flex-start; }
+
+  #more-for-plus-two .row > .col-xl-6 {
+    flex: 0 0 50%;
+    width: 50%;
+    max-width: 50%;
+    min-width: 0;
+  }
+  #more-for-plus-two .why-img-box3,
+  #more-for-plus-two .why-wrap3 { min-width: 0; }
+  #more-for-plus-two .why-img-box3 img { max-width: 100%; height: auto; object-fit: contain; }
+
+  .itwd-mission .row > .col-xl-6,
+  .itwd-mission .row > .col-xxl-5 {
+    flex: 0 0 50%;
+    width: 50%;
+    max-width: 50%;
+    min-width: 0;
+  }
+  .itwd-mission .title-area { text-align: left !important; }
+  .itwd-mission .sec-title { font-size: clamp(26px, 3.2vw, 38px); line-height: 1.15; }
+  .itwd-mission .itwd-cta-text { font-size: 15px; line-height: 1.6; }
+  .itwd-mission-btns { justify-content: flex-start; flex-wrap: wrap; }
+  .itwd-mission__visual { min-width: 0; }
+  .itwd-mission .cta-img4-1 > img { width: 100%; height: auto; object-fit: contain; }
+
+  .itwd-popular-promos .cta-card2 { gap: 12px; padding: 28px 22px; align-items: center; }
+  .itwd-popular-promos .cta-card2 .title-area {
+    flex: 1 1 66%;
+    width: auto;
+    min-width: 0;
+  }
+  .itwd-popular-promos .cta-card2 .sec-title { font-size: clamp(20px, 2.2vw, 25px); line-height: 1.2; }
+  .itwd-popular-promos .cta-card2 .itwd-pp__text { font-size: 14px; line-height: 1.5; }
+  .itwd-popular-promos .cta-card2 .box-thumb {
+    display: block;
+    flex: 0 0 34%;
+    width: 34%;
+    min-width: 0;
+    align-self: center;
+    margin: 0;
+    bottom: auto;
+  }
+  .itwd-popular-promos .cta-card2 .box-thumb img {
+    display: block;
+    width: 100%;
+    max-height: 260px;
+    height: auto;
+    padding: 0;
+    object-fit: contain;
+    transform: none;
+  }
+
+  .itwd-app-banner { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 20px; }
+  .itwd-app-banner__visual { display: flex; min-width: 0; align-items: center; }
+  .itwd-app-banner__art { width: 100%; max-height: 320px; height: auto; object-fit: contain !important; }
+  .itwd-app-banner__content { min-width: 0; padding: 18px 8px !important; text-align: left; }
+  .itwd-app-banner h2 { font-size: clamp(30px, 3.6vw, 44px) !important; line-height: 1.06 !important; }
+  .itwd-app-banner__content > p { font-size: 16px; line-height: 1.5; }
+  .itwd-app-downloads { flex-wrap: wrap; gap: 10px; }
+  .itwd-app-downloads a { min-width: 0; padding: 9px 12px; }
+}
+
+/* Small phones: wrap the long hero title and keep proof/buttons within the column. */
+@media (max-width: 575px) {
+  .hero-3 > .container > .row { margin-left: 0; margin-right: 0; }
+  .hero-3 > .container > .row > .col-xl-5,
+  .hero-3 > .container > .row > .col-xl-7 {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+  .hero-style3, .hero-thumb3-1, .hero-thumb3-1 .itwd-hero-main-image,
+  .itwd-hero-btns, .itwd-hero-proof { min-width: 0; max-width: 100%; }
+  .hero-style3 .hero-title,
+  .hero-style3 .hero-title > span { max-width: 100%; }
+  .hero-style3 .hero-title .title2 {
+    font-size: clamp(19px, 6vw, 24px);
+    line-height: 1.2;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  .hero-style3 .hero-title .title3 { font-size: clamp(29px, 8.2vw, 36px); }
+  .hero-style3 .itwd-hero-btns { width: 100%; flex-direction: column; align-items: stretch; }
+  .hero-style3 .itwd-hero-btns .th-btn { width: 100%; flex: 0 1 auto; white-space: normal; }
+  .itwd-hero-proof { gap: 10px; white-space: normal; justify-content: center; flex-wrap: wrap; }
+}
 
 /* ---- "IT Wala Dai ko mission": image is a normal grid column, centred with the text */
 .itwd-mission .cta-wrap4 > .container { position: relative; z-index: 2; }

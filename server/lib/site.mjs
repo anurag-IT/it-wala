@@ -188,9 +188,9 @@ export class Site {
       const pub = getRegions(home)
       const issues = []
       const draft = { version: version + 1, updatedAt: nowIso(), by }
-      for (const r of ['header', 'footer']) {
+      for (const r of ['header', 'footer', 'sideTab']) {
         if (typeof body[r] === 'string') {
-          issues.push(...securityIssues(body[r], pub[r]))
+          issues.push(...securityIssues(body[r], pub[r] || ''))
           draft[r] = body[r]
         } else if (current?.[r]) draft[r] = current[r]
       }
@@ -238,6 +238,7 @@ export class Site {
     const regions = {}
     if (typeof g.header === 'string') regions.header = refreshNav(setActiveNav(g.header, route), cur.header)
     if (typeof g.footer === 'string') regions.footer = refreshNav(g.footer, cur.footer)
+    if (typeof g.sideTab === 'string' && cur.sideTab) regions.sideTab = g.sideTab
     return setRegions(pageHtml, regions)
   }
 
@@ -267,10 +268,10 @@ export class Site {
     const pub = getRegions(home)
     const exists = makeResolver(this.root)
     const issues = []
-    for (const r of ['header', 'footer']) {
+    for (const r of ['header', 'footer', 'sideTab']) {
       if (typeof g[r] !== 'string') continue
-      issues.push(...securityIssues(g[r], pub[r]))
-      issues.push(...checkContent(g[r], pub[r], exists))
+      issues.push(...securityIssues(g[r], pub[r] || ''))
+      issues.push(...checkContent(g[r], pub[r] || '', exists))
     }
     return { issues, hasDraft: true, pages: this.listPages().filter((p) => p.status === 'published').length }
   }

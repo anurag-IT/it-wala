@@ -90,7 +90,18 @@ function decodeEntities(v) {
   })
 }
 
-const signature = (t) => t.name + '|' + t.attrs.map(([k, v]) => k + '=' + v).sort().join('|') + '|' + t.text.trim()
+function signature(t) {
+  // Match existing risky behavior by its risky attributes, not every ordinary attribute
+  // on the element. Editing an anchor's label, class or destination must not make its
+  // already-published legacy onclick look like a newly-added handler.
+  const risky = t.attrs.filter(([k, v]) => k.startsWith('on') || k === 'srcdoc' ||
+    (URL_ATTRS.has(k) && unsafeUrl(v, k)) ||
+    (k === 'style' && /expression\s*\(|javascript:|behavior\s*:|-moz-binding|@import/i.test(v)) ||
+    k === 'formaction' || (t.name === 'form' && k === 'action' && v && !/^(\/|https:\/\/formsubmit\.co\/)/.test(v)))
+  const attrs = risky.length ? risky : t.attrs
+  const text = risky.length ? '' : t.text.trim()
+  return t.name + '|' + attrs.map(([k, v]) => k + '=' + v).sort().join('|') + '|' + text
+}
 
 export function unsafeUrl(value, attr) {
   const v = String(value).replace(/[\u0000- \u007f-\u009f]/g, '').toLowerCase()

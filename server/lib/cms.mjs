@@ -82,12 +82,34 @@ export const CMS_TYPES = {
       url: { type: 'url', label: 'Official website', required: true, external: true },
     },
   },
+  college_strip: {
+    label: 'Homepage College Strip', root: 'list', itemLabel: 'name', allowEmpty: true,
+    note: 'Logos shown in the moving strip below the homepage hero. Removing an item here does not affect college pages or image files.',
+    fields: {
+      name: text('College or university name', { required: true, max: 160 }),
+      image: { type: 'image', label: 'Logo or image', required: true },
+      url: { type: 'url', label: 'Destination URL (optional)', nullable: true },
+      alt: text('Alternative text (optional)', { max: 200, nullable: true }),
+      order: { type: 'number', label: 'Display order', min: 0, max: 9999, integer: true, required: true },
+      active: { type: 'bool', label: 'Active', required: true },
+    },
+  },
   nav: {
     label: 'Navigation menu', root: 'list', itemLabel: 'label',
     note: 'Header menu, mobile menu and footer quick links on every page.',
     fields: {
       href: { type: 'url', label: 'Page', required: true, internal: true },
       label: text('Label', { required: true, max: 40 }),
+    },
+  },
+  header_controls: {
+    label: 'Header buttons', root: 'object',
+    note: 'Phone number and order of the Call and Join Now buttons in the header and mobile menu.',
+    fields: {
+      phoneNumber: text('Call button phone number', { required: true, max: 24 }),
+      joinLabel: text('Join button label', { required: true, max: 30 }),
+      order: { type: 'list', label: 'Button order', min: 2, maxItems: 2,
+        item: { type: 'enum', options: ['call', 'join'], labels: { call: 'Call button', join: 'Join Now button' } } },
     },
   },
   projects: {
@@ -134,7 +156,7 @@ function checkField(def, value, at, ctx, issues) {
       if (typeof value !== 'boolean') issues.push({ path: at, message: 'Must be true/false' })
       return
     case 'number':
-      if (typeof value !== 'number' || value < def.min || value > def.max) issues.push({ path: at, message: 'Number ' + def.min + '-' + def.max })
+      if (typeof value !== 'number' || value < def.min || value > def.max || (def.integer && !Number.isInteger(value))) issues.push({ path: at, message: 'Enter a ' + (def.integer ? 'whole number' : 'number') + ' from ' + def.min + ' to ' + def.max })
       return
     case 'icon':
       if (typeof value !== 'string' || !ICON.test(value)) issues.push({ path: at, message: 'Icon class like "fal fa-brain"' })
@@ -193,7 +215,7 @@ export function validateData(type, data, { root }) {
   const ctx = { root, refs: {} }
   if (type === 'projects' && data && Array.isArray(data.categories)) ctx.refs.categories = new Set(data.categories.map((c) => c.slug))
   if (schema.root === 'list') {
-    checkField({ type: 'objects', fields: schema.fields, min: 1 }, data, type, ctx, issues)
+    checkField({ type: 'objects', fields: schema.fields, min: schema.allowEmpty ? 0 : 1 }, data, type, ctx, issues)
     if (type === 'courses' && Array.isArray(data)) {
       const existing = JSON.parse(fs.readFileSync(path.join(root, 'content', 'data', 'courses.json'), 'utf8')).map((c) => c.slug)
       for (const slug of existing) if (!data.some((c) => c.slug === slug)) issues.push({ path: 'courses', message: 'Course "' + slug + '" has a published page and cannot be removed here (its page and links would break). Edit it instead.' })
@@ -206,6 +228,14 @@ export function validateData(type, data, { root }) {
     for (const k of Object.keys(data)) if (!schema.fields[k]) issues.push({ path: type + '.' + k, message: 'Unknown field' })
     for (const [k, f] of Object.entries(schema.fields)) checkField(f, data[k], type + '.' + k, ctx, issues)
   }
+  if (type === 'header_controls' && data && !Array.isArray(data)) {
+    if (typeof data.phoneNumber === 'string' && !/^\+?[0-9][0-9 ().-]{5,22}$/.test(data.phoneNumber.trim())) {
+      issues.push({ path: 'header_controls.phoneNumber', message: 'Enter a valid phone number with digits and optional +, spaces, brackets or hyphens.' })
+    }
+    if (!Array.isArray(data.order) || data.order.length !== 2 || new Set(data.order).size !== 2 || !['call', 'join'].every((x) => data.order.includes(x))) {
+      issues.push({ path: 'header_controls.order', message: 'Keep one Call button and one Join Now button, each in a different position.' })
+    }
+  }
   return issues.slice(0, 200)
 }
 
@@ -217,8 +247,10 @@ export function affectedFiles(type, root, pages) {
     faqs: ['index.html', 'free-it-consultation/index.html', ...coursePages],
     programmes: ['free-it-consultation/index.html'],
     colleges: ['free-it-consultation/index.html'],
+    college_strip: ['index.html'],
     projects: ['programs/index.html'],
     nav: pages.filter((p) => p.status === 'published').map((p) => p.file),
+    header_controls: pages.filter((p) => p.status === 'published').map((p) => p.file),
   }
   return [...new Set(map[type] || [])]
 }

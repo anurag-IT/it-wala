@@ -41,12 +41,22 @@ export function regionRanges(html) {
   const fs = html.indexOf('<footer', ms)
   const fe = fs === -1 ? -1 : matchClose(html, fs, 'footer')
   if (fs === -1 || fe === -1) throw new Error('Page footer not found')
-  return { header: [hs, he], main: [ms, fs], footer: [fs, fe] }
+  const ranges = { header: [hs, he], main: [ms, fs], footer: [fs, fe] }
+  // This fixed side badge lives after the shared footer markup. Keep it as its own
+  // global region so it can be edited/published across pages without nesting it in
+  // the footer or changing its fixed-position behavior.
+  const sideStart = html.indexOf('<!-- itwd:pranam-tab:start -->')
+  const sideEndMarker = html.indexOf('<!-- itwd:pranam-tab:end -->', sideStart)
+  if (sideStart !== -1 && sideEndMarker !== -1) {
+    const sideEnd = html.indexOf('-->', sideEndMarker) + 3
+    if (sideEnd > sideEndMarker) ranges.sideTab = [sideStart, sideEnd]
+  }
+  return ranges
 }
 
 export function getRegions(html) {
   const r = regionRanges(html)
-  return { header: html.slice(...r.header), main: html.slice(...r.main), footer: html.slice(...r.footer) }
+  return Object.fromEntries(Object.entries(r).map(([name, range]) => [name, html.slice(...range)]))
 }
 
 export function setRegions(html, regions) {

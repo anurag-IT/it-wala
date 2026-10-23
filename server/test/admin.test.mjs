@@ -112,6 +112,7 @@ test('unsafe HTML, URLs and CSS are rejected', async () => {
 
 test('unit: security + style compiler', () => {
   assert.equal(securityIssues('<a href="#" onClick="return true">x</a>', '<a href="#" onclick="return true">x</a>').length, 0)
+  assert.equal(securityIssues('<a href="/about/" class="updated" onclick="return true">About</a>', '<a href="#" onclick="return true">Home</a>').length, 0)
   assert.equal(securityIssues('<a href="#" onclick="steal()">x</a>', '<a href="#" onclick="return true">x</a>').length, 1)
   const { model, issues } = cleanStyleModel({ 'itwd-e-ab12cd': { desktop: { 'font-size': '42px', color: '#ff0000' }, mobile: { 'font-size': '28px', display: 'none' }, hover: { color: '#000' } } })
   assert.equal(issues.length, 0)
@@ -137,15 +138,45 @@ test('styles (incl. mobile overrides) are published into the page', async () => 
 
 test('shared header/footer: one change reaches every page, active menu stays per page', async () => {
   const home = getRegions(read('index.html'))
+  const header = home.header.replace(/(<a\b[^>]*\bonclick="return true"[^>]*)(>Home<\/a>)/i, '$1 title="Edited safely"$2')
+  assert.notEqual(header, home.header, 'test fixture should edit an existing legacy navigation link')
+  const sideTab = home.sideTab.replace('<strong>Pranam Software</strong>', '<strong>Pranam Software Edited</strong>')
+  assert.notEqual(sideTab, home.sideTab)
   const footer = home.footer.replace('Quick Links', 'Quick Links X')
   assert.notEqual(footer, home.footer)
-  const s = await c.req('PUT', '/api/global/draft', { version: 0, header: home.header, footer })
+  const s = await c.req('PUT', '/api/global/draft', { version: 0, header, footer, sideTab })
   assert.equal(s.status, 200, JSON.stringify(s.json))
   const p = await c.req('POST', '/api/global/publish', { version: 1, acceptWarnings: true })
   assert.equal(p.status, 200, JSON.stringify(p.json))
-  for (const rel of ['index.html', 'about/index.html', 'plus-two/cpp-programming/index.html']) assert.match(read(rel), /Quick Links X/, rel)
+  for (const rel of ['index.html', 'about/index.html', 'plus-two/cpp-programming/index.html']) {
+    assert.match(read(rel), /Quick Links X/, rel)
+    assert.match(read(rel), /Pranam Software Edited/, rel)
+  }
   assert.match(getRegions(read('about/index.html')).header, /current-menu-item current_page_item"><a href="\/about" aria-current="page">/)
   assert.match(getRegions(read('plus-two/cpp-programming/index.html')).header, /current-menu-item current_page_item"><a href="\/plus-two" aria-current="page">/)
+})
+
+test('header buttons validate and publish phone number and chosen order on desktop and mobile', async () => {
+  const initial = await c.req('GET', '/api/data/header_controls')
+  assert.equal(initial.status, 200)
+  const data = structuredClone(initial.json.published)
+  const bad = { ...data, order: ['call', 'call'] }
+  assert.equal((await c.req('PUT', '/api/data/header_controls', { version: 0, data: bad })).status, 422)
+  const badPhone = { ...data, phoneNumber: 'not a phone' }
+  assert.equal((await c.req('PUT', '/api/data/header_controls', { version: 0, data: badPhone })).status, 422)
+  data.phoneNumber = '+977 98000-12345'
+  data.joinLabel = 'Student Login'
+  data.order = ['join', 'call']
+  assert.equal((await c.req('PUT', '/api/data/header_controls', { version: 0, data })).status, 200)
+  assert.equal((await c.req('POST', '/api/data/header_controls/publish', {})).status, 200)
+  const live = read('index.html')
+  const desktop = live.split('<!-- itwd:header-actions:start -->')[1].split('<!-- itwd:header-actions:end -->')[0]
+  const mobile = live.split('<!-- itwd:mobile-actions:start -->')[1].split('<!-- itwd:mobile-actions:end -->')[0]
+  assert.ok(desktop.indexOf('Student Login') < desktop.indexOf('tel:+9779800012345'))
+  assert.match(desktop, /<span>\+977 98000-12345<\/span>/)
+  assert.ok(mobile.indexOf('Student Login') < mobile.indexOf('tel:+9779800012345'))
+  assert.match(mobile, /<span>\+977 98000-12345<\/span>/)
+  assert.equal((await c.req('GET', '/api/data/header_controls')).json.published.phoneNumber, '+977 98000-12345')
 })
 
 test('CMS: course edits reach the home card, +2 page and course page; bad data is refused', async () => {
@@ -164,6 +195,59 @@ test('CMS: course edits reach the home card, +2 page and course page; bad data i
   assert.match(read('plus-two/cpp-programming/index.html'), /C\+\+ for \+2 Students TEST/)
   // the visual-editor content outside the managed blocks was not touched
   assert.match(read('index.html'), /itwd:home-courses:start/)
+})
+
+test('homepage college strip drafts, publishes, repeats logos for the loop and never changes college records', async () => {
+  await c.login()
+  const collegesBefore = read('content/data/colleges.json')
+  const initial = await c.req('GET', '/api/data/college_strip')
+  assert.equal(initial.status, 200)
+  const data = structuredClone(initial.json.published)
+  data.push({ name: 'Test University', image: '/college/kmc.png', url: null, alt: 'Test University logo', order: 0, active: true })
+  assert.equal((await c.req('PUT', '/api/data/college_strip', { version: 0, data })).status, 200)
+  assert.equal((await c.req('POST', '/api/data/college_strip/publish', {})).status, 200)
+  let home = read('index.html')
+  assert.match(home, /Test University/)
+  assert.match(home, /Test University logo/)
+  assert.match(home, /aria-hidden="true"[^>]*><img src="\/college\/kmc\.png" alt=""/)
+  assert.match(fs.readFileSync(path.join(root, 'assets/itwd/itwd.css'), 'utf8'), /translateX\(-50%\)/)
+
+  let current = (await c.req('GET', '/api/data/college_strip')).json.published
+  const testItem = current.find((x) => x.name === 'Test University')
+  testItem.name = 'Test University Updated'
+  testItem.image = '/college/ccrc.png'
+  testItem.order = 2
+  assert.equal((await c.req('PUT', '/api/data/college_strip', { version: 0, data: current })).status, 200)
+  assert.equal((await c.req('POST', '/api/data/college_strip/publish', {})).status, 200)
+  home = read('index.html')
+  current = (await c.req('GET', '/api/data/college_strip')).json.published
+  assert.equal(current.find((x) => x.name === 'Test University Updated').order, 2)
+  assert.match(home, /src="\/college\/ccrc\.png" alt="Test University logo"/)
+  const track = home.split('<!-- itwd:home-college-strip:start -->')[1].split('<!-- itwd:home-college-strip:end -->')[0]
+  assert.ok(track.indexOf('src="/college/ccrc.png"') < track.indexOf('alt="Test University logo"'))
+  assert.ok(track.indexOf('alt="Test University logo"') < track.indexOf('src="/college/kmc.png"'))
+
+  current = (await c.req('GET', '/api/data/college_strip')).json.published
+  const updated = current.find((x) => x.name === 'Test University Updated')
+  updated.active = false
+  assert.equal((await c.req('PUT', '/api/data/college_strip', { version: 0, data: current })).status, 200)
+  const reloaded = (await c.req('GET', '/api/data/college_strip')).json.draft
+  assert.equal(reloaded.find((x) => x.name === 'Test University Updated').image, '/college/ccrc.png')
+  assert.equal((await c.req('POST', '/api/data/college_strip/publish', {})).status, 200)
+  home = read('index.html').split('<!-- itwd:home-college-strip:start -->')[1].split('<!-- itwd:home-college-strip:end -->')[0]
+  assert.doesNotMatch(home, /alt="Test University logo"/)
+
+  current = (await c.req('GET', '/api/data/college_strip')).json.published
+  const beforeRemove = current.length
+  current = current.filter((x) => x.name !== 'Test University Updated')
+  assert.equal(current.length, beforeRemove - 1)
+  assert.equal((await c.req('PUT', '/api/data/college_strip', { version: 0, data: current })).status, 200)
+  assert.equal((await c.req('POST', '/api/data/college_strip/publish', {})).status, 200)
+  const finalTrack = read('index.html').split('<!-- itwd:home-college-strip:start -->')[1].split('<!-- itwd:home-college-strip:end -->')[0]
+  assert.doesNotMatch(finalTrack, /alt="Test University logo"/)
+  assert.equal(read('content/data/colleges.json'), collegesBefore)
+  assert.equal(fs.existsSync(path.join(root, 'college', 'ccrc.png')), true)
+  assert.equal((await fetch(srv.base + '/free-it-consultation')).status, 200)
 })
 
 test('media: real image upload, fake image refused, used image cannot be deleted', async () => {
