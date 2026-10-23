@@ -3693,21 +3693,31 @@ button.itwd-join-cta { border: 0; cursor: pointer; }
 
 /* ============================================================
    About page - hero photo cluster (.img-box1)
-   The two photos are 1535x1024 (3:2). Frames match that ratio,
-   so nothing is cropped, and widths are capped so the full-size
-   artwork can't blow out the layout. The third (library) photo
-   was removed from the markup.
+   Both photos are 1535x1024 (3:2). The theme puts no width on
+   .img1/.img2, so without this the full-size artwork renders at
+   natural pixel width and blows up the layout. Frames match the
+   3:2 source ratio, so nothing gets cropped. The third (library)
+   photo was removed from the markup.
    ============================================================ */
 .img-box1 {
-  padding: 90px 150px 60px 0;
+  padding: 0;
+  display: inline-block;
 }
 
 .img-box1 .img1 {
   width: min(460px, 100%);
+  position: relative;
+  z-index: 1;
 }
 
+/* Hang the graduate photo off img1's bottom-right corner so the two
+   still read as one collage instead of two side-by-side boxes. */
 .img-box1 .img2 {
-  width: min(300px, 65%);
+  width: min(300px, 62%);
+  right: -34px;
+  bottom: -34px;
+  z-index: 2;
+  box-shadow: 0 16px 36px rgba(26, 72, 64, .16);
 }
 
 .img-box1 .img1 .thumb,
@@ -3726,25 +3736,48 @@ button.itwd-join-cta { border: 0; cursor: pointer; }
   object-fit: cover;
 }
 
-/* Smaller circular "1.2K+ Happy Students" badge - scaled as a whole
-   so the rotating text ring stays in sync with the circle. */
+/* Smaller "1.2K+ Happy Students" badge - scaled as a whole unit so the
+   rotating text ring stays in sync with its circle. */
 .img-box1 .about-tag {
   transform: scale(.7);
   transform-origin: top right;
+  right: -14px;
+  top: -14px;
+  z-index: 3;
 }
 
-@media (max-width: 1199px) {
-  .img-box1 {
-    padding: 0;
-  }
-  .img-box1 .img1 {
+/* Below 575px the theme stacks the cluster and makes .img2 relative,
+   so the negative offsets have to be released. */
+@media (max-width: 575px) {
+  .img-box1 .img1,
+  .img-box1 .img2 {
     width: 100%;
   }
   .img-box1 .img2 {
-    width: 100%;
-    max-width: 420px;
+    right: auto;
+    bottom: auto;
+    box-shadow: none;
   }
   .img-box1 .about-tag {
     transform-origin: top left;
   }
+}
+
+/* ============================================================
+   About page - "Your Path" six-step cards (.itwd-your-path)
+   The theme leaves .process-card .box-img unconstrained, so the
+   new 1200-3000px photos would render at full natural size and
+   break the row. Original artwork was 141x121, so that frame is
+   pinned here and the photos crop into it.
+   ============================================================ */
+.itwd-your-path .process-card .box-img {
+  width: 141px;
+  height: 121px;
+}
+
+.itwd-your-path .process-card .box-img img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

@@ -1,0 +1,34 @@
+[
+  {
+    "href": "/",
+    "label": "Home"
+  },
+  {
+    "href": "/programs",
+    "label": "Bachelor Project"
+  },
+  {
+    "href": "/plus-two",
+    "label": "For +2"
+  },
+  {
+    "href": "/free-it-consultation",
+    "label": "Free Guidance After +2"
+  },
+  {
+    "href": "/community",
+    "label": "Community"
+  },
+  {
+    "href": "/testimonials",
+    "label": "Testimonials"
+  },
+  {
+    "href": "/about",
+    "label": "About"
+  },
+  {
+    "href": "/contact",
+    "label": "Contact"
+  }
+]

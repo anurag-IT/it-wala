@@ -4,3 +4,11 @@ node_modules/
 dist/
 .env
 .env.*
+
+# admin: local working data (published site = the HTML files; CMS data = content/data)
+content/drafts/
+content/revisions/
+content/private/
+content/unpublished/
+
+__pycache__/

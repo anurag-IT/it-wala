@@ -1,0 +1,45 @@
+/* Loaded ONLY inside the admin editor canvas (/__admin/render/<page>?mode=edit). Never part of the public site. */
+
+/* theme scripts are inert while editing: show what the animations would reveal */
+.th_fade_anim, .wow, .th-text-perspective { opacity: 1 !important; visibility: visible !important; transform: none !important; }
+html.itwd-editing a, html.itwd-editing button { cursor: default; }
+html.itwd-editing [contenteditable="true"], html.itwd-editing [contenteditable="plaintext-only"] {
+  outline: 2px dashed #1CB098 !important; outline-offset: 3px; cursor: text !important;
+}
+html.itwd-dragging, html.itwd-dragging * { cursor: grabbing !important; user-select: none !important; }
+
+#itwd-ed-layer { position: fixed; inset: 0; z-index: 2147483000; pointer-events: none; font: 12px/1.3 system-ui, -apple-system, "Segoe UI", sans-serif; }
+#itwd-ed-layer .ed-box { position: fixed; display: none; box-sizing: border-box; pointer-events: none; }
+#itwd-ed-layer .ed-hover { border: 1px dashed #1CB098; background: rgba(28, 176, 152, .04); }
+#itwd-ed-layer .ed-select { border: 2px solid #1CB098; box-shadow: 0 0 0 1px rgba(255, 255, 255, .9); }
+#itwd-ed-layer .ed-select.is-locked { border-color: #8a64d6; }
+#itwd-ed-layer .ed-select.is-global { border-color: #e8a400; }
+#itwd-ed-layer .ed-label {
+  position: fixed; display: none; padding: 2px 7px; border-radius: 4px 4px 0 0; background: #1CB098; color: #fff;
+  font-weight: 600; white-space: nowrap; max-width: 60vw; overflow: hidden; text-overflow: ellipsis; pointer-events: none;
+}
+#itwd-ed-layer .ed-label.is-locked { background: #8a64d6; }
+#itwd-ed-layer .ed-label.is-global { background: #e8a400; color: #1d1d1d; }
+#itwd-ed-layer .ed-toolbar {
+  position: fixed; display: none; gap: 2px; padding: 3px; border-radius: 8px; background: #17202b;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .25); pointer-events: auto;
+}
+#itwd-ed-layer .ed-toolbar button {
+  width: 28px; height: 28px; display: grid; place-items: center; border: 0; border-radius: 6px; background: transparent;
+  color: #fff; font: 600 14px/1 system-ui, sans-serif; cursor: pointer; padding: 0;
+}
+#itwd-ed-layer .ed-toolbar button:hover, #itwd-ed-layer .ed-toolbar button:focus-visible { background: #1CB098; outline: none; }
+#itwd-ed-layer .ed-toolbar button[data-act="drag"] { cursor: grab; }
+#itwd-ed-layer .ed-toolbar button[disabled] { opacity: .35; cursor: not-allowed; }
+#itwd-ed-layer .ed-drop { position: fixed; display: none; background: #e8a400; border-radius: 3px; box-shadow: 0 0 0 2px rgba(232, 164, 0, .25); }
+#itwd-ed-layer .ed-drop.is-inside { background: rgba(232, 164, 0, .12); border: 2px dashed #e8a400; }
+#itwd-ed-layer .ed-drop-label {
+  position: fixed; display: none; padding: 2px 8px; border-radius: 4px; background: #e8a400; color: #1d1d1d; font-weight: 700;
+}
+#itwd-ed-layer .ed-toast {
+  position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); display: none; padding: 8px 14px; border-radius: 8px;
+  background: #17202b; color: #fff; font-weight: 600; pointer-events: none;
+}
+/* no accidental text selection while clicking/dragging in the editor (typing mode re-enables it) */
+html.itwd-editing body { -webkit-user-select: none; user-select: none; }
+html.itwd-editing [contenteditable="true"], html.itwd-editing [contenteditable="true"] * { -webkit-user-select: text; user-select: text; }

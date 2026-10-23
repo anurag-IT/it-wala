@@ -1,0 +1,98 @@
+[
+  {
+    "name": "Bibek K.",
+    "image": "",
+    "context": "BSc CSIT · TU",
+    "category": "project",
+    "status": "published",
+    "text": "Mero AI attendance project aba college mai use bhairaheko chha. External le ‘production-ready’ bhannu bhayo!"
+  },
+  {
+    "name": "Kritika B.",
+    "image": "",
+    "context": "BCA · Pokhara Univ.",
+    "category": "project",
+    "status": "published",
+    "text": "Documentation ra viva prep sabai bhanda helpful thiyo. Pahilo choti viva ma confident bhaye."
+  },
+  {
+    "name": "Rohan M.",
+    "image": "",
+    "context": "BIT · Purbanchal",
+    "category": "project",
+    "status": "published",
+    "text": "Mentor review le mero naramro coding habits samatyo. Yahi project le malai internship dilayo."
+  },
+  {
+    "name": "Aakash",
+    "image": "",
+    "context": "+2 Student",
+    "category": "college",
+    "status": "sample",
+    "text": "+2 sakepachhi CSIT ki BIT bhanne confusion thiyo. Dai sanga kura garepachhi dubai course ko farak clear bhayo."
+  },
+  {
+    "name": "Anil",
+    "image": "",
+    "context": "+2 Student",
+    "category": "coding",
+    "status": "sample",
+    "text": "C programming pahile garo lagthyo. Simple examples ra practice le loops ra functions bujhna sajilo bhayo."
+  },
+  {
+    "name": "Irfan",
+    "image": "",
+    "context": "Bachelor Student",
+    "category": "project",
+    "status": "sample",
+    "text": "Final year project ko scope fix garna help paye. Weekly review le kaam samaya mai sakiyo."
+  },
+  {
+    "name": "Kashish",
+    "image": "",
+    "context": "+2 Student",
+    "category": "college",
+    "status": "sample",
+    "text": "College compare garda ke-ke hernu parchha bhanne kura pahilo choti bujhe — affiliation, curriculum, location sabai."
+  },
+  {
+    "name": "Saurav",
+    "image": "",
+    "context": "Bachelor Student",
+    "category": "coding",
+    "status": "sample",
+    "text": "Python ko basics bata suru gare. Aba sano project aafai banauna sakchhu."
+  },
+  {
+    "name": "Manish",
+    "image": "",
+    "context": "+2 Student",
+    "category": "coding",
+    "status": "sample",
+    "text": "Free classes ra notes le +2 ko computer science ko tayari ma dherai madat garyo."
+  },
+  {
+    "name": "Sushma",
+    "image": "",
+    "context": "Bachelor Student",
+    "category": "project",
+    "status": "sample",
+    "text": "Viva ko lagi mock questions practice garda confidence dherai badhyo."
+  },
+  {
+    "name": "Prakriti",
+    "image": "",
+    "context": "+2 Student",
+    "category": "college",
+    "status": "sample",
+    "text": "TU ra foreign-affiliated college ko barema clear information paye. Decision lina sajilo bhayo."
+  },
+  {
+    "name": "Nabin",
+    "image": "",
+    "context": "Bachelor Student",
+    "category": "coding",
+    "status": "sample",
+    "text": "GitHub ma project rakhna ra deploy garna sikiye. Portfolio banauna yo dherai kaam lagyo."
+  }
+]

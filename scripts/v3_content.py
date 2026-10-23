@@ -15,6 +15,7 @@ from html import escape
 
 import build_site as B
 import v2_content as V
+import cms_data as C
 from course_data import COURSE_BY_SLUG, n_lessons, course_url, course_img
 
 ARROW = B.ARROW_SVG
@@ -513,96 +514,10 @@ def patch_community(s):
 
 CHECKED = 'Oct 2026'
 
-PROGRAMMES = [  # foreign-affiliated first
-    dict(name='BSc (Hons) Computing', kind='foreign', award='London Metropolitan University, UK', at='Islington College',
-         years='3 years', elig='NEB +2 ma CGPA 2.2 (55%) wa mathi', url='https://islington.edu.np/programmes/computing'),
-    dict(name='BSc (Hons) Computing with Artificial Intelligence', kind='foreign', award='London Metropolitan University, UK',
-         at='Islington College', years='3 years', elig='NEB +2 ma CGPA 2.2 (55%) wa mathi',
-         url='https://islington.edu.np/programmes/computing-with-Ai'),
-    dict(name='BSc (Hons) Computer Networking &amp; IT Security', kind='foreign', award='London Metropolitan University, UK',
-         at='Islington College', years=None, elig='NEB +2 ma CGPA 2.2 (55%) wa mathi',
-         url='https://islington.edu.np/programmes/networking'),
-    dict(name='BSc (Hons) Computer Science with Artificial Intelligence', kind='foreign', award='Coventry University, UK',
-         at='Softwarica College of IT &amp; E-Commerce', years='3 years',
-         elig='+2 ma GPA 2.4 wa A Level; English: IELTS 6.0 wa college ko GETS test',
-         url='https://softwarica.edu.np/programmes/bsc-computer-science-ai'),
-    dict(name='BSc (Hons) Software Engineering', kind='foreign', award='Coventry University, UK',
-         at='Softwarica College of IT &amp; E-Commerce', years='3 years',
-         elig='+2 ma GPA 2.4 wa A Level; English: IELTS 6.0 wa college ko GETS test',
-         url='https://softwarica.edu.np/programmes/bsc-software-engineering'),
-    dict(name='BSc (Hons) Ethical Hacking &amp; Cybersecurity', kind='foreign', award='Coventry University, UK',
-         at='Softwarica College of IT &amp; E-Commerce', years='3 years',
-         elig='+2 ma GPA 2.4 wa A Level; English: IELTS 6.0 wa college ko GETS test',
-         url='https://softwarica.edu.np/programmes/bsc-cybersecurity'),
-    dict(name='BSc (Hons) Computer Science with Artificial Intelligence', kind='foreign', award='Birmingham City University, UK',
-         at='Sunway College Kathmandu', years='4 years (professional placement year sahit)', elig='NEB grade 12 ma CGPA 2.6 wa mathi',
-         url='https://sunway.edu.np/program/artificial-intelligence/'),
-    dict(name='BSc (Hons) Business Information Technology', kind='foreign', award='Birmingham City University, UK',
-         at='Sunway College Kathmandu', years=None, elig='NEB grade 12 ma CGPA 2.6 wa mathi',
-         url='https://sunway.edu.np/program/bschons-business-information-technology/'),
-    dict(name='BSc (Hons) Computer Science', kind='foreign', award='University of Wolverhampton, UK',
-         at='Herald College Kathmandu', years='3 years', elig='NEB +2 (jun-sukai stream) ma 55% (GPA 2.4) wa mathi',
-         url='https://heraldcollege.edu.np/bachelors-in-computer-science'),
-    dict(name='BSc (Hons) Cybersecurity', kind='foreign', award='University of Wolverhampton, UK',
-         at='Herald College Kathmandu', years='3 years', elig='NEB +2 (jun-sukai stream) ma 55% (GPA 2.4) wa mathi',
-         url='https://heraldcollege.edu.np/bachelors-in-cyber-security'),
-    dict(name='BSc (Hons) Computing', kind='foreign', award='Leeds Beckett University, UK', at='The British College',
-         years='3 years', elig='Foundation entry: +2 ma 60% (GPA 2.4); direct entry ko criteria official page ma',
-         url='https://www.thebritishcollege.edu.np/programme/bsc-computing-BIT-in-kathmandu-nepal'),
-    dict(name='BSc (Hons) Computer Science &ndash; Artificial Intelligence', kind='foreign',
-         award='University of the West of England, UK', at='The British College', years='3 years',
-         elig='+2 ma 60% (GPA 2.4) wa mathi',
-         url='https://www.thebritishcollege.edu.np/programme/bsc-hons-computer-science-artificial-intelligence'),
-    dict(name='BSc (Hons) Cyber Security and Digital Forensics', kind='foreign', award='University of the West of England, UK',
-         at='The British College', years='3 years', elig='+2 ma 60% (GPA 2.4) wa mathi',
-         url='https://www.thebritishcollege.edu.np/programme/bsc-hons-cyber-security-and-digital-forensics'),
-    dict(name='Bachelor of Information Technology (Hons)', kind='foreign', award='HELP University, Malaysia',
-         at='Mid-Valley International College', years='4 years (8 semesters)', elig=None,
-         url='https://midvalley.edu.np/programs/bachelors-of-information-technology-hons/'),
-    # Nepali universities
-    dict(name='BSc CSIT', kind='nepal', award='Tribhuvan University (IOST)', at='TU ka constituent ra affiliated colleges',
-         years='4 years (8 semesters)', elig='+2 Science ra IOST, TU ko entrance exam', url='https://www.tuiost.edu.np/programs'),
-    dict(name='BIT', kind='nepal', award='Tribhuvan University (IOST)', at='TU ka constituent ra affiliated colleges',
-         years='4 years (8 semesters)', elig='+2 (jun-sukai stream) ra TU ko entrance exam', url='https://www.tuiost.edu.np/programs'),
-    dict(name='BCA', kind='nepal', award='Tribhuvan University (FOHSS)', at='Kathmandu Model College lagayat TU-affiliated colleges',
-         years='4 years (8 semesters)', elig='+2 ma kam-se-kam 45% ra entrance (Kathmandu Model College ko criteria)',
-         url='https://kmcen.edu.np/best-bca-college-nepal/'),
-    dict(name='BIM', kind='nepal', award='Tribhuvan University (Faculty of Management)', at='TU ka constituent ra affiliated colleges',
-         years='4 years (8 semesters)', elig=None, url='https://memc.tu.edu.np/pages/bachelor-of-information-management-bim-2935'),
-    dict(name='BIT', kind='nepal', award='Purbanchal University', at='Himalayan WhiteHouse International College',
-         years='4 years (8 semesters)', elig=None, url='https://whitehousecmt.edu.np/bit'),
-    dict(name='BE Computer', kind='nepal', award='Purbanchal University', at='Himalayan WhiteHouse International College',
-         years='4 years (8 semesters)', elig=None, url='https://whitehousecmt.edu.np/be-computer'),
-]
+PROGRAMMES = C.load('programmes')  # foreign-affiliated first; edited in the admin CMS
 
 # bachelor-level IT colleges only (+2-only colleges such as CCRC and Urbana are not listed here)
-COLLEGES = [
-    dict(name='Islington College', logo=None, univ='London Metropolitan University, UK', kind='foreign', location=None,
-         progs=['BSc (Hons) Computing', 'BSc (Hons) Computing with AI', 'BSc (Hons) Computer Networking &amp; IT Security'],
-         url='https://islington.edu.np/'),
-    dict(name='Softwarica College of IT &amp; E-Commerce', logo='/college/softwrica.png', univ='Coventry University, UK',
-         kind='foreign', location='Kathmandu',
-         progs=['BSc (Hons) Computer Science with AI', 'BSc (Hons) Software Engineering', 'BSc (Hons) Ethical Hacking &amp; Cybersecurity'],
-         url='https://softwarica.edu.np/courses'),
-    dict(name='Sunway College Kathmandu', logo='/college/sunway.png', univ='Birmingham City University, UK', kind='foreign',
-         location='Maitidevi, Kathmandu',
-         progs=['BSc (Hons) Computer Science with AI', 'BSc (Hons) Business Information Technology'],
-         url='https://sunway.edu.np/programs/'),
-    dict(name='Herald College Kathmandu', logo=None, univ='University of Wolverhampton, UK', kind='foreign',
-         location='Naxal, Kathmandu', progs=['BSc (Hons) Computer Science', 'BSc (Hons) Cybersecurity'],
-         url='https://heraldcollege.edu.np/'),
-    dict(name='The British College', logo=None, univ='Leeds Beckett University ra University of the West of England, UK',
-         kind='foreign', location='Thapathali, Kathmandu',
-         progs=['BSc (Hons) Computing', 'BSc (Hons) Computer Science &ndash; AI', 'BSc (Hons) Cyber Security &amp; Digital Forensics'],
-         url='https://www.thebritishcollege.edu.np/'),
-    dict(name='Mid-Valley International College', logo='/college/images.png', univ='HELP University, Malaysia', kind='foreign',
-         location=None, progs=['Bachelor of Information Technology (Hons)'],
-         url='https://midvalley.edu.np/programs/bachelors-of-information-technology-hons/'),
-    dict(name='Kathmandu Model College', logo='/college/kmc.png', univ='Tribhuvan University', kind='nepal', location=None,
-         progs=['BCA'], url='https://kmcen.edu.np/best-bca-college-nepal/'),
-    dict(name='Himalayan WhiteHouse International College', logo='/college/white%20house.png', univ='Purbanchal University',
-         kind='nepal', location=None, progs=['BIT', 'BE Computer'], url='https://whitehousecmt.edu.np/'),
-]
+COLLEGES = C.load('colleges')
 
 KIND_LABEL = {'foreign': 'Foreign-affiliated', 'nepal': 'Nepal university'}
 

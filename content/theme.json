@@ -1,0 +1,19 @@
+{
+  "primary": "#1CB098",
+  "secondary": "#FFBF00",
+  "headingColor": "#1E1E1E",
+  "bodyColor": "#556377",
+  "lightBackground": "#F0FBF8",
+  "sectionBackground": "#F3F5F4",
+  "linkColor": "",
+  "headingFont": "Plus Jakarta Sans",
+  "bodyFont": "Inter",
+  "baseFontSize": 16,
+  "containerWidth": 1320,
+  "sectionSpace": 120,
+  "sectionSpaceMobile": 80,
+  "buttonRadius": "",
+  "cardRadius": "",
+  "cardShadow": "theme",
+  "animations": true
+}
