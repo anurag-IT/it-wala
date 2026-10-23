@@ -1292,9 +1292,18 @@ html.itwd-modal-open, html.itwd-modal-open body { overflow: hidden; }
   .header-layout3 .header-logo img { height: 56px; max-width: 180px; }
   .header-layout3 .main-menu > ul > li > a { padding: 0 7px; font-size: 12px; }
   .header-layout3 .main-menu > ul > li.current-menu-item > a { padding: 0 11px; }
-  .itwd-nav-search { display: none; }
   .header-layout3 .header-button .th-btn.itwd-phone-cta { min-width: 150px; padding: 0 12px; }
   .itwd-join-cta { min-width: 112px; padding: 0 12px; }
+}
+/* The container is capped at 1500px, so between 1500 and 1699 there is not
+   enough room for logo + 8 nav items + search + phone + join on one row -
+   the nav used to spill over the search pill. Only show the search once the
+   header is allowed to grow. */
+@media (max-width: 1699px) {
+  .itwd-nav-search { display: none; }
+}
+@media (min-width: 1700px) {
+  .header-layout3 .container { max-width: 1680px; }
 }
 @media (max-width: 1199px) {
   .header-layout3 .menu-area { min-height: 74px; padding: 5px 18px; border-radius: 0 0 20px 20px; }
@@ -3699,23 +3708,30 @@ button.itwd-join-cta { border: 0; cursor: pointer; }
    3:2 source ratio, so nothing gets cropped. The third (library)
    photo was removed from the markup.
    ============================================================ */
+/* The box must be pinned to the main photo's width: as an inline-block it
+   shrink-wraps around the static position of the absolutely-positioned
+   second photo too (~760px), which pushes the negative offsets out and
+   leaves the two photos side-by-side with a gap instead of overlapping. */
 .img-box1 {
   padding: 0;
-  display: inline-block;
+  display: block;
+  width: min(620px, 100%);
 }
 
 .img-box1 .img1 {
-  width: min(460px, 100%);
+  width: 100%;
   position: relative;
   z-index: 1;
 }
 
 /* Hang the graduate photo off img1's bottom-right corner so the two
-   still read as one collage instead of two side-by-side boxes. */
+   still read as one collage instead of two side-by-side boxes.
+   Pushed further down/right so it stops covering the students' faces
+   in the group photo. */
 .img-box1 .img2 {
-  width: min(300px, 62%);
-  right: -34px;
-  bottom: -34px;
+  width: min(390px, 62%);
+  right: -44px;
+  bottom: -84px;
   z-index: 2;
   box-shadow: 0 16px 36px rgba(26, 72, 64, .16);
 }
@@ -3737,30 +3753,59 @@ button.itwd-join-cta { border: 0; cursor: pointer; }
 }
 
 /* Smaller "1.2K+ Happy Students" badge - scaled as a whole unit so the
-   rotating text ring stays in sync with its circle. */
+   rotating text ring stays in sync with its circle. Tucked onto img1's
+   top-right corner so it no longer floats in the gap between photos. */
 .img-box1 .about-tag {
-  transform: scale(.7);
+  transform: scale(.72);
   transform-origin: top right;
-  right: -14px;
-  top: -14px;
+  right: -20px;
+  top: -20px;
   z-index: 3;
+}
+
+/* Centre the cluster against the (taller) copy column. */
+.elementor-element-4224605 {
+  justify-content: center;
 }
 
 /* Below 575px the theme stacks the cluster and makes .img2 relative,
    so the negative offsets have to be released. */
 @media (max-width: 575px) {
-  .img-box1 .img1,
-  .img-box1 .img2 {
+  .img-box1 {
     width: 100%;
   }
   .img-box1 .img2 {
+    width: 100%;
     right: auto;
     bottom: auto;
     box-shadow: none;
   }
   .img-box1 .about-tag {
     transform-origin: top left;
+    right: auto;
   }
+}
+
+/* ---- About hero copy column: tighter heading + shorter paragraph */
+.elementor-element-6456fe4 .sec-title {
+  font-size: clamp(28px, 2.9vw, 42px);
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+}
+
+.elementor-element-6456fe4 .sec-text {
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 520px;
+  margin-bottom: 0;
+}
+
+.elementor-element-6456fe4 .title-area {
+  margin-bottom: 22px;
+}
+
+.elementor-element-6456fe4 .itwd-pranam-badge {
+  margin-top: 22px;
 }
 
 /* ============================================================
@@ -3780,4 +3825,27 @@ button.itwd-join-cta { border: 0; cursor: pointer; }
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* ============================================================
+   About page - "Our Approach" image column (.why-img-box1)
+   The theme pulls this box 300px left and 120px up, and only
+   resets that at <=1500px - so on wider screens the photo lands
+   half outside the section. Neutralise the offset at every width
+   and drop the dark tint, which existed only to sit behind the
+   (removed) video play button.
+   ============================================================ */
+.why-img-box1 {
+  margin: 0;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.why-img-box1:after {
+  display: none;
+}
+
+/* Keep the copy column centred against the photo */
+.elementor-element-70fcce3 {
+  justify-content: center;
 }
