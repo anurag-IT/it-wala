@@ -31,6 +31,17 @@ test('admin data is never served publicly', async () => {
   assert.equal((await fetch(srv.base + '/about')).status, 200)
 })
 
+test('integration checks require admin authentication and report missing cloud configuration', async () => {
+  const anon = client(srv.base)
+  assert.equal((await anon.req('GET', '/api/integrations/check')).status, 401)
+  assert.equal((await c.login()).status, 200)
+  const result = await c.req('GET', '/api/integrations/check')
+  assert.equal(result.status, 502)
+  assert.equal(result.json.supabase.configured, false)
+  assert.equal(result.json.cloudinary.configured, false)
+  assert.equal(result.json.ok, false)
+})
+
 test('editing operations require a session and a CSRF token', async () => {
   const anon = client(srv.base)
   assert.equal((await anon.req('GET', '/api/pages')).status, 401)

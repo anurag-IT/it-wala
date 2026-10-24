@@ -163,10 +163,13 @@ label { display: block; font-size: 12px; font-weight: 600; color: var(--c-muted)
 .media-tools { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
 .media-tools > * { flex: 1 1 140px; }
 .media-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
-.media-card { display: flex; flex-direction: column; gap: 4px; padding: 6px; border: 1px solid var(--c-line); border-radius: 10px; background: #fff; cursor: pointer; text-align: left; }
+.media-card { display: flex; min-width: 0; flex-direction: column; gap: 4px; padding: 6px; border: 1px solid var(--c-line); border-radius: 10px; background: #fff; text-align: left; }
 .media-card:hover, .media-card.is-sel { border-color: var(--c-primary); box-shadow: 0 0 0 2px rgba(28, 176, 152, .2); }
+.media-card__select { display: flex; min-width: 0; width: 100%; flex-direction: column; gap: 4px; padding: 0; border: 0; background: transparent; cursor: pointer; text-align: left; }
 .media-card img { width: 100%; height: 90px; object-fit: contain; border-radius: 6px; background: repeating-conic-gradient(#eee 0 25%, #fff 0 50%) 0 / 12px 12px; }
 .media-card span { font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.media-card__actions { display: grid; gap: 4px; margin-top: 5px; }
+.media-card__actions .btn { width: 100%; padding: 0 4px; font-size: 11px; }
 .media-detail { display: grid; grid-template-columns: 200px 1fr; gap: 16px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--c-line); }
 .media-detail img { width: 100%; max-height: 200px; object-fit: contain; background: repeating-conic-gradient(#eee 0 25%, #fff 0 50%) 0 / 12px 12px; border-radius: 8px; }
 
@@ -195,7 +198,15 @@ label { display: block; font-size: 12px; font-weight: 600; color: var(--c-muted)
 .toast a { color: #8ff3e0; }
 
 /* narrower screens: side panels become drawers */
-@media (max-width: 1280px) { :root { --left: 260px; --right: 300px; } .topbar__brand span { display: none; } }
+@media (max-width: 1500px) {
+  :root { --left: 260px; --right: 300px; --top: 100px; }
+  .app { grid-template-rows: auto minmax(0, 1fr); }
+  .topbar { flex-wrap: wrap; align-content: center; overflow: visible; min-height: var(--top); padding: 7px 10px; gap: 5px 7px; }
+  .topbar__brand span, .topbar__spacer { display: none; }
+  .topbar__page { width: 180px; }
+  .topbar__status { flex: 0 1 auto; }
+  .topbar #saveBtn { order: -1; border-color: var(--c-primary); background: #e8f7f4; color: var(--c-primary-d); }
+}
 @media (max-width: 1080px) {
   .app { grid-template-columns: 1fr; }
   .left, .right { position: fixed; top: var(--top); bottom: 0; z-index: 20; width: min(330px, 90vw); box-shadow: 0 0 40px rgba(0, 0, 0, .2); transform: translateX(-105%); transition: transform .25s ease; }

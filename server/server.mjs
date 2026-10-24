@@ -14,6 +14,8 @@ import { securityIssues } from './lib/htmlsafe.mjs'
 import { MANAGED_BLOCKS } from './lib/pages.mjs'
 import { CMS_TYPES } from './lib/cms.mjs'
 import { FONTS } from './lib/theme.mjs'
+import { SupabaseStore } from './lib/supabase.mjs'
+import { CloudinaryStore } from './lib/cloudinary.mjs'
 
 const BLOCKED_TOP = new Set(['content', 'server', 'scripts', 'node_modules', '.git', '.claude', 'it-wala', '_original', 'dist'])
 const COOKIE = 'itwd_admin'
@@ -25,6 +27,8 @@ export function createServer(overrides = {}) {
   const cfg = loadConfig(overrides)
   const site = new Site(cfg)
   const media = new Media(site)
+  const supabase = new SupabaseStore(cfg)
+  const cloudinary = new CloudinaryStore(cfg)
   const sessions = new Sessions({ idleMinutes: cfg.sessionIdleMinutes, maxHours: cfg.sessionMaxHours })
   const limiter = new RateLimiter({ max: 5, windowMs: 15 * 60 * 1000 })
   const adminDir = path.join(cfg.root, 'admin')
@@ -145,6 +149,26 @@ export function createServer(overrides = {}) {
     send(res, 200, { username: s.username, csrf: s.csrf })
   })
 
+  route('GET', '/api/integrations/check', async (req, res) => {
+    requireAuth(req)
+    const check = async (name, store) => {
+      if (store.partiallyConfigured) return { configured: false, ok: false, error: name + ' credentials are incomplete.' }
+      if (!store.configured) return { configured: false, ok: false, error: name + ' is not configured.' }
+      try {
+        await store.testConnection()
+        return { configured: true, ok: true }
+      } catch (error) {
+        return { configured: true, ok: false, error: error.message }
+      }
+    }
+    const checks = {
+      supabase: await check('Supabase', supabase),
+      cloudinary: await check('Cloudinary', cloudinary),
+    }
+    const ok = checks.supabase.ok && checks.cloudinary.ok
+    send(res, ok ? 200 : 502, { ok, ...checks })
+  })
+
   route('GET', '/api/pages', async (req, res) => { requireAuth(req); send(res, 200, { pages: site.listPages() }) })
   route('GET', '/api/pages/:key', async (req, res, p) => { requireAuth(req); send(res, 200, site.getState(p.key)) })
   route('PUT', '/api/pages/:key/draft', async (req, res, p) => {
@@ -199,13 +223,34 @@ export function createServer(overrides = {}) {
     requireAuth(req)
     send(res, 200, { types: Object.entries(CMS_TYPES).map(([k, v]) => ({ type: k, label: v.label, note: v.note })) })
   })
-  route('GET', '/api/data/:type', async (req, res, p) => { requireAuth(req); send(res, 200, site.getData(p.type)) })
+  route('GET', '/api/data/:type', async (req, res, p) => {
+    requireAuth(req)
+    if (supabase.partiallyConfigured) throw new HttpError(503, 'Supabase credentials are incomplete. Set both SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY, or remove the partial configuration.')
+    const result = site.getData(p.type)
+    if (supabase.configured) {
+      const published = await supabase.get(p.type)
+      if (published !== null) result.published = published
+    }
+    send(res, 200, result)
+  })
   route('PUT', '/api/data/:type', async (req, res, p) => {
     const s = requireAuth(req, W)
     send(res, 200, await site.saveDataDraft(p.type, await readJsonBody(req, cfg.maxBodyBytes), s.username))
   })
   route('DELETE', '/api/data/:type', async (req, res, p) => { requireAuth(req, W); send(res, 200, await site.discardDataDraft(p.type)) })
-  route('POST', '/api/data/:type/publish', async (req, res, p) => { const s = requireAuth(req, W); send(res, 200, await site.publishData(p.type, s.username)) })
+  route('POST', '/api/data/:type/publish', async (req, res, p) => {
+    const s = requireAuth(req, W)
+    if (supabase.partiallyConfigured) throw new HttpError(503, 'Supabase credentials are incomplete. Set both SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY, or remove the partial configuration.')
+    const result = await site.publishData(p.type, s.username)
+    if (supabase.configured) {
+      try {
+        await supabase.upsert(p.type, site.getData(p.type).published)
+      } catch (error) {
+        throw new HttpError(502, 'CMS content was published locally, but the Supabase sync failed: ' + error.message, { publishedLocally: true, type: p.type })
+      }
+    }
+    send(res, 200, result)
+  })
 
   route('GET', '/api/media', async (req, res, p, url) => {
     requireAuth(req)
@@ -213,10 +258,23 @@ export function createServer(overrides = {}) {
   })
   route('POST', '/api/media/upload', async (req, res) => {
     const s = requireAuth(req, W)
+    if (cloudinary.partiallyConfigured) throw new HttpError(503, 'Cloudinary credentials are incomplete. Set all three Cloudinary credentials, or remove the partial configuration.')
     const buf = await readBody(req, cfg.maxUploadBytes + 1)
     let name = 'image'
     try { name = decodeURIComponent(String(req.headers['x-file-name'] || 'image')) } catch { /* keep default */ }
-    send(res, 200, await site.exclusive(() => media.upload(buf, name, s.username)))
+    const local = await site.exclusive(() => media.upload(buf, name, s.username))
+    if (!cloudinary.configured) return send(res, 200, local)
+    const ext = path.extname(local.path).slice(1)
+    const contentType = ({ png: 'image/png', jpg: 'image/jpeg', webp: 'image/webp', gif: 'image/gif', avif: 'image/avif' })[ext]
+    const publicId = 'it-wala/uploads/' + local.path.replace(/^assets\/uploads\//, '').replace(/\.[^.]+$/, '')
+    let remote
+    try {
+      remote = await cloudinary.upload(buf, { publicId, contentType })
+    } catch (error) {
+      throw new HttpError(502, 'The image was saved locally at ' + local.path + ', but Cloudinary upload failed: ' + error.message, { localPath: local.path })
+    }
+    media.setCloudUrl(local.path, remote.secureUrl)
+    send(res, 200, { ...local, localUrl: local.url, url: remote.secureUrl, cloudUrl: remote.secureUrl })
   })
   route('POST', '/api/media/alt', async (req, res) => {
     requireAuth(req, W)

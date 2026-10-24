@@ -1,5 +1,5 @@
 // IT Wala Dai admin server — configuration (paths, environment, limits).
-// Secrets are read from `.env.admin` (git-ignored, created by `npm run admin:set-password`) or the real environment.
+// Secrets are read from `.env` (git-ignored) or `.env.admin` (legacy fallback) or the real environment.
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -22,11 +22,37 @@ function readEnvFile(file) {
   return out
 }
 
+function cloudinaryEnv(env) {
+  let fromUrl = {}
+  if (env.CLOUDINARY_URL) {
+    let url
+    try { url = new URL(env.CLOUDINARY_URL) } catch { throw new Error('CLOUDINARY_URL is not a valid URL') }
+    if (url.protocol !== 'cloudinary:' || !url.hostname || !url.username || !url.password) {
+      throw new Error('CLOUDINARY_URL must use cloudinary://<api_key>:<api_secret>@<cloud_name>')
+    }
+    fromUrl = {
+      cloudName: url.hostname,
+      apiKey: decodeURIComponent(url.username),
+      apiSecret: decodeURIComponent(url.password),
+    }
+  }
+  return {
+    cloudName: env.CLOUDINARY_CLOUD_NAME || fromUrl.cloudName || '',
+    apiKey: env.CLOUDINARY_API_KEY || fromUrl.apiKey || '',
+    apiSecret: env.CLOUDINARY_API_SECRET || fromUrl.apiSecret || '',
+  }
+}
+
 export function loadConfig(overrides = {}) {
   const root = path.resolve(overrides.root || process.env.ITWD_ROOT || DEFAULT_ROOT)
-  const envFile = overrides.envFile || process.env.ITWD_ENV_FILE || path.join(root, '.env.admin')
+  // Prefer .env (standard); fall back to .env.admin (legacy) if .env does not exist
+  const defaultEnvFile = fs.existsSync(path.join(root, '.env'))
+    ? path.join(root, '.env')
+    : path.join(root, '.env.admin')
+  const envFile = overrides.envFile || process.env.ITWD_ENV_FILE || defaultEnvFile
   const env = { ...readEnvFile(envFile), ...process.env, ...(overrides.env || {}) }
   const contentDir = path.resolve(overrides.contentDir || env.ITWD_CONTENT_DIR || path.join(root, 'content'))
+  const cloudinary = cloudinaryEnv(env)
   return {
     root,
     envFile,
@@ -42,6 +68,9 @@ export function loadConfig(overrides = {}) {
     maxUploadBytes: Number(env.MAX_UPLOAD_MB || 8) * 1024 * 1024,
     maxBodyBytes: 6 * 1024 * 1024,
     trustProxy: env.TRUST_PROXY === '1',
+    supabaseUrl: env.SUPABASE_URL || '',
+    supabaseServiceRoleKey: env.SUPABASE_SERVICE_ROLE_KEY || '',
+    ...cloudinary,
   }
 }
 

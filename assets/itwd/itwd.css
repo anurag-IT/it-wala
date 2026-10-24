@@ -5,6 +5,119 @@
   --itwd-dark: #1E1E1E;
 }
 
+/* Branded not-found page */
+.itwd-404-page {
+  display: grid;
+  min-height: min(720px, 76vh);
+  place-items: center;
+  padding: clamp(48px, 8vw, 104px) 20px;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255, 191, 0, .11), transparent 24%),
+    radial-gradient(circle at 88% 82%, rgba(28, 176, 152, .12), transparent 28%),
+    #fff;
+}
+.itwd-404-card {
+  position: relative;
+  width: min(100%, 900px);
+  overflow: hidden;
+  padding: clamp(36px, 7vw, 76px) 24px;
+  border: 1px solid rgba(28, 176, 152, .2);
+  border-radius: 32px;
+  background: linear-gradient(145deg, #f4fcf9 0%, #fff 72%);
+  box-shadow: 0 24px 70px rgba(30, 65, 59, .09);
+  text-align: center;
+}
+.itwd-404-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--itwd-green, #1CB098);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.itwd-404-number {
+  margin: 8px 0 -2px;
+  color: var(--itwd-dark, #1E1E1E);
+  font-size: clamp(104px, 20vw, 196px);
+  font-weight: 800;
+  letter-spacing: -.09em;
+  line-height: .95;
+}
+.itwd-404-card h1 {
+  margin: 18px 0 12px;
+  color: var(--itwd-dark, #1E1E1E);
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 800;
+  letter-spacing: -.04em;
+}
+.itwd-404-card > p {
+  max-width: 540px;
+  margin: 0 auto;
+  color: var(--body-color, #556377);
+  font-size: 17px;
+  line-height: 1.75;
+}
+.itwd-404-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px 24px;
+  margin-top: 30px;
+}
+.itwd-404-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 999px;
+  background: var(--itwd-yellow, #FFBF00);
+  color: var(--itwd-dark, #1E1E1E);
+}
+.itwd-404-primary:hover {
+  color: var(--itwd-dark, #1E1E1E);
+}
+.itwd-404-secondary,
+.itwd-404-help a {
+  color: var(--itwd-green, #1CB098);
+  font-weight: 700;
+}
+.itwd-404-secondary:hover,
+.itwd-404-help a:hover {
+  color: var(--itwd-dark, #1E1E1E);
+}
+.itwd-404-help {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 34px;
+  color: var(--body-color, #556377);
+  font-size: 14px;
+}
+.itwd-404-help-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--itwd-yellow, #FFBF00);
+}
+
+@media (max-width: 575px) {
+  .itwd-404-card {
+    border-radius: 24px;
+  }
+  .itwd-404-card > p {
+    font-size: 15px;
+  }
+  .itwd-404-actions {
+    flex-direction: column;
+  }
+  .itwd-404-help {
+    flex-wrap: wrap;
+  }
+}
+
 /* Keep the four project guidance steps in one horizontal row. */
 .itwd-process-row {
   flex-wrap: nowrap;
@@ -3577,27 +3690,28 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .itwd-cpp--bachelor .itwd-cpp__label { background: #E8F7F4; border-color: #CDEBE4; color: #0d7f6d; }
 .itwd-cpp--bachelor .itwd-cpp__points i { background: var(--itwd-green); color: #fff; }
 
-/* Tablet layout: keep home image/text pairs in their authored desktop order. */
+/* Tablet layout: keep the desktop-style text-left, artwork-right hero composition. */
 @media (min-width: 768px) and (max-width: 1199px) {
   .hero-3 > .container > .row {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
+    padding-top: 56px;
   }
   .hero-3 > .container > .row > .col-xl-5 {
-    flex: 0 0 44%;
-    width: 44%;
-    max-width: 44%;
+    flex: 0 0 48%;
+    width: 48%;
+    max-width: 48%;
     min-width: 0;
   }
   .hero-3 > .container > .row > .col-xl-7 {
-    flex: 0 0 56%;
-    width: 56%;
-    max-width: 56%;
+    flex: 0 0 52%;
+    width: 52%;
+    max-width: 52%;
     min-width: 0;
     text-align: left !important;
   }
-  .hero-style3 { padding: 28px 0 22px; text-align: left; }
+  .hero-style3 { padding: 36px 0 22px; text-align: left; }
   .hero-style3 .sub-title { font-size: clamp(16px, 2vw, 21px); }
   .hero-style3 .hero-title { margin-bottom: 14px; }
   .hero-style3 .hero-title .title1 { font-size: clamp(36px, 4.4vw, 54px); line-height: 1.04; }

@@ -1008,13 +1008,22 @@ function mediaDialog({ pick } = {}) {
     const r = await api('GET', '/api/media?' + params)
     if (folder.options.length === 1) for (const f of r.folders) folder.append(h('option', { value: f, text: f }))
     items = r.items
-    grid.replaceChildren(...(items.length ? items.slice(0, 300).map((m) => h('button', { type: 'button', class: 'media-card' + (current && current.path === m.path ? ' is-sel' : ''), title: m.path, onclick: () => show(m) },
-      h('img', { src: m.url, alt: '', loading: 'lazy' }), h('span', { text: m.name }), h('span', { class: 'muted', text: (m.width ? m.width + '×' + m.height + ' · ' : '') + Math.round(m.size / 1024) + ' KB' })))
+    grid.replaceChildren(...(items.length ? items.slice(0, 300).map((m) => h('div', { class: 'media-card' + (current && current.path === m.path ? ' is-sel' : ''), 'data-path': m.path },
+      h('button', { type: 'button', class: 'media-card__select', title: m.path, onclick: () => show(m) },
+        h('img', { src: m.url, alt: '', loading: 'lazy' }), h('span', { text: m.name }), h('span', { class: 'muted', text: (m.width ? m.width + ' x ' + m.height + ' - ' : '') + Math.round(m.size / 1024) + ' KB' })),
+      pick ? h('div', { class: 'media-card__actions', hidden: !(current && current.path === m.path) },
+        h('button', { type: 'button', class: 'btn btn--primary btn--sm', onclick: (e) => { e.stopPropagation(); pick(m); dlg.close() } }, 'Use this image'),
+        h('button', { type: 'button', class: 'btn btn--sm', onclick: async (e) => { e.stopPropagation(); pick(m); if (await save()) { toast('Image used and draft saved'); dlg.close() } } }, 'Save Draft')) : null))
       : [h('p', { class: 'muted', text: 'No images found.' })]))
   }
   const show = (m) => {
     current = m
-    for (const c of grid.children) c.classList.toggle('is-sel', c.title === m.path)
+    for (const c of grid.children) {
+      const selected = c.dataset.path === m.path
+      c.classList.toggle('is-sel', selected)
+      const actions = c.querySelector('.media-card__actions')
+      if (actions) actions.hidden = !selected
+    }
     const alt = h('input', { type: 'text', value: m.alt, 'aria-label': 'Default alt text' })
     const name = h('input', { type: 'text', value: m.name.replace(/\.[^.]+$/, ''), 'aria-label': 'New name', disabled: !m.editable })
     detail.replaceChildren(h('div', { class: 'media-detail' },
@@ -1035,7 +1044,7 @@ function mediaDialog({ pick } = {}) {
             if (!(await confirmBox('Delete image', 'Permanently delete ' + m.name + '? It is not used anywhere.', 'Delete', true))) return
             try { await api('POST', '/api/media/delete', { path: m.path }); toast('Deleted'); detail.replaceChildren(); await load() } catch (e) { toast(e.message, { error: true }) }
           } }, m.usedBy.length ? 'In use — cannot delete' : 'Delete'))) : h('div', { class: 'muted', text: 'Theme file: read-only.' }),
-        pick ? h('div', { class: 'actions' }, h('button', { type: 'button', class: 'btn btn--primary', onclick: () => { pick(m); dlg.close() } }, 'Use this image')) : null)))
+        null)))
   }
   file.addEventListener('change', async () => {
     for (const f of file.files) {

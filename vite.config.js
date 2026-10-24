@@ -19,6 +19,35 @@ const cleanUrls = () => ({
   },
 })
 
+// Vite's multi-page mode returns its own plain 404 for unknown routes. Serve the
+// site's branded page for browser navigations while keeping missing assets as 404s.
+const brandedNotFound = () => {
+  const mount = (server, root) => {
+    server.middlewares.use((req, res, next) => {
+      if (req.method !== 'GET' && req.method !== 'HEAD') return next()
+      if (!req.headers.accept?.includes('text/html')) return next()
+
+      let pathname
+      try { pathname = decodeURIComponent(req.url.split('?')[0]) } catch { return next() }
+      const file = path.resolve(root, `.${pathname}`)
+      if (file !== root && !file.startsWith(root + path.sep)) return next()
+      if (fs.existsSync(file) && (fs.statSync(file).isFile() || fs.existsSync(path.join(file, 'index.html')))) return next()
+
+      const notFoundFile = path.join(root, '404.html')
+      if (!fs.existsSync(notFoundFile)) return next()
+      res.statusCode = 404
+      res.setHeader('Content-Type', 'text/html; charset=utf-8')
+      if (req.method === 'HEAD') return res.end()
+      fs.createReadStream(notFoundFile).pipe(res)
+    })
+  }
+  return {
+    name: 'branded-not-found',
+    configureServer(server) { mount(server, path.resolve(server.config.root)) },
+    configurePreviewServer(server) { mount(server, path.resolve(server.config.root)) },
+  }
+}
+
 // The mirrored WordPress theme/plugin files (/wp-content, /wp-includes) are already-minified classic scripts and
 // stylesheets. Without this, Vite's dev server transforms every one of them and appends an inline source map
 // (three.js 1.1 MB -> 6 MB, ~16 MB of JS/CSS per page), which made first page loads slow or incomplete until a
@@ -85,5 +114,5 @@ export default defineConfig({
     // admin autosaves and revisions are not site files: don't trigger page reloads for them
     watch: { ignored: ['**/content/drafts/**', '**/content/revisions/**', '**/content/private/**', '**/content/published/**'] },
   },
-  plugins: [visualAdmin(), cleanUrls(), rawLegacyAssets()],
+  plugins: [visualAdmin(), cleanUrls(), brandedNotFound(), rawLegacyAssets()],
 })

@@ -7,6 +7,8 @@
     "dev": "vite",
     "admin": "node server/server.mjs",
     "admin:set-password": "node server/cli/set-password.mjs",
+    "supabase:sync": "node server/cli/sync-supabase.mjs",
+    "cloudinary:migrate": "node server/cli/migrate-cloudinary.mjs",
     "test": "node --test \"server/test/*.test.mjs\""
   },
   "devDependencies": {

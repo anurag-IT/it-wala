@@ -117,7 +117,8 @@ export class Media {
           fs.closeSync(fd)
           const usedBy = used(rel)
           items.push({
-            path: rel, url: this.urlOf(rel), folder: dir, name: e.name, ext: ext.slice(1), size: stat.size,
+            path: rel, url: meta[rel]?.cloudUrl || this.urlOf(rel), cloudUrl: meta[rel]?.cloudUrl || null,
+            folder: dir, name: e.name, ext: ext.slice(1), size: stat.size,
             ...imageSize(head), modified: stat.mtime.toISOString(), alt: meta[rel]?.alt || '',
             usedBy, editable: EDITABLE_DIRS.some((x) => rel.startsWith(x + '/')),
           })
@@ -134,6 +135,17 @@ export class Media {
     this.assertKnown(rel)
     const meta = readJson(this.metaFile(), {})
     meta[rel] = { ...(meta[rel] || {}), alt: alt.trim() }
+    writeJson(this.metaFile(), meta)
+    return { ok: true }
+  }
+
+  setCloudUrl(rel, cloudUrl) {
+    this.assertKnown(rel)
+    let url
+    try { url = new URL(cloudUrl) } catch { throw new HttpError(400, 'Cloudinary URL is invalid') }
+    if (url.protocol !== 'https:' || url.hostname !== 'res.cloudinary.com') throw new HttpError(400, 'Expected a secure Cloudinary image URL')
+    const meta = readJson(this.metaFile(), {})
+    meta[rel] = { ...(meta[rel] || {}), cloudUrl: url.toString() }
     writeJson(this.metaFile(), meta)
     return { ok: true }
   }
