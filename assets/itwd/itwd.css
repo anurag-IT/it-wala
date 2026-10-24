@@ -5,6 +5,39 @@
   --itwd-dark: #1E1E1E;
 }
 
+/* Keep the four project guidance steps in one horizontal row. */
+.itwd-process-row {
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 24px;
+  overflow-x: auto;
+  padding: 0 0 12px;
+  scrollbar-width: thin;
+}
+.itwd-process-row .process-card3 {
+  flex: 0 0 270px;
+  max-width: 270px;
+  min-height: 420px;
+  margin-top: 0;
+  padding: 0 20px 40px;
+}
+.itwd-process-row .process-card3 .box-text {
+  max-width: 230px;
+}
+
+@media (max-width: 1199px) {
+  .itwd-process-row {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 575px) {
+  .itwd-process-row .process-card3 {
+    flex-basis: 250px;
+    max-width: 250px;
+  }
+}
+
 /* ------------------------------------------------------------ University marquee */
 .itwd-marquee-section {
   padding: 36px 0 30px;

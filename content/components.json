@@ -1,0 +1,9 @@
+[
+  {
+    "id": "mvlsag6f",
+    "name": "free",
+    "html": "<section class=\"itwd-marquee-section\" aria-label=\"Universities and courses\">\n  <p class=\"itwd-marquee__label\">Students From These Colleges Learn With IT Wala Dai</p>\n  <div class=\"itwd-marquee\" style=\"--marquee-duration: 35s\">\n    <ul class=\"itwd-marquee__track\"><li class=\"itwd-marquee__item\"><img src=\"/college/ccrc.png\" alt=\"CCRC College\"></li>\n<li class=\"itwd-marquee__item\"><img src=\"/college/images.png\" alt=\"College partner\"></li>\n<li class=\"itwd-marquee__item\"><img src=\"/college/kmc.png\" alt=\"KMC College\"></li>\n<li class=\"itwd-marquee__item\"><img src=\"/assets/itwd/college-softwarica.webp\" alt=\"Softwarica College\"></li>\n<li class=\"itwd-marquee__item\"><img src=\"/college/sunway.png\" alt=\"Sunway College\"></li>\n<li class=\"itwd-marquee__item\"><img src=\"/college/urbana%20school%20ofscience.png\" alt=\"Urbana School of Science\"></li>\n<li class=\"itwd-marquee__item\"><img src=\"/college/white%20house.png\" alt=\"White House College\"></li>\n<li class=\"itwd-marquee__item\" aria-hidden=\"true\"><img src=\"/college/ccrc.png\" alt=\"\"></li>\n<li class=\"itwd-marquee__item\" aria-hidden=\"true\"><img src=\"/college/images.png\" alt=\"\"></li>\n<li class=\"itwd-marquee__item\" aria-hidden=\"true\"><img src=\"/college/kmc.png\" alt=\"\"></li>\n<li class=\"itwd-marquee__item\" aria-hidden=\"true\"><img src=\"/assets/itwd/college-softwarica.webp\" alt=\"\"></li>\n<li class=\"itwd-marquee__item\" aria-hidden=\"true\"><img src=\"/college/sunway.png\" alt=\"\"></li>\n<li class=\"itwd-marquee__item\" aria-hidden=\"true\"><img src=\"/college/urbana%20school%20ofscience.png\" alt=\"\"></li>\n<li class=\"itwd-marquee__item\" aria-hidden=\"true\"><img src=\"/college/white%20house.png\" alt=\"\"></li></ul>\n  </div>\n</section>",
+    "createdAt": "2026-10-24T02:32:48.999Z",
+    "by": "admin"
+  }
+]
