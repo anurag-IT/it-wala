@@ -3962,8 +3962,35 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .itwd-wa-fallback { display: inline-flex; align-items: center; gap: 6px; margin-left: 4px; font-weight: 800; color: var(--itwd-green); text-decoration: underline; text-underline-offset: 3px; }
 button[aria-busy="true"] { opacity: .7; cursor: progress; }
 .itwd-modal__box { max-height: calc(100vh - 32px); overflow-y: auto; }
+.itwd-join .itwd-modal__box { max-width: 560px; padding: 20px 24px 18px; }
+.itwd-join .itwd-modal__eyebrow { margin-bottom: 4px; }
+.itwd-join .itwd-modal__title { margin-bottom: 4px; font-size: 23px; }
+.itwd-join .itwd-modal__intro { margin-bottom: 10px; padding: 8px 11px; }
+.itwd-join .itwd-modal__lead { font-size: 14px; }
+.itwd-join .itwd-modal__intro .itwd-modal__text { font-size: 12px; line-height: 1.35; }
+.itwd-join .itwd-flabel { margin-bottom: 2px; font-size: 12px; }
+.itwd-join .form-control, .itwd-join .form-select { min-height: 38px; padding-top: 6px; padding-bottom: 6px; }
+.itwd-join textarea.form-control { min-height: 48px; }
+.itwd-join .row { --bs-gutter-y: .375rem; }
+.itwd-join .itwd-form-status { margin: 2px 0; }
+@media (min-width: 576px) {
+  .itwd-join .itwd-join-form > .row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px 12px;
+    margin: 0;
+  }
+  .itwd-join .itwd-join-form > .row > * { width: auto; margin: 0; }
+  .itwd-join .itwd-join-form > .row > :nth-child(1) { grid-column: 1; grid-row: 1; }
+  .itwd-join .itwd-join-form > .row > :nth-child(4) { grid-column: 2; grid-row: 1; }
+  .itwd-join .itwd-join-form > .row > :nth-child(2) { grid-column: 1; grid-row: 2; }
+  .itwd-join .itwd-join-form > .row > :nth-child(3) { grid-column: 2; grid-row: 2; }
+  .itwd-join .itwd-join-form > .row > :nth-child(5) { grid-column: 1 / -1; grid-row: 3; }
+}
 @media (max-width: 575px) {
   .itwd-modal__box { max-height: calc(100vh - 20px); padding: 26px 18px 22px; }
+  .itwd-join .itwd-modal__box { padding: 20px 16px 16px; }
+  .itwd-join .itwd-modal__title { font-size: 21px; }
 }
 
 /* header Join Now is now a real <button> */
